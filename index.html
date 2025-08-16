@@ -25,6 +25,25 @@
             margin: 40px 20px;
         }
 
+        /* --- Language Switcher --- */
+        #lang-switcher {
+            text-align: right;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+        #lang-switcher a {
+            color: #888;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s ease-in-out;
+        }
+        #lang-switcher a.active {
+            color: #0056b3;
+            background-color: #e7f1ff;
+        }
+
         /* --- Header & Contact Info --- */
         header {
             display: flex;
@@ -227,14 +246,23 @@
 <body>
 
 <div class="container">
+    <div id="lang-switcher">
+        <a href="#" onclick="setLanguage('en')" class="lang-link active">English</a> / 
+        <a href="#" onclick="setLanguage('zh')" class="lang-link">中文</a>
+    </div>
+
     <header>
         <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
         <div class="header-info">
-            <h1>Haokai Ding</h1>
+            <h1>Haokai Ding (丁浩楷)</h1>
             <div class="contact-info">
                 <p>
-                    Future Technology School, Shenzhen Technology University (Shenzhen, Guangdong)<br>
-                    Tsinghua University Tsien Excellence in Engineering Program - Shenzhen X-Institute<br>
+                    <span class="lang-en">Future Technology School, Shenzhen Technology University (Shenzhen, Guangdong)</span>
+                    <span class="lang-zh">深圳技术大学, 未来技术学院 (中国, 深圳)</span>
+                    <br>
+                    <span class="lang-en">Tsinghua University Tsien Excellence in Engineering Program - Shenzhen X-Institute</span>
+                    <span class="lang-zh">清华大学钱学森班 - 深圳零一学院</span>
+                    <br>
                     E-mail: <a href="mailto:dinghaokai@x-institute.edu.cn">dinghaokai@x-institute.edu.cn</a> | <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a><br>
                     <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> | <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a> | <a href="[Your GitHub URL]" target="_blank">GitHub</a>
                 </p>
@@ -244,45 +272,70 @@
 
     <main class="main-content">
         <section id="education">
-            <h2>Education</h2>
+            <h2>
+                <span class="lang-en">Education</span>
+                <span class="lang-zh">教育背景</span>
+            </h2>
             <hr>
             <div class="education-entry">
                 <div class="entry-line-1">
-                    <strong class="entry-role">Undergraduate:</strong>
+                    <strong class="entry-role">
+                        <span class="lang-en">Undergraduate:</span>
+                        <span class="lang-zh">本科:</span>
+                    </strong>
                     <img class="entry-logo" src="my-academic-site/images/深圳技术大学校徽_00.jpg" alt="SZTU Logo">
                     <div class="entry-details">
-                        <a href="https://www.sztu.edu.cn/" target="_blank">Shenzhen Technology University</a>, Future Technology School--Bachelor of Engineering
+                        <a href="https://www.sztu.edu.cn/" target="_blank">
+                            <span class="lang-en">Shenzhen Technology University</span>
+                            <span class="lang-zh">深圳技术大学</span>
+                        </a>
+                        <span class="lang-en">, Future Technology School--Bachelor of Engineering</span>
+                        <span class="lang-zh">, 未来技术学院 -- 工学学士</span>
                     </div>
                 </div>
                 <div class="entry-line-2">
                     <div class="entry-date">2022.09–2026.07</div>
                 </div>
                 <ul>
-                    <li>Main Courses: C++, Python, Digital Circuits, Sensors and Actuators, Engineering Project Design</li>
-                    <li>Main Research: Laser-Induced Breakdown Spectroscopy (LIBS)</li>
+                    <li><span class="lang-en">Main Courses: C++, Python, Digital Circuits, Sensors and Actuators, Engineering Project Design</span><span class="lang-zh">主修课程: C++, Python, 数字电路, 传感器与执行器, 工程项目设计</span></li>
+                    <li><span class="lang-en">Main Research: Laser-Induced Breakdown Spectroscopy (LIBS)</span><span class="lang-zh">主要研究: 激光诱导击穿光谱 (LIBS)</span></li>
                 </ul>
             </div>
             <div class="education-entry">
                 <div class="entry-line-1">
-                    <strong class="entry-role">Joint Training:</strong>
+                    <strong class="entry-role">
+                        <span class="lang-en">Joint Training:</span>
+                        <span class="lang-zh">联合培养:</span>
+                    </strong>
                     <img class="entry-logo" src="my-academic-site/images/Tsinghua_University_Logo.svg" alt="Tsinghua University Logo">
                     <div class="entry-details">
-                        <a href="https://www.x-institute.edu.cn/" target="_blank">Tsinghua University Tsien Excellence in Engineering Program - Shenzhen X-Institute</a>--X Scholar
+                        <a href="https://www.x-institute.edu.cn/" target="_blank">
+                            <span class="lang-en">Tsinghua University Tsien Excellence in Engineering Program - Shenzhen X-Institute</span>
+                            <span class="lang-zh">清华大学钱学森班 - 深圳零一学院</span>
+                        </a>--
+                        <span class="lang-en">X Scholar</span>
+                        <span class="lang-zh">零一学者</span>
                     </div>
                 </div>
                 <div class="entry-line-2">
                     <div class="entry-date">2023.09–Present</div>
                 </div>
                 <ul>
-                    <li>Main Research: Underactuated Robotic Grippers, Peaucellier Linkages, <a href="https://www.x-institute.edu.cn/accompany/xidea" target="_blank">See Qian Class Step-by-Step Training Program</a></li>
+                    <li><span class="lang-en">Main Research: Underactuated Robotic Grippers, Peaucellier Linkages, <a href="https://www.x-institute.edu.cn/accompany/xidea" target="_blank">See Qian Class Step-by-Step Training Program</a></span><span class="lang-zh">主要研究: 欠驱动机器人抓手, 佩索利耶连杆, <a href="https://www.x-institute.edu.cn/accompany/xidea" target="_blank">见钱班进阶式培养计划</a></span></li>
                 </ul>
             </div>
         </section>
 
         <section id="publications">
-            <h2>Publications</h2>
+            <h2>
+                <span class="lang-en">Publications</span>
+                <span class="lang-zh">学术出版</span>
+            </h2>
             <hr>
-            <h3>Conference Papers</h3>
+            <h3>
+                <span class="lang-en">Conference Papers</span>
+                <span class="lang-zh">会议论文</span>
+            </h3>
             <ul class="publication-list">
                 <li class="publication-item">
                     <div class="pub-index">[C4]</div>
@@ -292,7 +345,7 @@
                         <div class="pub-venue">Proceedings of the 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</div>
                         <div class="pub-links">
                             <span class="pub-status">[Accepted]</span>
-                            <span class="author-tag">First Author</span>
+                            <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
                         </div>
                     </div>
                 </li>
@@ -304,7 +357,7 @@
                         <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Automation Science and Engineering (CASE)</div>
                         <div class="pub-links">
                             <span class="pub-status">[Published]</span>
-                            <span class="author-tag">First Author</span>
+                            <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
                         </div>
                     </div>
                 </li>
@@ -316,7 +369,7 @@
                         <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Advanced Robotics and Mechatronics (ARM)</div>
                         <div class="pub-links">
                             <span class="pub-status">[Published]</span>
-                            <span class="author-tag">First Author</span>
+                            <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
                         </div>
                     </div>
                 </li>
@@ -333,7 +386,10 @@
                 </li>
             </ul>
 
-            <h3>Journal Articles</h3>
+            <h3>
+                <span class="lang-en">Journal Articles</span>
+                <span class="lang-zh">期刊论文</span>
+            </h3>
             <ul class="publication-list">
                  <li class="publication-item">
                     <div class="pub-index">[J1]</div>
@@ -343,7 +399,7 @@
                         <div class="pub-venue">Polymers 17, no. 15: 2136</div>
                         <div class="pub-links">
                             <a href="https://doi.org/10.3390/polym17152136" target="_blank">[DOI]</a>
-                            <span class="author-tag">Co-first Author</span>
+                            <span class="author-tag"><span class="lang-en">Co-first Author</span><span class="lang-zh">共同第一作者</span></span>
                         </div>
                     </div>
                 </li>
@@ -351,46 +407,120 @@
         </section>
 
         <section id="awards">
-            <h2>Honors & Awards</h2>
+            <h2>
+                <span class="lang-en">Honors & Awards</span>
+                <span class="lang-zh">荣誉奖项</span>
+            </h2>
             <hr>
-            <h3>Provincial-Level & Above</h3>
+            <h3>
+                <span class="lang-en">Provincial-Level & Above</span>
+                <span class="lang-zh">省级及以上</span>
+            </h3>
             <div class="awards-list">
                 <div class="award-item award-highlight">
-                    <span class="award-name">🏆 Gold Prize, The 9th China "Internet+" Innovation Competition (Guangdong Division)</span>
+                    <span class="award-name">
+                        <span class="lang-en">🏆 Gold Prize, The 9th China "Internet+" Innovation Competition (Guangdong Division)</span>
+                        <span class="lang-zh">🏆 第九届中国国际“互联网+”大学生创新创业大赛 (广东省分赛金奖)</span>
+                    </span>
                     <span class="award-year">2023</span>
                 </div>
                 <div class="award-item">
-                    <span class="award-name">Second Prize, The 17th "Challenge Cup" Extracurricular Science Competition (Guangdong Division)</span>
+                    <span class="award-name">
+                        <span class="lang-en">Second Prize, The 17th "Challenge Cup" Extracurricular Science Competition (Guangdong Division)</span>
+                        <span class="lang-zh">第十七届“挑战杯”全国大学生课外学术科技作品竞赛 (广东省分赛二等奖)</span>
+                    </span>
                     <span class="award-year">2023</span>
                 </div>
             </div>
 
-            <h3>University-Level</h3>
+            <h3>
+                <span class="lang-en">University-Level</span>
+                <span class="lang-zh">校级</span>
+            </h3>
             <div class="awards-list">
                  <div class="award-item award-highlight">
-                    <span class="award-name">🏆 President's Award (Highest Student Honor), Shenzhen Technology University</span>
+                    <span class="award-name">
+                        <span class="lang-en">🏆 President's Award (Highest Student Honor), Shenzhen Technology University</span>
+                        <span class="lang-zh">🏆 深圳技术大学“校长奖” (学生最高荣誉)</span>
+                    </span>
                     <span class="award-year">2024</span>
                 </div>
                 <div class="award-item">
-                    <span class="award-name">Research and Innovation Award (First Prize)</span>
+                    <span class="award-name">
+                        <span class="lang-en">Research and Innovation Award (First Prize)</span>
+                        <span class="lang-zh">深圳技术大学“科研创新奖” (一等奖)</span>
+                    </span>
                     <span class="award-year">2024</span>
                 </div>
                  <div class="award-item">
-                    <span class="award-name">Research and Innovation Award (First Prize)</span>
+                    <span class="award-name">
+                        <span class="lang-en">Research and Innovation Award (First Prize)</span>
+                        <span class="lang-zh">深圳技术大学“科研创新奖” (一等奖)</span>
+                    </span>
                     <span class="award-year">2023</span>
                 </div>
                 <div class="award-item">
-                    <span class="award-name">CHENHSONG Scholarship (Dean's Award & Academic Excellence)</span>
+                    <span class="award-name">
+                        <span class="lang-en">CHENHSONG Scholarship (Dean's Award & Academic Excellence)</span>
+                        <span class="lang-zh">陈鸿松奖学金 (院长奖学金, 学业卓越奖)</span>
+                    </span>
                     <span class="award-year">2023</span>
                 </div>
                  <div class="award-item">
-                    <span class="award-name">Outstanding Student Cadre Award</span>
+                    <span class="award-name">
+                        <span class="lang-en">Outstanding Student Cadre Award</span>
+                        <span class="lang-zh">深圳技术大学“优秀学生干部”</span>
+                    </span>
                     <span class="award-year">2024</span>
                 </div>
             </div>
         </section>
     </main>
 </div>
+
+<script>
+    // --- Language Switching Logic ---
+    function setLanguage(lang) {
+        // Hide all language elements first
+        document.querySelectorAll('.lang-en, .lang-zh').forEach(el => {
+            el.style.display = 'none';
+        });
+
+        // Show the selected language elements
+        document.querySelectorAll(`.lang-${lang}`).forEach(el => {
+            // Use 'inline' for spans, 'block' for block-level elements if needed.
+            // '' resets to default display property from CSS, which is safer.
+            el.style.display = ''; 
+        });
+
+        // Update active class on switcher links
+        document.querySelectorAll('.lang-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        document.querySelector(`.lang-link[onclick="setLanguage('${lang}')"]`).classList.add('active');
+
+        // Save the user's preference in local storage
+        try {
+            localStorage.setItem('preferredLanguage', lang);
+        } catch (e) {
+            console.error('LocalStorage is not available.');
+        }
+    }
+
+    // On page load, check for saved language preference
+    document.addEventListener('DOMContentLoaded', () => {
+        let preferredLanguage = 'en'; // Default to English
+        try {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang) {
+                preferredLanguage = savedLang;
+            }
+        } catch (e) {
+             console.error('LocalStorage is not available.');
+        }
+        setLanguage(preferredLanguage);
+    });
+</script>
 
 </body>
 </html>
