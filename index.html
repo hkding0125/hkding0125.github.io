@@ -5,127 +5,157 @@
 <title>Haokai Ding - Academic Homepage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Google Fonts Roboto -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* --- General Style Reset & Typography --- */
 body {
-  font-family: 'Roboto', sans-serif;
-  background-color: #ffffff;
-  color: #000000; /* 全部文字黑色 */
-  line-height: 1.6;
-  max-width: 960px;
+  font-family: 'Source Sans Pro', sans-serif;
+  background-color: #fdfdfd; /* A slightly softer white */
+  color: #333333; /* Softer than pure black for better readability */
+  line-height: 1.7;
+  font-size: 17px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* Navigation */
+/* --- Navigation Bar --- */
 nav {
   position: sticky;
-  top:0;
+  top: 0;
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 10px 0;
+  padding: 12px 0;
   border-bottom: 1px solid #e0e0e0;
-  background-color: #ffffff;
+  background-color: rgba(253, 253, 253, 0.95); /* Semi-transparent background */
+  backdrop-filter: blur(8px); /* Frosted glass effect for modern browsers */
   z-index: 100;
 }
 nav a {
   margin: 0 20px;
   text-decoration: none;
-  font-weight: 500;
-  color: #000000; /* 导航字体黑色 */
+  font-weight: 600;
+  color: #333333;
+  transition: color 0.2s ease-in-out;
 }
-nav a:hover, nav a.active { text-decoration: underline; }
+nav a:hover, nav a.active {
+  color: #0056b3; /* A more professional blue */
+  text-decoration: underline;
+}
 
-/* Header 左右布局 */
+/* --- Header Section --- */
 header {
   display: flex;
   align-items: center;
-  margin: 40px 0;
+  margin: 50px 0;
 }
 header img {
-  width: auto;
-  height: 120px;        
-  max-width: 200px;     
-  margin-right: 20px;
-  border-radius: 6px;
+  width: 130px; /* Slightly larger */
+  height: 130px;
+  margin-right: 30px;
+  border-radius: 50%; /* Circular images are a modern standard */
+  border: 3px solid #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 .header-text h1 {
-  font-size: 2.4em;
+  font-size: 2.5em;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  color: #1a1a1a;
+}
+.header-text p {
+  font-size: 1.1em;
+  color: #555;
 }
 .header-text .contact a {
-  color:#000000; /* 联系信息黑色字体 */
-  text-decoration:none;
-  margin-right: 8px;
+  color: #0056b3;
+  text-decoration: none;
+  margin-right: 12px;
+}
+.header-text .contact a:hover {
+  text-decoration: underline;
 }
 
-/* Sections */
+/* --- General Section Styling --- */
 section {
-  margin: 30px 0;
+  padding-top: 20px; /* Add padding for nav link accuracy */
+  margin: 40px 0;
 }
-h2, h3 { color: #000000; } /* 标题黑色 */
-
-/* Publications grid */
-.pub-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.pub-card {
-  display: flex;
-  align-items: flex-start;
-}
-.pub-year {
-  flex: 0 0 60px;
+h2 {
+  font-size: 1.8em;
   font-weight: 700;
-  font-size: 1.2em;
-  color: #999999;          /* 浅灰色 */
-  margin-right: 10px;
-  display: flex;
-  align-items: center;     
-  justify-content: center; 
+  color: #1a1a1a;
+  border-bottom: 2px solid #e0e0e0; /* Underline for clear separation */
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
-.pub-info {
-  line-height: 1.5;
-  font-size: 1em;
-}
-.doi-btn {
-  margin-left: 6px;
-  padding: 4px 8px;
-  background-color: #0d6efd; color: #fff;
-  text-decoration:none;
-  border-radius:4px;
-  font-size:0.8em;
-}
-.doi-btn:hover { background-color:#0056b3; }
 
-/* Back to top */
+/* --- Publications Section (Revised) --- */
+.publication-list {
+  list-style: none;
+  padding: 0;
+}
+.publication-item {
+  margin-bottom: 25px;
+}
+.pub-title {
+  font-weight: 600;
+  font-size: 1.1em;
+  margin-bottom: 4px;
+}
+.pub-authors {
+  font-size: 0.95em;
+  color: #555;
+  margin-bottom: 4px;
+}
+.pub-venue {
+  font-size: 0.95em;
+  font-style: italic;
+  color: #444;
+}
+.pub-links a {
+  margin-right: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9em;
+  color: #0056b3;
+}
+.pub-links a:hover {
+  text-decoration: underline;
+}
+
+
+/* --- Back to Top Button --- */
 #topBtn {
   display: none;
   position: fixed; bottom: 30px; right: 30px;
-  padding: 10px 14px; border:none; border-radius:50%;
-  background-color:#0d6efd; color:#fff; cursor:pointer;
-  font-size:16px;
+  padding: 10px 15px; border: none; border-radius: 50%;
+  background-color: #0056b3; color: #fff; cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
-#topBtn:hover { background-color:#0056b3; }
+#topBtn:hover { background-color: #004494; }
 
-/* Responsive */
-@media(max-width:700px){
-  header { flex-direction: column; align-items: center; text-align: center; }
-  header img { height:100px; max-width:160px; margin-bottom:15px;}
-  h1 { font-size:2.2em;}
-  nav a { margin:0 12px;}
-  .pub-grid { grid-template-columns: 1fr; }
-  .pub-year { flex: 0 0 50px; font-size:1.1em; margin-right:8px; }
+/* --- Responsive Design --- */
+@media(max-width: 768px){
+  body { font-size: 16px; }
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+  header img {
+    margin-right: 0;
+    margin-bottom: 20px;
+    width: 120px;
+    height: 120px;
+  }
+  h1 { font-size: 2.2em; }
+  nav a { margin: 0 15px; }
 }
-@media(max-width:400px){
-  header img { height:80px; max-width:120px;}
-  h1 { font-size:1.8em;}
-  nav a { margin:0 8px; font-size:0.9em;}
+@media(max-width: 480px){
+  nav a { margin: 0 10px; font-size: 0.9em; }
 }
 </style>
 </head>
@@ -142,77 +172,120 @@ h2, h3 { color: #000000; } /* 标题黑色 */
   <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
   <div class="header-text">
     <h1>Haokai Ding</h1>
-    <p class="contact">📧 <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a> | 🔗 <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> | 🆔 <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a></p>
+    <p>PhD Student in [Your Field] at [Your University/Institution]</p>
+    <p class="contact">
+      📧 <a href="mailto:hk_ding@outlook.com">Email</a> |
+      <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> |
+      <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a> |
+      <a href="[Your GitHub URL]" target="_blank">GitHub</a>
+    </p>
   </div>
 </header>
 
 <section id="about">
   <h2>🧑 About Me</h2>
-  <p>Welcome! I am Haokai Ding. This is my academic homepage where I share my research, publications, and professional activities.</p>
+  <p>
+    Welcome! I am Haokai Ding, a [Your Year, e.g., first-year PhD student] in the [Your Department] at [Your University]. I am fortunate to be advised by [Your Advisor's Name].
+  </p>
+  <p>
+    My research focuses on [briefly describe your main research area]. I am particularly interested in [mention a specific sub-topic or problem]. Before starting my PhD, I received my [Your Degree, e.g., B.S. in Computer Science] from [Your Undergraduate University].
+  </p>
 </section>
 
 <section id="research">
   <h2>🔬 Research Interests</h2>
-  <p>[👉 在这里写你的研究方向，例如 Applied Mathematics, Machine Learning, Scientific Computing 等]</p>
+  <p>I am broadly interested in the following areas:</p>
+  <ul>
+    <li>Applied Mathematics</li>
+    <li>Machine Learning & Deep Learning</li>
+    <li>Scientific Computing & Numerical Analysis</li>
+    <li>[Another Research Interest]</li>
+  </ul>
 </section>
 
 <section id="publications">
   <h2>📚 Publications</h2>
-  <div id="all-pubs" class="pub-grid">
-    <div class="pub-card" data-year="2025">
-      <div class="pub-year">2025</div>
-      <div class="pub-info">
-        Yating Liu, Haokai Ding, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang, Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries, Polymers 17, no. 15: 2136.
-        <a href="https://doi.org/10.3390/polym17152136" target="_blank" class="doi-btn">DOI</a>
+  <ul id="all-pubs" class="publication-list">
+    <li class="publication-item" data-year="2025">
+      <div class="pub-title">Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</div>
+      <div class="pub-authors">Yating Liu, <b>Haokai Ding</b>, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang</div>
+      <div class="pub-venue">Polymers, 2025</div>
+      <div class="pub-links">
+        <a href="https://doi.org/10.3390/polym17152136" target="_blank">[DOI]</a>
+        </div>
+    </li>
+    <li class="publication-item" data-year="2025">
+      <div class="pub-title">Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</div>
+      <div class="pub-authors">Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, <b>Haokai Ding</b>, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang</div>
+      <div class="pub-venue">E3S Web of Conferences, 2025</div>
+      <div class="pub-links">
+        <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank">[DOI]</a>
       </div>
-    </div>
-    <div class="pub-card" data-year="2025">
-      <div class="pub-year">2025</div>
-      <div class="pub-info">
-        Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, Haokai Ding, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang, Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology, E3S Web Conf., 615 (2025) 02010.
-        <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank" class="doi-btn">DOI</a>
-      </div>
-    </div>
-  </div>
+    </li>
+    </ul>
 </section>
 
 <section id="contact">
   <h2>✉️ Contact</h2>
-  <p>If you’d like to get in touch, feel free to reach me at <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a>.</p>
+  <p>The best way to reach me is by email: <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a>.</p>
 </section>
 
 <button id="topBtn" title="Go to top">↑</button>
 
 <script>
-// Back to top
+// --- Back to top button ---
 const topBtn = document.getElementById("topBtn");
-window.onscroll = function(){
-  if(document.body.scrollTop>200||document.documentElement.scrollTop>200) topBtn.style.display="block";
-  else topBtn.style.display="none";
+window.onscroll = function() {
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    topBtn.style.display = "block";
+  } else {
+    topBtn.style.display = "none";
+  }
 };
-topBtn.onclick = function(){ window.scrollTo({top:0,behavior:'smooth'}); };
+topBtn.onclick = function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
 
-// Active nav link
+// --- Active navigation link on scroll ---
+const sections = document.querySelectorAll('section, header');
 const navLinks = document.querySelectorAll('nav a');
-window.addEventListener('scroll', ()=>{
-  let fromTop = window.scrollY + 100;
-  navLinks.forEach(link=>{
-    const section=document.querySelector(link.hash);
-    if(section.offsetTop <= fromTop && section.offsetTop+section.offsetHeight>fromTop){
-      navLinks.forEach(l=>l.classList.remove('active'));
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    if (pageYOffset >= sectionTop - 60) { // 60 is nav height offset
+      current = section.getAttribute('id');
+    }
+  });
+  // The 'about' section is tied to the header in this logic
+  if (current === null && pageYOffset < 200) {
+      current = 'about';
+  }
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.href.includes('#' + current)) {
       link.classList.add('active');
     }
   });
 });
 
-// Sort all publications by year descending
-function sortAllPubs() {
+// --- Sort publications by year (descending) ---
+function sortPublications() {
   const container = document.getElementById('all-pubs');
+  // Convert HTMLCollection to Array to use sort()
   const pubs = Array.from(container.children);
-  pubs.sort((a,b) => parseInt(b.dataset.year) - parseInt(a.dataset.year));
+  pubs.sort((a, b) => {
+    // Get year from data-year attribute
+    const yearA = parseInt(a.dataset.year, 10);
+    const yearB = parseInt(b.dataset.year, 10);
+    return yearB - yearA; // Sort descending
+  });
+  // Append sorted items back to the container
   pubs.forEach(pub => container.appendChild(pub));
 }
-sortAllPubs();
+// Run sort on page load
+document.addEventListener('DOMContentLoaded', sortPublications);
 </script>
 
 </body>
