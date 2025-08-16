@@ -28,18 +28,17 @@
 
         /* --- Right Sidebar (Profile) --- */
         .sidebar {
-            width: 250px; /* Slightly reduced width */
+            width: 250px;
             flex-shrink: 0;
-            padding-right: 30px; /* Adjusted padding */
+            padding-right: 30px;
             position: sticky;
             top: 40px;
             align-self: flex-start;
         }
         .sidebar img {
-            width: 100px; /* Smaller image */
-            height: 100px;
-            border-radius: 50%; /* Make it circular */
-            object-fit: cover; /* Ensure the image fills the circle without distortion */
+            width: 120px; /* Scaled width */
+            height: auto;  /* Maintain aspect ratio */
+            border-radius: 8px; /* Soft rounded corners, no cropping */
             margin-bottom: 15px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
@@ -62,7 +61,7 @@
             padding: 6px 0;
             border-bottom: 1px solid #eee;
             transition: color 0.2s;
-            font-size: 0.9em; /* Slightly smaller link font */
+            font-size: 0.9em;
         }
         .sidebar-links a:hover {
             color: #003d7a;
@@ -73,7 +72,7 @@
             flex-grow: 1;
         }
         section {
-            margin-bottom: 35px; /* Slightly reduced section margin */
+            margin-bottom: 35px;
         }
         h2 {
             font-size: 1.5em;
@@ -82,6 +81,15 @@
             border-bottom: 2px solid #0056b3;
             padding-bottom: 6px;
             margin-bottom: 15px;
+        }
+        h3 { /* Style for subheadings like "Conference Papers" */
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
         }
         .main-content p, .main-content ul {
             margin-bottom: 0.9em;
@@ -151,7 +159,6 @@
             color: #555;
         }
 
-
         /* --- Responsive Design --- */
         @media(max-width: 800px){
             .container {
@@ -165,8 +172,7 @@
                 margin-bottom: 30px;
             }
             .sidebar img {
-                width: 100px;
-                height: 100px;
+                width: 120px;
             }
             .sidebar-links {
                 display: flex;
@@ -217,6 +223,8 @@
 
         <section id="publications">
             <h2>Publications</h2>
+
+            <h3>Conference Papers</h3>
             <ul class="publication-list">
                 <li class="publication-item">
                     <div class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
@@ -243,19 +251,23 @@
                     </div>
                 </li>
                 <li class="publication-item" data-year="2025">
-                    <div class="pub-title">Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</div>
-                    <div class="pub-authors">Yating Liu, <b>Haokai Ding</b>, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang</div>
-                    <div class="pub-venue">Polymers 17, no. 15: 2136</div>
-                    <div class="pub-links">
-                        <a href="https://doi.org/10.3390/polym17152136" target="_blank">[DOI]</a>
-                    </div>
-                </li>
-                <li class="publication-item" data-year="2025">
                     <div class="pub-title">Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</div>
                     <div class="pub-authors">Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, <b>Haokai Ding</b>, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang</div>
                     <div class="pub-venue">E3S Web Conf., 615 (2025) 02010</div>
                     <div class="pub-links">
                         <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank">[DOI]</a>
+                    </div>
+                </li>
+            </ul>
+
+            <h3>Journal Articles</h3>
+            <ul class="publication-list">
+                 <li class="publication-item" data-year="2025">
+                    <div class="pub-title">Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</div>
+                    <div class="pub-authors">Yating Liu, <b>Haokai Ding</b>, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang</div>
+                    <div class="pub-venue">Polymers 17, no. 15: 2136</div>
+                    <div class="pub-links">
+                        <a href="https://doi.org/10.3390/polym17152136" target="_blank">[DOI]</a>
                     </div>
                 </li>
             </ul>
