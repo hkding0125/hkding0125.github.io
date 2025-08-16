@@ -9,11 +9,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-/* Reset & body */
-* { box-sizing: border-box; margin:0; padding:0; }
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #f7f8fa;
+  background-color: #ffffff;
   color: #212529;
   line-height: 1.6;
   max-width: 960px;
@@ -26,11 +24,11 @@ nav {
   position: sticky;
   top:0;
   width: 100%;
-  background-color: rgba(255,255,255,0.95);
   display: flex;
   justify-content: center;
   padding: 10px 0;
   border-bottom: 1px solid #e0e0e0;
+  background-color: #ffffff;
   z-index: 100;
 }
 nav a {
@@ -38,91 +36,83 @@ nav a {
   text-decoration: none;
   font-weight: 500;
   color: #0d6efd;
-  transition: color 0.2s;
 }
-nav a:hover, nav a.active { color: #0056b3; }
+nav a:hover, nav a.active { text-decoration: underline; }
 
 /* Header */
 header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin: 40px 0;
   text-align: center;
+  margin: 40px 0;
 }
 header img {
-  width: 160px; height: 160px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #0d6efd;
   margin-bottom: 20px;
 }
 h1 {
-  font-size: 2.6em; font-weight:700; color:#0d6efd;
+  font-size: 2.6em;
+  font-weight: 700;
   margin-bottom: 10px;
 }
 .contact a {
-  color:#0d6efd; text-decoration:none; margin:0 5px;
+  color:#0d6efd;
+  text-decoration:none;
+  margin:0 5px;
 }
-.contact a:hover { text-decoration: underline; }
 
-/* Section cards */
-.card {
-  background-color: #fff;
-  padding: 30px 25px;
-  margin: 20px 0;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+/* Sections */
+section {
+  margin: 30px 0;
 }
 
 /* Section titles */
-h2 {
-  font-size: 1.8em;
-  color: #0d6efd;
-  margin-bottom: 15px;
-  opacity: 0; transform: translateY(20px);
-  transition: opacity 0.8s, transform 0.8s;
-}
-h2.visible { opacity: 1; transform: translateY(0); }
+h2 { font-size: 1.8em; margin-bottom: 15px; color: #0d6efd; }
+h3 { font-size: 1.4em; margin-top:20px; margin-bottom:10px; }
 
-/* Publications */
+/* Publications grid */
+.pub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
 .pub-card {
-  border-left: 4px solid #0d6efd;
-  padding: 15px 20px;
-  margin: 12px 0;
-  background-color: #fff;
   line-height: 1.5;
   font-size: 1em;
-  display: flex; flex-direction: column;
 }
-.pub-card.journal { background-color: #e7f0ff; }
-.pub-card.conference { background-color: #f0f0f0; }
+.pub-card strong {
+  margin-right: 6px;
+}
 .doi-btn {
-  margin-top: 6px;
-  padding: 6px 12px;
-  background-color: #0d6efd; color:#fff;
-  text-decoration:none; border-radius:6px;
-  font-size:0.85em;
-  width: fit-content;
+  margin-left: 6px;
+  padding: 4px 8px;
+  background-color: #0d6efd; color: #fff;
+  text-decoration:none;
+  border-radius:4px;
+  font-size:0.8em;
 }
 .doi-btn:hover { background-color:#0056b3; }
 
 /* Back to top */
 #topBtn {
-  display: none; position: fixed; bottom: 30px; right: 30px;
-  padding: 12px 16px; border-radius: 50%; border:none;
+  display: none;
+  position: fixed; bottom: 30px; right: 30px;
+  padding: 10px 14px; border:none; border-radius:50%;
   background-color:#0d6efd; color:#fff; cursor:pointer;
-  box-shadow:0 2px 6px rgba(0,0,0,0.3);
-  font-size: 18px;
+  font-size:16px;
 }
 #topBtn:hover { background-color:#0056b3; }
 
 /* Responsive */
 @media(max-width:700px){
   header img { width:120px;height:120px;}
-  h1 { font-size:2.2em; }
+  h1 { font-size:2.2em;}
   nav a { margin:0 12px;}
+  .pub-grid { grid-template-columns: 1fr; }
 }
 @media(max-width:400px){
   header img { width:100px;height:100px;}
@@ -146,45 +136,41 @@ h2.visible { opacity: 1; transform: translateY(0); }
   <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
   <h1>Haokai Ding</h1>
   <p class="contact">
-    📧 <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a> | 
-    🔗 <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> | 
+    📧 <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a> |
+    🔗 <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> |
     <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a>
   </p>
 </header>
 
 <!-- About -->
-<section id="about" class="card">
+<section id="about">
   <h2>About Me</h2>
   <p>Welcome! I am Haokai Ding. This is my academic homepage where I share my research, publications, and professional activities.</p>
 </section>
 
 <!-- Research -->
-<section id="research" class="card">
+<section id="research">
   <h2>Research Interests</h2>
   <p>[👉 在这里写你的研究方向，例如 Applied Mathematics, Machine Learning, Scientific Computing 等]</p>
 </section>
 
 <!-- Publications -->
-<section id="publications" class="card">
+<section id="publications">
   <h2>Publications</h2>
-  <h3>Journal Articles</h3>
-  <div id="journal-list">
-    <div class="pub-card journal" data-year="2025">
-      Yating Liu, Haokai Ding, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang, Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries, Polymers 17, no. 15: 2136, 2025.
-      <span class="doi-container" data-doi="https://doi.org/10.3390/polym17152136"></span>
+  <div id="all-pubs" class="pub-grid">
+    <div class="pub-card" data-year="2025">
+      <strong>2025.</strong> Yating Liu, Haokai Ding, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang, Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries, Polymers 17, no. 15: 2136.
+      <a href="https://doi.org/10.3390/polym17152136" target="_blank" class="doi-btn">DOI</a>
     </div>
-  </div>
-  <h3>Conference Papers</h3>
-  <div id="conference-list">
-    <div class="pub-card conference" data-year="2025">
-      Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, Haokai Ding, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang, Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology, E3S Web Conf., 615 (2025) 02010.
-      <span class="doi-container" data-doi="https://doi.org/10.1051/e3sconf/202561502010"></span>
+    <div class="pub-card" data-year="2025">
+      <strong>2025.</strong> Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, Haokai Ding, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang, Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology, E3S Web Conf., 615 (2025) 02010.
+      <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank" class="doi-btn">DOI</a>
     </div>
   </div>
 </section>
 
 <!-- Contact -->
-<section id="contact" class="card">
+<section id="contact">
   <h2>Contact</h2>
   <p>If you’d like to get in touch, feel free to reach me at <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a>.</p>
 </section>
@@ -193,13 +179,6 @@ h2.visible { opacity: 1; transform: translateY(0); }
 <button id="topBtn" title="Go to top">↑</button>
 
 <script>
-// Intersection Observer for fade-in titles
-const headers = document.querySelectorAll('h2');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
-},{threshold:0.2});
-headers.forEach(h=>observer.observe(h));
-
 // Back to top
 const topBtn = document.getElementById("topBtn");
 window.onscroll = function(){
@@ -211,7 +190,7 @@ topBtn.onclick = function(){ window.scrollTo({top:0,behavior:'smooth'}); };
 // Active nav link
 const navLinks = document.querySelectorAll('nav a');
 window.addEventListener('scroll', ()=>{
-  let fromTop = window.scrollY + 120;
+  let fromTop = window.scrollY + 100;
   navLinks.forEach(link=>{
     const section=document.querySelector(link.hash);
     if(section.offsetTop <= fromTop && section.offsetTop+section.offsetHeight>fromTop){
@@ -221,38 +200,14 @@ window.addEventListener('scroll', ()=>{
   });
 });
 
-// DOI buttons
-document.querySelectorAll('.doi-container').forEach(span=>{
-  const doiUrl=span.dataset.doi;
-  if(doiUrl){
-    const btn=document.createElement('a');
-    btn.href=doiUrl; btn.target="_blank"; btn.className="doi-btn"; btn.textContent="DOI";
-    span.appendChild(btn);
-  }
-});
-
-// Group by year
-function groupByYear(listId){
-  const container=document.getElementById(listId);
-  if(!container) return;
-  const items=Array.from(container.querySelectorAll('.pub-card'));
-  if(items.length==0) return;
-  items.sort((a,b)=>parseInt(b.dataset.year)-parseInt(a.dataset.year));
-  container.innerHTML='';
-  const yearGroups={};
-  items.forEach(item=>{
-    const year=item.dataset.year;
-    if(!yearGroups[year]) yearGroups[year]=[];
-    yearGroups[year].push(item);
-  });
-  Object.keys(yearGroups).sort((a,b)=>b-a).forEach(year=>{
-    const yearTitle=document.createElement('h4');
-    yearTitle.textContent=year; yearTitle.style.color="#0d6efd"; yearTitle.style.marginTop="12px";
-    container.appendChild(yearTitle);
-    yearGroups[year].forEach(item=>container.appendChild(item));
-  });
+// Sort all publications by year descending
+function sortAllPubs() {
+  const container = document.getElementById('all-pubs');
+  const pubs = Array.from(container.children);
+  pubs.sort((a,b) => parseInt(b.dataset.year) - parseInt(a.dataset.year));
+  pubs.forEach(pub => container.appendChild(pub));
 }
-groupByYear('journal-list'); groupByYear('conference-list');
+sortAllPubs();
 </script>
 
 </body>
