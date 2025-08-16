@@ -34,14 +34,32 @@ nav a {
 nav a:hover, nav a.active { color: #0056b3; }
 
 /* Header */
-header { text-align: center; margin: 40px 0; }
-header img {
-  width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
-  border: 3px solid #0d6efd; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  transition: transform 0.3s;
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 水平居中 */
+  justify-content: center; /* 垂直居中 */
+  text-align: center;
+  margin: 40px 0;
 }
-header img:hover { transform: scale(1.05); }
-h1 { font-size: 2.6em; color: #0d6efd; margin: 15px 0; font-weight: 700; }
+header img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #0d6efd;
+  margin-bottom: 20px; /* 头像与文字间距 */
+}
+h1 {
+  margin: 0;
+  font-size: 2.6em;
+  font-weight: 700;
+  color: #0d6efd;
+  line-height: 1.2; /* 文字紧凑 */
+}
+.contact {
+  margin-top: 8px; /* 姓名与联系方式间距 */
+}
 .contact a { color: #0d6efd; text-decoration: none; transition: color 0.2s; }
 .contact a:hover { text-decoration: underline; color: #0056b3; }
 
@@ -242,7 +260,6 @@ function groupByYear(listId){
   const items = Array.from(container.querySelectorAll('.pub-card'));
   if(items.length === 0) return;
 
-  // 按年份倒序排序
   items.sort((a,b) => parseInt(b.dataset.year) - parseInt(a.dataset.year));
   container.innerHTML = '';
 
