@@ -1,181 +1,94 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Haokai Ding - Academic Homepage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    :root {
-      --bg: #121212;
-      --fg: #e0e0e0;
-      --accent: #4db6ff;
-      --sidebar: #1e1e1e;
-    }
     body {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      display: flex;
-      min-height: 100vh;
-    }
-    /* 左侧导航栏 */
-    nav {
-      width: 250px;
-      background: var(--sidebar);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
       padding: 20px;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      line-height: 1.6;
+      background-color: #fafafa;
+      color: #333;
     }
-    nav img {
-      width: 120px;
-      height: 120px;
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    header img {
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
-      border: 3px solid var(--accent);
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
-    nav h1 {
-      font-size: 20px;
-      margin: 10px 0 20px 0;
-      text-align: center;
-    }
-    nav a {
-      text-decoration: none;
-      color: var(--fg);
-      padding: 10px;
-      margin: 5px 0;
-      width: 100%;
-      text-align: center;
-      border-radius: 8px;
-      transition: 0.3s;
-    }
-    nav a:hover {
-      background: var(--accent);
-      color: black;
-    }
-    /* 右侧内容区 */
-    main {
-      flex-grow: 1;
-      padding: 30px;
-      max-width: 900px;
-    }
-    section {
-      margin-bottom: 50px;
+    h1 {
+      margin: 0;
+      font-size: 2.2em;
     }
     h2 {
-      color: var(--accent);
-      border-bottom: 2px solid var(--accent);
+      border-bottom: 2px solid #ddd;
       padding-bottom: 5px;
-      margin-bottom: 15px;
-    }
-    ul {
-      padding-left: 20px;
+      margin-top: 40px;
     }
     a {
-      color: var(--accent);
+      color: #0066cc;
+      text-decoration: none;
     }
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      font-size: 14px;
-      color: #888;
+    a:hover {
+      text-decoration: underline;
     }
-    /* 响应式：窄屏幕下导航栏折叠到上方 */
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
-      nav {
-        flex-direction: row;
-        width: 100%;
-        justify-content: space-around;
-      }
-      nav img {
-        display: none;
-      }
-      nav h1 {
-        display: none;
-      }
-      nav a {
-        flex-grow: 1;
-        margin: 0 5px;
-      }
+    .contact {
+      margin-top: 15px;
     }
   </style>
 </head>
 <body>
-  <!-- 左侧导航栏 -->
-  <nav>
-    <img src="images/profile.jpg" alt="Profile Photo">
-    <h1>Haokai Ding</h1>
-    <a href="#about">关于我</a>
-    <a href="#education">教育背景</a>
-    <a href="#research">研究方向</a>
-    <a href="#publications">论文发表</a>
-    <a href="#contact">联系我</a>
-  </nav>
 
-  <!-- 右侧主要内容 -->
-  <main>
-    <!-- 关于我 -->
-    <section id="about">
-      <h2>关于我</h2>
-      <p>
-        你好！我是 <strong>Haokai Ding</strong> 🎓  
-        目前研究兴趣包括人工智能、深度学习、数学建模与优化，以及科研数据可视化。
-      </p>
-    </section>
+<header>
+  <!-- 上传后将 profile.jpg 放到 images/ 文件夹里 -->
+  <img src="images/profile.jpg" alt="Profile photo of Haokai Ding">
+  <h1>Haokai Ding</h1>
+  <p class="contact">
+    📧 <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a><br>
+    🔗 <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> |
+    <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a>
+  </p>
+</header>
 
-    <!-- 教育背景 -->
-    <section id="education">
-      <h2>教育背景</h2>
-      <ul>
-        <li>博士研究生，某某大学，2023 – 至今</li>
-        <li>硕士研究生，某某大学，2020 – 2023</li>
-        <li>学士，某某大学，2016 – 2020</li>
-      </ul>
-    </section>
+<section>
+  <h2>About Me</h2>
+  <p>
+    Welcome! I am Haokai Ding. This is my academic homepage where I share my research,
+    publications, and professional activities.  
+  </p>
+</section>
 
-    <!-- 研究方向 -->
-    <section id="research">
-      <h2>研究方向</h2>
-      <ul>
-        <li>人工智能与深度学习</li>
-        <li>数学建模与优化</li>
-        <li>科研数据可视化</li>
-      </ul>
-    </section>
+<section>
+  <h2>Research Interests</h2>
+  <p>
+    [👉 在这里写你的研究方向，例如 Applied Mathematics, Machine Learning, Scientific Computing 等]
+  </p>
+</section>
 
-    <!-- 论文发表 -->
-    <section id="publications">
-      <h2>论文发表</h2>
-      <ul>
-        <li>
-          Haokai Ding, et al. <strong>“Robotics and AI for Smart Manufacturing”</strong>. 
-          <em>Journal of AI Research</em>, 2023. [<a href="#">PDF</a>]
-        </li>
-        <li>
-          Haokai Ding, et al. <strong>“Data-Driven Control in Robotics”</strong>. 
-          <em>ICRA</em>, 2022. [<a href="#">DOI</a>]
-        </li>
-      </ul>
-    </section>
+<section>
+  <h2>Publications</h2>
+  <ul>
+    <li>[示例] Title of your paper, <i>Journal Name</i>, Year.</li>
+    <li>[示例] Another publication entry.</li>
+    <!-- 以后可以在这里一篇篇加上 -->
+  </ul>
+</section>
 
-    <!-- 联系方式 -->
-    <section id="contact">
-      <h2>联系我</h2>
-      <p>
-        📧 <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a><br>
-        📖 <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a><br>
-        🆔 <a href="https://orcid.org/my-orcid?orcid=0009-0001-6158-9897" target="_blank">ORCID</a>
-      </p>
-    </section>
+<section>
+  <h2>Contact</h2>
+  <p>
+    If you’d like to get in touch, feel free to reach me at 
+    <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a>.
+  </p>
+</section>
 
-    <footer>
-      © 2025 Haokai Ding · Academic Homepage
-    </footer>
-  </main>
 </body>
 </html>
