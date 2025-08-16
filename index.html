@@ -1,141 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Haokai Ding - Academic Homepage</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Haokai Ding - Academic Homepage</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Fonts Roboto -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap">
+<!-- Google Fonts Roboto -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap">
 
-  <style>
-    html { scroll-behavior: smooth; }
-    html, body, h1, h2, h3, p, ul, li, a {
-      font-family: 'Roboto', Helvetica, Arial, sans-serif;
-    }
-    body {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-      line-height: 1.6;
-      background-color: #f8f9fa;
-      color: #212529;
-    }
+<style>
+html { scroll-behavior: smooth; }
+body { 
+  font-family: 'Roboto', Helvetica, Arial, sans-serif; 
+  margin: 0; padding: 20px; 
+  background-color: #f4f6f8; 
+  color: #212529; 
+  max-width: 1000px; margin-left: auto; margin-right: auto;
+}
 
-    /* 导航栏 */
-    nav {
-      position: sticky;
-      top: 0;
-      background-color: #ffffff;
-      padding: 10px 0;
-      text-align: center;
-      border-bottom: 1px solid #dee2e6;
-      z-index: 100;
-    }
-    nav a {
-      margin: 0 15px;
-      color: #0d6efd;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    nav a:hover { color: #0056b3; }
+/* 导航栏 */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background-color: rgba(255,255,255,0.95);
+  padding: 10px 0; text-align: center;
+  border-bottom: 1px solid #dee2e6;
+  backdrop-filter: blur(4px);
+}
+nav a {
+  margin: 0 15px; color: #0d6efd; text-decoration: none; font-weight: 500;
+  transition: color 0.2s;
+}
+nav a:hover, nav a.active { color: #0056b3; }
 
-    /* 页眉 */
-    header { text-align: center; margin-bottom: 50px; }
-    header img {
-      width: 160px;
-      height: 160px;
-      max-width: 30vw;
-      max-height: 30vw;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 20px;
-      transition: transform 0.3s;
-      border: 2px solid #007bff;
-    }
-    header img:hover { transform: scale(1.05); }
-    h1 { margin: 0; font-size: 2.4em; color: #0d6efd; font-weight: 700; }
-    .contact { margin-top: 10px; }
-    .contact a { color: #0d6efd; text-decoration: none; transition: color 0.2s; }
-    .contact a:hover { color: #0056b3; text-decoration: underline; }
+/* Header */
+header { text-align: center; margin: 40px 0; }
+header img {
+  width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
+  border: 3px solid #0d6efd; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s;
+}
+header img:hover { transform: scale(1.05); }
+h1 { font-size: 2.6em; color: #0d6efd; margin: 15px 0; font-weight: 700; }
+.contact a { color: #0d6efd; text-decoration: none; transition: color 0.2s; }
+.contact a:hover { text-decoration: underline; color: #0056b3; }
 
-    /* 章节标题 */
-    h2 {
-      border-bottom: 2px solid #dee2e6;
-      padding-bottom: 5px;
-      margin-top: 40px;
-      font-size: 1.6em;
-      color: #0d6efd;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-      font-weight: 500;
-    }
-    h2.visible { opacity: 1; transform: translateY(0); }
+/* Card layout */
+.card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin: 25px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
 
-    /* 子标题 h3 */
-    h3 {
-      margin-top: 25px;
-      color: #0d6efd;
-      font-size: 1.4em;
-      font-weight: 500;
-    }
+/* Section titles */
+h2 {
+  font-size: 1.8em; color: #0d6efd; margin-bottom: 15px;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+h2.visible { opacity: 1; transform: translateY(0); }
+h3 { font-size: 1.4em; color: #0d6efd; margin-top: 20px; }
 
-    /* 段落和列表 */
-    p, ul { font-size: 1em; margin-top: 15px; }
-    ul li { margin-bottom: 10px; }
+/* Publications card */
+.pub-card {
+  background-color: #f8faff;
+  border-left: 4px solid #0d6efd;
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin: 15px 0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.pub-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
-    /* 回到顶部按钮 */
-    #topBtn {
-      display: none;
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 200;
-      font-size: 18px;
-      border: none;
-      outline: none;
-      background-color: #0d6efd;
-      color: white;
-      cursor: pointer;
-      padding: 12px 16px;
-      border-radius: 50%;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      transition: background-color 0.3s;
-    }
-    #topBtn:hover { background-color: #0056b3; }
+/* Paragraphs and lists */
+p, ul { font-size: 1em; margin-top: 10px; }
+ul li { margin-bottom: 8px; }
 
-    /* 响应式优化 */
-    @media (max-width: 700px) {
-      body { padding: 15px; }
-      header img { width: 120px; height: 120px; max-width: 40vw; max-height: 40vw; }
-      h1 { font-size: 2em; }
-      h2 { font-size: 1.4em; }
-      h3 { font-size: 1.2em; }
-      nav a { margin: 0 10px; }
-      #topBtn { bottom: 20px; right: 20px; padding: 10px 14px; font-size: 16px; }
-    }
-    @media (max-width: 400px) {
-      header img { width: 100px; height: 100px; max-width: 50vw; max-height: 50vw; }
-      h1 { font-size: 1.8em; }
-      h2 { font-size: 1.2em; }
-      h3 { font-size: 1em; }
-      nav a { margin: 0 5px; font-size: 0.9em; }
-      #topBtn { bottom: 15px; right: 15px; padding: 8px 12px; font-size: 14px; }
-    }
-  </style>
+/* Back to top button */
+#topBtn {
+  display: none; position: fixed; bottom: 30px; right: 30px;
+  z-index: 200; font-size: 18px; border: none; outline: none;
+  background-color: #0d6efd; color: white; cursor: pointer;
+  padding: 12px 16px; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: background-color 0.3s;
+}
+#topBtn:hover { background-color: #0056b3; }
+
+/* Responsive */
+@media (max-width: 700px){
+  header img { width: 120px; height: 120px; }
+  h1 { font-size: 2.2em; }
+  h2 { font-size: 1.5em; }
+  h3 { font-size: 1.2em; }
+}
+@media (max-width: 400px){
+  header img { width: 100px; height: 100px; }
+  h1 { font-size: 1.8em; }
+  h2 { font-size: 1.2em; }
+  h3 { font-size: 1em; }
+  nav a { margin: 0 8px; font-size: 0.9em; }
+  #topBtn { padding: 10px 14px; font-size: 16px; }
+}
+</style>
 </head>
 <body>
 
-<!-- 导航栏 -->
+<!-- Navigation -->
 <nav>
-  <a href="#about">About</a>
+  <a href="#about" class="active">About</a>
   <a href="#research">Research</a>
   <a href="#publications">Publications</a>
   <a href="#contact">Contact</a>
 </nav>
 
+<!-- Header -->
 <header>
   <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
   <h1>Haokai Ding</h1>
@@ -146,83 +125,33 @@
   </p>
 </header>
 
-<section id="about">
+<!-- About -->
+<section id="about" class="card">
   <h2>About Me</h2>
-  <p>
-    Welcome! I am Haokai Ding. This is my academic homepage where I share my research,
-    publications, and professional activities.
-  </p>
+  <p>Welcome! I am Haokai Ding. This is my academic homepage where I share my research, publications, and professional activities.</p>
 </section>
 
-<section id="research">
+<!-- Research -->
+<section id="research" class="card">
   <h2>Research Interests</h2>
-  <p>
-    [👉 在这里写你的研究方向，例如 Applied Mathematics, Machine Learning, Scientific Computing 等]
-  </p>
+  <p>[👉 在这里写你的研究方向，例如 Applied Mathematics, Machine Learning, Scientific Computing 等]</p>
 </section>
 
-<section id="publications">
+<!-- Publications -->
+<section id="publications" class="card">
   <h2>Publications</h2>
 
-  <!-- 期刊论文 -->
   <h3>Journal Articles</h3>
-  <ul>
-    <li>
-      Liu, Yating, Haokai Ding, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, and Ning Wang. 
-      2025. <i>Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</i>, 
-      Polymers 17, no. 15: 2136. 
-      <a href="https://doi.org/10.3390/polym17152136" target="_blank">DOI: 10.3390/polym17152136</a>
-    </li>
-  </ul>
+  <div class="pub-card">
+    Liu, Yating, Haokai Ding, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, and Ning Wang. 
+    2025. <i>Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</i>, 
+    Polymers 17, no. 15: 2136. 
+    <a href="https://doi.org/10.3390/polym17152136" target="_blank">DOI: 10.3390/polym17152136</a>
+  </div>
 
-  <!-- 会议论文 -->
   <h3>Conference Papers</h3>
-  <ul>
-    <li>
-      Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, Haokai Ding, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang. 
-      2025. <i>Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</i>, 
-      E3S Web Conf., 615 (2025) 02010. 
-      <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank">DOI: 10.1051/e3sconf/202561502010</a>
-    </li>
-  </ul>
-</section>
-
-<section id="contact">
-  <h2>Contact</h2>
-  <p>
-    If you’d like to get in touch, feel free to reach me at 
-    <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a>.
-  </p>
-</section>
-
-<!-- 回到顶部按钮 -->
-<button id="topBtn" title="Go to top">↑</button>
-
-<script>
-  // 标题渐显动画
-  const headers = document.querySelectorAll('h2');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.2 });
-  headers.forEach(h => observer.observe(h));
-
-  // 回到顶部按钮逻辑
-  const topBtn = document.getElementById("topBtn");
-  window.onscroll = function() {
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-      topBtn.style.display = "block";
-    } else {
-      topBtn.style.display = "none";
-    }
-  };
-  topBtn.onclick = function() {
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  };
-</script>
-
-</body>
-</html>
+  <div class="pub-card">
+    Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, Haokai Ding, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang. 
+    2025. <i>Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</i>, 
+    E3S Web Conf., 615 (2025) 02010. 
+    <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank">DOI: 10.10_
