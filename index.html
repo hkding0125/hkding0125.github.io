@@ -4,23 +4,33 @@
     <meta charset="UTF-8">
     <title>Haokai Ding - Academic Homepage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* --- General Style & Layout --- */
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: Optima, "Palatino Linotype", "PingFang SC", "Microsoft YaHei", sans-serif;
             background-color: #ffffff;
-            color: #333;
-            line-height: 1.7;
-            font-size: 16px;
+            color: #444;
+            line-height: 1.8;
+            font-size: 15px;
             margin: 0;
             padding: 0;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
+        }
+
+        a {
+            color: #0080ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
 
         /* --- Navigation Bar --- */
@@ -28,86 +38,83 @@
             position: sticky;
             top: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid #e5e5e5;
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
             z-index: 1000;
-            padding: 10px 0;
+            padding: 5px 0;
         }
         .nav-container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
+            padding: 0 20px;
             display: flex;
-            justify-content: flex-start;
+            justify-content: flex-end;
             align-items: center;
         }
         nav a {
-            color: #555;
-            font-weight: 500;
-            text-decoration: none;
-            padding: 8px 16px;
+            color: #666;
+            font-weight: 400;
+            padding: 8px 12px;
             transition: color 0.2s;
+            font-family: 'Inter', sans-serif; /* Use a more common font for UI */
         }
         nav a:hover, nav a.active {
-            color: #0056b3;
+            color: #0080ff;
         }
         .nav-name {
             font-weight: 700;
             font-size: 1.1em;
-            color: #1a1a1a;
-            margin-right: auto; /* Pushes other links to the right */
+            color: #333;
+            margin-right: auto;
         }
 
         /* --- Header & Contact Info --- */
         header {
-            padding: 60px 0;
+            padding: 50px 0;
             display: flex;
             align-items: center;
         }
         header img {
-            width: 150px;
-            height: 150px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
-            margin-right: 40px;
+            margin-right: 30px;
             object-fit: cover;
         }
         .header-info h1 {
-            font-size: 2.5em;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 400;
             margin: 0 0 10px 0;
+            color: #333;
         }
         .header-info p {
             margin: 4px 0;
-            font-size: 1em;
-            color: #555;
+            font-size: 1.05em;
+            color: #6c757d;
         }
         .contact-links a {
-            color: #0056b3;
-            text-decoration: none;
             margin-right: 15px;
-            font-weight: 500;
-        }
-        .contact-links a:hover {
-            text-decoration: underline;
+            font-weight: 400;
+            font-family: 'Inter', sans-serif;
         }
 
         /* --- Main Content Styling --- */
         section {
-            padding-top: 60px; /* Offset for sticky nav */
-            margin-top: -60px; /* Pull section up to fill space */
-            margin-bottom: 40px;
+            padding-top: 50px;
+            margin-top: -40px;
+            margin-bottom: 30px;
         }
         h2 {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: #1a1a1a;
-            border-bottom: 1px solid #e5e5e5;
-            padding-bottom: 10px;
-            margin-bottom: 25px;
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.3em;
+            margin-bottom: 1em;
         }
         h3 {
-            font-size: 1.2em;
-            font-weight: 500;
+            font-size: 1.1rem;
+            font-weight: 400;
             color: #333;
             margin-top: 25px;
             margin-bottom: 15px;
@@ -121,8 +128,8 @@
         }
         .news-date {
             flex-shrink: 0;
-            width: 120px;
-            color: #555;
+            width: 100px;
+            color: #6c757d;
         }
         .news-content {
             flex-grow: 1;
@@ -131,71 +138,53 @@
         /* --- Publications List --- */
         .publication-list { list-style: none; padding: 0; }
         .publication-item {
-            margin-bottom: 25px;
-            display: flex;
+            margin-bottom: 2em;
         }
-        .pub-index {
-            flex-shrink: 0;
-            width: 40px;
-            font-weight: 500;
-        }
-        .pub-details { flex-grow: 1; }
         .pub-title {
-            font-weight: 500;
-            font-size: 1em;
-            margin-bottom: 4px;
+            font-weight: 400;
+            font-size: 1.1em;
+            margin-bottom: 0.2em;
         }
         .pub-authors {
-            font-size: 0.9em;
-            color: #555;
-            margin-bottom: 4px;
+            color: #6c757d;
+            margin-bottom: 0.2em;
         }
         .pub-authors b { color: #333; }
         .pub-venue {
-            font-size: 0.9em;
+            color: #6c757d;
             font-style: italic;
-            color: #444;
         }
-        .pub-links { margin-top: 6px; }
+        .pub-links { margin-top: 0.5em; }
         .pub-links a, .pub-links span {
             display: inline-block;
-            margin-right: 10px;
-            text-decoration: none;
-            font-weight: 500;
-            vertical-align: middle;
-            font-size: 0.85em;
-        }
-        .pub-links a { color: #0056b3; }
-        .pub-links a:hover { text-decoration: underline; }
-        .author-tag {
-            background-color: #e7f1ff;
-            color: #0056b3;
-            padding: 3px 8px;
+            border: 1px solid #0080ff;
+            color: #0080ff;
             border-radius: 4px;
-            font-size: 0.75em;
+            padding: 2px 8px;
+            margin-right: 8px;
+            font-size: 0.8em;
+            font-weight: 400;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+        }
+        .pub-links a:hover {
+            background-color: #0080ff;
+            color: #fff;
         }
         
         /* --- Awards List --- */
-        .awards-list { list-style: none; padding: 0; }
+        .awards-list { padding-left: 20px; }
         .award-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 0.95em;
+            margin-bottom: 0.5em;
         }
-        .award-item:last-child { border-bottom: none; }
-        .award-name { flex-grow: 1; padding-right: 20px; }
-        .award-year { flex-shrink: 0; font-weight: 500; color: #555; }
         
         /* --- Responsive Design --- */
         @media(max-width: 768px){
-            header { flex-direction: column; text-align: center; }
+            body { font-size: 14px; }
+            header { flex-direction: column; text-align: center; padding: 30px 0;}
             header img { margin: 0 auto 20px auto; }
             .nav-container { flex-direction: column; }
             .nav-name { margin-bottom: 10px; }
-            .publication-item { flex-direction: column; }
-            .pub-index { width: auto; margin-bottom: 5px; }
         }
     </style>
 </head>
@@ -204,7 +193,7 @@
 <nav id="navbar">
     <div class="nav-container">
         <a href="#home" class="nav-name">Haokai Ding</a>
-        <a href="#about" class="nav-link">About Me</a>
+        <a href="#about" class="nav-link">About</a>
         <a href="#news" class="nav-link">News</a>
         <a href="#publications" class="nav-link">Publications</a>
         <a href="#awards" class="nav-link">Awards</a>
@@ -216,15 +205,14 @@
         <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
         <div class="header-info">
             <h1>Haokai Ding (丁浩剀)</h1>
-            <p>Undergraduate Student, Future Technology School</p>
-            <p>Shenzhen Technology University (SZTU)</p>
+            <p>Undergraduate Student, Future Technology School, Shenzhen Technology University</p>
             <p>X Scholar, Tsien Excellence in Engineering Program, Shenzhen X-Institute</p>
             <p class="contact-links">
-                <a href="mailto:dinghaokai@x-institute.edu.cn">Email</a> |
-                <a href="[Your CV Path]">CV</a> |
-                <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> |
-                <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a> |
-                <a href="[Your GitHub URL]" target="_blank">GitHub</a>
+                <a href="mailto:dinghaokai@x-institute.edu.cn">[Email]</a>
+                <a href="[Your CV Path]">[CV]</a>
+                <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">[Google Scholar]</a>
+                <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">[ORCID]</a>
+                <a href="[Your GitHub URL]" target="_blank">[GitHub]</a>
             </p>
         </div>
     </header>
@@ -233,13 +221,10 @@
         <section id="about">
             <h2>About Me</h2>
             <p>
-                I am an undergraduate student at the <strong>Future Technology School, Shenzhen Technology University</strong>, expecting my Bachelor of Engineering degree in July 2026. I am also an X Scholar at the <strong>Tsinghua University Tsien Excellence in Engineering Program - Shenzhen X-Institute</strong>.
+                I am an undergraduate student at the <strong>Future Technology School, Shenzhen Technology University</strong> (2022.09 - 2026.07), expecting my Bachelor of Engineering degree. I am also an X Scholar at the <strong>Tsinghua University Tsien Excellence in Engineering Program - Shenzhen X-Institute</strong> (2023.09 - Present).
             </p>
             <p>
-                My research is centered on the design and application of novel robotic mechanisms and advanced spectroscopy techniques. My recent work includes developing underactuated robotic grippers based on the Peaucellier linkage, which has resulted in three accepted papers at premier IEEE conferences (ARM, CASE, and IROS 2025). I also have hands-on experience in utilizing excimer lasers for Laser-Induced Breakdown Spectroscopy (LIBS) and developing automated detection workflows with LabVIEW.
-            </p>
-            <p>
-                <strong>Research Interests:</strong> Robotics and Mechatronics, Underactuated Mechanisms, Gripper Design, Laser-Induced Breakdown Spectroscopy (LIBS), and Automated Systems.
+                My research is centered on the design and application of novel robotic mechanisms and advanced spectroscopy techniques. My recent work includes developing underactuated robotic grippers based on the Peaucellier linkage, and hands-on experience in utilizing excimer lasers for Laser-Induced Breakdown Spectroscopy (LIBS).
             </p>
         </section>
 
@@ -270,40 +255,39 @@
             <h3>Conference Papers</h3>
             <ul class="publication-list">
                 <li class="publication-item">
-                    <div class="pub-index">[C4]</div>
                     <div class="pub-details">
                         <div class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
                         <div class="pub-authors"><b>Haokai Ding</b>, W.Zhang*</div>
                         <div class="pub-venue">Proceedings of the 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</div>
                         <div class="pub-links">
-                            <span class="author-tag">First Author</span>
+                            <a>[Accepted]</a>
+                            <a>First Author</a>
                         </div>
                     </div>
                 </li>
                 <li class="publication-item">
-                    <div class="pub-index">[C3]</div>
                     <div class="pub-details">
                         <div class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
                         <div class="pub-authors"><b>Haokai Ding</b>, Z.Chen, T.Yang*, W.Zhang*</div>
                         <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Automation Science and Engineering (CASE)</div>
                         <div class="pub-links">
-                            <span class="author-tag">First Author</span>
+                            <a>[Published]</a>
+                            <a>First Author</a>
                         </div>
                     </div>
                 </li>
                 <li class="publication-item">
-                    <div class="pub-index">[C2]</div>
-                    <div class="pub-details">
+                     <div class="pub-details">
                         <div class="pub-title">Peaucellier Gripper: A Novel Underactuated Gripper for Linear Pinching and Self-Adaptive Grasp with the Peaucellier Linkage</div>
                         <div class="pub-authors"><b>Haokai Ding</b>, J.Fan, Z.Zhu, Y.Zhao, K.Chen*, W.Zhang*</div>
                         <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Advanced Robotics and Mechatronics (ARM)</div>
                         <div class="pub-links">
-                           <span class="author-tag">First Author</span>
+                           <a>[Published]</a>
+                           <a>First Author</a>
                         </div>
                     </div>
                 </li>
                 <li class="publication-item">
-                    <div class="pub-index">[C1]</div>
                     <div class="pub-details">
                         <div class="pub-title">Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</div>
                         <div class="pub-authors">Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, <b>Haokai Ding</b>, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang</div>
@@ -318,14 +302,13 @@
             <h3>Journal Articles</h3>
             <ul class="publication-list">
                  <li class="publication-item">
-                    <div class="pub-index">[J1]</div>
                     <div class="pub-details">
                         <div class="pub-title">Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</div>
                         <div class="pub-authors">Yating Liu, <b>Haokai Ding</b>, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang</div>
                         <div class="pub-venue">Polymers 17, no. 15: 2136</div>
                         <div class="pub-links">
                             <a href="https://doi.org/10.3390/polym17152136" target="_blank">[DOI]</a>
-                            <span class="author-tag">Co-first Author</span>
+                            <a>Co-first Author</a>
                         </div>
                     </div>
                 </li>
@@ -334,70 +317,51 @@
 
         <section id="awards">
             <h2>Honors & Awards</h2>
-            <h3>Provincial-Level & Above</h3>
             <ul class="awards-list">
-                <li class="award-item">
-                    <span class="award-name">🏆 Gold Prize, The 9th China "Internet+" Innovation Competition (Guangdong Division)</span>
-                    <span class="award-year">2023</span>
-                </li>
-                <li class="award-item">
-                    <span class="award-name">Second Prize, The 17th "Challenge Cup" Extracurricular Science Competition (Guangdong Division)</span>
-                    <span class="award-year">2023</span>
-                </li>
-            </ul>
-
-            <h3>University-Level</h3>
-            <ul class="awards-list">
-                 <li class="award-item">
-                    <span class="award-name">🏆 President's Award (Highest Student Honor), Shenzhen Technology University</span>
-                    <span class="award-year">2024</span>
-                </li>
-                <li class="award-item">
-                    <span class="award-name">Research and Innovation Award (First Prize)</span>
-                    <span class="award-year">2024</span>
-                </li>
-                 <li class="award-item">
-                    <span class="award-name">Research and Innovation Award (First Prize)</span>
-                    <span class="award-year">2023</span>
-                </li>
-                <li class="award-item">
-                    <span class="award-name">CHENHSONG Scholarship (Dean's Award & Academic Excellence)</span>
-                    <span class="award-year">2023</span>
-                </li>
-                 <li class="award-item">
-                    <span class="award-name">Outstanding Student Cadre Award</span>
-                    <span class="award-year">2024</span>
-                </li>
+                <li class="award-item">🏆 Gold Prize, The 9th China "Internet+" Innovation Competition (Guangdong Division), 2023</li>
+                <li class="award-item">🏆 President's Award (Highest Student Honor), Shenzhen Technology University, 2024</li>
+                <li class="award-item">Second Prize, The 17th "Challenge Cup" Extracurricular Science Competition (Guangdong Division), 2023</li>
+                <li class="award-item">Research and Innovation Award (First Prize), 2024</li>
+                <li class="award-item">Research and Innovation Award (First Prize), 2023</li>
+                <li class="award-item">CHENHSONG Scholarship (Dean's Award & Academic Excellence), 2023</li>
+                <li class="award-item">Outstanding Student Cadre Award, 2024</li>
             </ul>
         </section>
     </main>
 </div>
 
 <script>
-    // --- Smooth scrolling and active link highlighting ---
     document.addEventListener('DOMContentLoaded', () => {
         const sections = document.querySelectorAll('section, header');
         const navLinks = document.querySelectorAll('.nav-link');
+        const navHome = document.querySelector('.nav-name');
 
-        function changeNav() {
-            let index = sections.length;
+        function changeNavOnScroll() {
+            let current = 'home';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
 
-            while(--index && window.scrollY + 50 < sections[index].offsetTop) {}
-            
-            navLinks.forEach((link) => link.classList.remove('active'));
-            if(index > 0) { // Do not highlight for header
-                navLinks[index-1].classList.add('active');
-            }
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
         }
 
-        changeNav();
-        window.addEventListener('scroll', changeNav);
+        window.addEventListener('scroll', changeNavOnScroll);
 
-        // Smooth scroll for nav links
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 50, // offset for nav bar height
                     behavior: 'smooth'
                 });
             });
