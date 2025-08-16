@@ -28,7 +28,7 @@
 
         /* --- Right Sidebar (Profile) --- */
         .sidebar {
-            width: 250px;
+            width: 280px; /* Adjusted width to better fit content */
             flex-shrink: 0;
             padding-right: 30px;
             position: sticky;
@@ -50,7 +50,7 @@
         }
         .sidebar .contact-block {
             font-size: 0.9em;
-            color: #555;
+            color: #444;
             line-height: 1.5;
         }
         .sidebar .contact-block a {
@@ -67,24 +67,28 @@
             flex-grow: 1;
         }
         section {
-            margin-bottom: 35px;
+            margin-bottom: 25px;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #e5e5e5;
+            margin: 30px 0;
         }
         h2 {
             font-size: 1.5em;
             font-weight: 700;
             color: #1a1a1a;
-            border-bottom: 2px solid #0056b3;
-            padding-bottom: 6px;
+            border: none; /* Removed border to use <hr> instead */
+            padding-bottom: 0;
             margin-bottom: 15px;
         }
         h3 {
-            font-size: 1.2em;
+            font-size: 1.1em;
             font-weight: 500;
             color: #333;
-            margin-top: 20px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
+            margin-top: 15px;
+            margin-bottom: 10px;
         }
         .main-content p, .main-content ul {
             margin-bottom: 0.9em;
@@ -102,6 +106,16 @@
         }
         .publication-item {
             margin-bottom: 20px;
+            display: flex;
+        }
+        .pub-index {
+            flex-shrink: 0;
+            width: 40px;
+            font-weight: 500;
+            color: #333;
+        }
+        .pub-details {
+            flex-grow: 1;
         }
         .pub-title {
             font-weight: 500;
@@ -121,6 +135,7 @@
         .pub-links {
             display: flex;
             align-items: center;
+            margin-top: 4px;
         }
         .pub-links a, .pub-links span {
             margin-right: 10px;
@@ -195,6 +210,13 @@
             .sidebar img {
                 width: 120px;
             }
+            .publication-item {
+                flex-direction: column;
+            }
+            .pub-index {
+                width: auto;
+                margin-bottom: 5px;
+            }
         }
     </style>
 </head>
@@ -204,15 +226,17 @@
     <aside class="sidebar">
         <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
         <h1>Haokai Ding</h1>
-        <p class="contact-block">
-            Future Technology School, Shenzhen Technology University (Shenzhen, Guangdong)<br>
-            Shenzhen X-Institute<br>
-            <br>
-            E-mail: <a href="mailto:dinghaokai@x-institute.edu.cn">dinghaokai@x-institute.edu.cn</a><br>
-            E-mail: <a href="mailto:202200101041@stumail.sztu.edu.cn">202200101041@stumail.sztu.edu.cn</a><br>
-            E-mail: <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a><br>
-            Contact/Phone: (+86) 13301938580
-        </p>
+        <div class="contact-block">
+            <p>
+                Future Technology School, Shenzhen Technology University (Shenzhen, Guangdong)<br>
+                Shenzhen X-Institute<br>
+                <br>
+                E-mail: <a href="mailto:dinghaokai@x-institute.edu.cn">dinghaokai@x-institute.edu.cn</a><br>
+                E-mail: <a href="mailto:202200101041@stumail.sztu.edu.cn">202200101041@stumail.sztu.edu.cn</a><br>
+                E-mail: <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a><br>
+                Contact/Phone: (+86) 13301938580
+            </p>
+        </div>
     </aside>
 
     <main class="main-content">
@@ -229,61 +253,80 @@
             </p>
         </section>
 
+        <hr>
+
         <section id="publications">
             <h2>Publications</h2>
 
             <h3>Conference Papers</h3>
             <ul class="publication-list">
                 <li class="publication-item">
-                    <div class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
-                    <div class="pub-authors"><b>Haokai Ding</b>, W.Zhang*</div>
-                    <div class="pub-venue">Proceedings of the 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</div>
-                    <div class="pub-links">
-                        <span class="pub-status">[Accepted]</span>
-                        <span class="author-tag">First Author</span>
+                    <div class="pub-index">[C4]</div>
+                    <div class="pub-details">
+                        <div class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
+                        <div class="pub-authors"><b>Haokai Ding</b>, W.Zhang*</div>
+                        <div class="pub-venue">Proceedings of the 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</div>
+                        <div class="pub-links">
+                            <span class="pub-status">[Accepted]</span>
+                            <span class="author-tag">First Author</span>
+                        </div>
                     </div>
                 </li>
                 <li class="publication-item">
-                    <div class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
-                    <div class="pub-authors"><b>Haokai Ding</b>, Z.Chen, T.Yang*, W.Zhang*</div>
-                    <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Automation Science and Engineering (CASE)</div>
-                    <div class="pub-links">
-                        <span class="pub-status">[Published]</span>
-                        <span class="author-tag">First Author</span>
+                    <div class="pub-index">[C3]</div>
+                    <div class="pub-details">
+                        <div class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
+                        <div class="pub-authors"><b>Haokai Ding</b>, Z.Chen, T.Yang*, W.Zhang*</div>
+                        <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Automation Science and Engineering (CASE)</div>
+                        <div class="pub-links">
+                            <span class="pub-status">[Published]</span>
+                            <span class="author-tag">First Author</span>
+                        </div>
                     </div>
                 </li>
                 <li class="publication-item">
-                    <div class="pub-title">Peaucellier Gripper: A Novel Underactuated Gripper for Linear Pinching and Self-Adaptive Grasp with the Peaucellier Linkage</div>
-                    <div class="pub-authors"><b>Haokai Ding</b>, J.Fan, Z.Zhu, Y.Zhao, K.Chen*, W.Zhang*</div>
-                    <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Advanced Robotics and Mechatronics (ARM)</div>
-                    <div class="pub-links">
-                        <span class="pub-status">[Published]</span>
-                        <span class="author-tag">First Author</span>
+                    <div class="pub-index">[C2]</div>
+                    <div class="pub-details">
+                        <div class="pub-title">Peaucellier Gripper: A Novel Underactuated Gripper for Linear Pinching and Self-Adaptive Grasp with the Peaucellier Linkage</div>
+                        <div class="pub-authors"><b>Haokai Ding</b>, J.Fan, Z.Zhu, Y.Zhao, K.Chen*, W.Zhang*</div>
+                        <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Advanced Robotics and Mechatronics (ARM)</div>
+                        <div class="pub-links">
+                            <span class="pub-status">[Published]</span>
+                            <span class="author-tag">First Author</span>
+                        </div>
                     </div>
                 </li>
-                <li class="publication-item" data-year="2025">
-                    <div class="pub-title">Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</div>
-                    <div class="pub-authors">Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, <b>Haokai Ding</b>, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang</div>
-                    <div class="pub-venue">E3S Web Conf., 615 (2025) 02010</div>
-                    <div class="pub-links">
-                        <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank">[DOI]</a>
+                <li class="publication-item">
+                    <div class="pub-index">[C1]</div>
+                    <div class="pub-details">
+                        <div class="pub-title">Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</div>
+                        <div class="pub-authors">Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, <b>Haokai Ding</b>, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang</div>
+                        <div class="pub-venue">E3S Web Conf., 615 (2025) 02010</div>
+                        <div class="pub-links">
+                            <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank">[DOI]</a>
+                        </div>
                     </div>
                 </li>
             </ul>
 
             <h3>Journal Articles</h3>
             <ul class="publication-list">
-                 <li class="publication-item" data-year="2025">
-                    <div class="pub-title">Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</div>
-                    <div class="pub-authors">Yating Liu, <b>Haokai Ding</b>, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang</div>
-                    <div class="pub-venue">Polymers 17, no. 15: 2136</div>
-                    <div class="pub-links">
-                        <a href="https://doi.org/10.3390/polym17152136" target="_blank">[DOI]</a>
-                        <span class="author-tag">Co-first Author</span>
+                 <li class="publication-item">
+                    <div class="pub-index">[J1]</div>
+                    <div class="pub-details">
+                        <div class="pub-title">Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</div>
+                        <div class="pub-authors">Yating Liu, <b>Haokai Ding</b>, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang</div>
+                        <div class="pub-venue">Polymers 17, no. 15: 2136</div>
+                        <div class="pub-links">
+                            <a href="https://doi.org/10.3390/polym17152136" target="_blank">[DOI]</a>
+                            <span class="author-tag">Co-first Author</span>
+                        </div>
                     </div>
                 </li>
             </ul>
         </section>
+
+        <hr>
 
         <section id="awards">
             <h2>Honors & Awards</h2>
