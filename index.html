@@ -86,15 +86,17 @@
             font-size: 0.95em;
         }
 
-        /* --- Education Section --- */
+        /* --- Education Section (NEW LAYOUT) --- */
         .education-entry {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
-        .entry-header {
+        .entry-line-1 {
             display: flex;
             align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 8px;
+        }
+        .entry-line-2 {
+            text-align: right;
+            margin-top: 4px;
         }
         .entry-role {
             font-weight: 500;
@@ -102,9 +104,9 @@
             font-size: 1em;
         }
         .entry-logo {
-            width: 40px;  /* Increased from 32px */
-            height: 40px; /* Increased from 32px */
-            margin-right: 12px; /* Adjusted margin */
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
         }
         .entry-details {
             font-size: 0.95em;
@@ -118,14 +120,11 @@
             text-decoration: underline;
         }
         .entry-date {
-            margin-left: auto;
             color: #666;
             font-size: 0.9em;
-            white-space: nowrap;
-            padding-left: 15px;
         }
         .education-entry ul {
-            margin-top: 0;
+            margin-top: 8px;
             padding-left: 25px;
             font-size: 0.95em;
         }
@@ -209,8 +208,7 @@
         @media(max-width: 768px){
             header { flex-direction: column; text-align: center; align-items: center; }
             header img { margin-right: 0; margin-bottom: 20px; }
-            .entry-header { flex-direction: column; align-items: flex-start; }
-            .entry-date { margin-left: 0; padding-left: 0; margin-top: 5px; }
+            .entry-line-2 { text-align: left; margin-left: 32px; }
             .publication-item { flex-direction: column; }
             .pub-index { width: auto; margin-bottom: 5px; }
         }
@@ -239,12 +237,14 @@
             <h2>Education</h2>
             <hr>
             <div class="education-entry">
-                <div class="entry-header">
+                <div class="entry-line-1">
                     <strong class="entry-role">Undergraduate:</strong>
                     <img class="entry-logo" src="my-academic-site/images/SZTU_LOGO.svg" alt="SZTU Logo">
                     <div class="entry-details">
                         <a href="https://www.sztu.edu.cn/" target="_blank">Shenzhen Technology University</a>, Future Technology School--Bachelor of Engineering
                     </div>
+                </div>
+                <div class="entry-line-2">
                     <div class="entry-date">2022.09–2026.07</div>
                 </div>
                 <ul>
@@ -252,12 +252,14 @@
                 </ul>
             </div>
             <div class="education-entry">
-                <div class="entry-header">
+                <div class="entry-line-1">
                     <strong class="entry-role">Joint Training:</strong>
                     <img class="entry-logo" src="my-academic-site/images/Tsinghua_University_Logo.svg" alt="Tsinghua University Logo">
                     <div class="entry-details">
                         <a href="https://www.x-institute.edu.cn/" target="_blank">Tsinghua University Tsien Excellence in Engineering Program - Shenzhen X-Institute</a>--X Scholar
                     </div>
+                </div>
+                <div class="entry-line-2">
                     <div class="entry-date">[Start Date]–[End Date]</div>
                 </div>
                 <ul>
