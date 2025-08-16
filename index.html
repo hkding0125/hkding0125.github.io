@@ -5,15 +5,40 @@
   <title>Haokai Ding - Academic Homepage</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* 基础样式 */
+    /* 平滑滚动 */
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       max-width: 900px;
       margin: 0 auto;
       padding: 20px;
       line-height: 1.6;
-      background-color: #f8f9fa; /* 浅灰背景 */
-      color: #212529; /* 主文字颜色 */
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+
+    /* 导航栏 */
+    nav {
+      position: sticky;
+      top: 0;
+      background-color: #ffffff;
+      padding: 10px 0;
+      text-align: center;
+      border-bottom: 1px solid #dee2e6;
+      z-index: 100;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #0d6efd;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav a:hover {
+      color: #0056b3;
     }
 
     /* 页眉 */
@@ -30,7 +55,7 @@
       object-fit: cover;
       margin-bottom: 20px;
       transition: transform 0.3s;
-      border: 2px solid #007bff; /* 蓝色边框增强学术感 */
+      border: 2px solid #007bff;
     }
     header img:hover {
       transform: scale(1.05);
@@ -38,7 +63,7 @@
     h1 {
       margin: 0;
       font-size: 2.4em;
-      color: #0d6efd; /* 深蓝色标题 */
+      color: #0d6efd;
     }
     .contact {
       margin-top: 10px;
@@ -60,6 +85,13 @@
       margin-top: 40px;
       font-size: 1.6em;
       color: #0d6efd;
+      opacity: 0; /* 初始透明 */
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    h2.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* 段落和列表 */
@@ -88,6 +120,9 @@
       h2 {
         font-size: 1.4em;
       }
+      nav a {
+        margin: 0 10px;
+      }
     }
     @media (max-width: 400px) {
       header img {
@@ -102,13 +137,25 @@
       h2 {
         font-size: 1.2em;
       }
+      nav a {
+        margin: 0 5px;
+        font-size: 0.9em;
+      }
     }
   </style>
 </head>
 <body>
 
+<!-- 导航栏 -->
+<nav>
+  <a href="#about">About</a>
+  <a href="#research">Research</a>
+  <a href="#publications">Publications</a>
+  <a href="#contact">Contact</a>
+</nav>
+
 <header>
-  <img src="https://你的用户名.github.io/my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
+  <img src="https://hkding0125.github.io/my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
   <h1>Haokai Ding</h1>
   <p class="contact">
     📧 <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a><br>
@@ -117,7 +164,7 @@
   </p>
 </header>
 
-<section>
+<section id="about">
   <h2>About Me</h2>
   <p>
     Welcome! I am Haokai Ding. This is my academic homepage where I share my research,
@@ -125,14 +172,14 @@
   </p>
 </section>
 
-<section>
+<section id="research">
   <h2>Research Interests</h2>
   <p>
     [👉 在这里写你的研究方向，例如 Applied Mathematics, Machine Learning, Scientific Computing 等]
   </p>
 </section>
 
-<section>
+<section id="publications">
   <h2>Publications</h2>
   <ul>
     <li>[示例] Title of your paper, <i>Journal Name</i>, Year.</li>
@@ -140,13 +187,27 @@
   </ul>
 </section>
 
-<section>
+<section id="contact">
   <h2>Contact</h2>
   <p>
     If you’d like to get in touch, feel free to reach me at 
     <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a>.
   </p>
 </section>
+
+<script>
+  // 监听页面滚动，实现标题渐显动画
+  const headers = document.querySelectorAll('h2');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  headers.forEach(h => observer.observe(h));
+</script>
 
 </body>
 </html>
