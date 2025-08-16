@@ -5,94 +5,92 @@
 <title>Haokai Ding - Academic Homepage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
 /* --- General Style Reset & Typography --- */
 body {
-  font-family: 'Source Sans Pro', sans-serif;
-  background-color: #fdfdfd; /* A slightly softer white */
-  color: #333333; /* Softer than pure black for better readability */
-  line-height: 1.7;
-  font-size: 17px;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* --- Navigation Bar --- */
-nav {
-  position: sticky;
-  top: 0;
-  width: 100%;
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  color: #333;
+  line-height: 1.6;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
-  padding: 12px 0;
-  border-bottom: 1px solid #e0e0e0;
-  background-color: rgba(253, 253, 253, 0.95); /* Semi-transparent background */
-  backdrop-filter: blur(8px); /* Frosted glass effect for modern browsers */
-  z-index: 100;
-}
-nav a {
-  margin: 0 20px;
-  text-decoration: none;
-  font-weight: 600;
-  color: #333333;
-  transition: color 0.2s ease-in-out;
-}
-nav a:hover, nav a.active {
-  color: #0056b3; /* A more professional blue */
-  text-decoration: underline;
 }
 
-/* --- Header Section --- */
-header {
+.container {
   display: flex;
-  align-items: center;
-  margin: 50px 0;
+  max-width: 1100px;
+  width: 100%;
+  margin: 40px 20px;
 }
-header img {
-  width: 130px; /* Slightly larger */
-  height: 130px;
-  margin-right: 30px;
-  border-radius: 50%; /* Circular images are a modern standard */
-  border: 3px solid #f0f0f0;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+
+/* --- Right Sidebar (Profile) --- */
+.sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  padding-right: 40px;
+  position: sticky;
+  top: 40px;
+  align-self: flex-start;
 }
-.header-text h1 {
-  font-size: 2.5em;
+.sidebar img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.sidebar h1 {
+  font-size: 2em;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin: 0 0 8px 0;
   color: #1a1a1a;
 }
-.header-text p {
-  font-size: 1.1em;
+.sidebar p {
+  font-size: 1em;
   color: #555;
+  margin: 0 0 20px 0;
 }
-.header-text .contact a {
-  color: #0056b3;
+.sidebar-links a {
+  display: block;
   text-decoration: none;
-  margin-right: 12px;
+  color: #0056b3;
+  font-weight: 500;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  transition: color 0.2s;
 }
-.header-text .contact a:hover {
-  text-decoration: underline;
+.sidebar-links a:hover {
+  color: #003d7a;
 }
 
-/* --- General Section Styling --- */
+/* --- Left Main Content Area --- */
+.main-content {
+  flex-grow: 1;
+}
 section {
-  padding-top: 20px; /* Add padding for nav link accuracy */
-  margin: 40px 0;
+  margin-bottom: 40px;
 }
 h2 {
-  font-size: 1.8em;
+  font-size: 1.6em;
   font-weight: 700;
   color: #1a1a1a;
-  border-bottom: 2px solid #e0e0e0; /* Underline for clear separation */
-  padding-bottom: 10px;
+  border-bottom: 2px solid #0056b3;
+  padding-bottom: 8px;
   margin-bottom: 20px;
 }
+.main-content p, .main-content ul {
+  margin-bottom: 1em;
+}
+.main-content ul {
+  list-style-position: outside;
+  padding-left: 20px;
+}
 
-/* --- Publications Section (Revised) --- */
+/* --- Publications List --- */
 .publication-list {
   list-style: none;
   padding: 0;
@@ -101,24 +99,24 @@ h2 {
   margin-bottom: 25px;
 }
 .pub-title {
-  font-weight: 600;
-  font-size: 1.1em;
+  font-weight: 500;
+  font-size: 1.05em;
   margin-bottom: 4px;
 }
 .pub-authors {
-  font-size: 0.95em;
+  font-size: 0.9em;
   color: #555;
   margin-bottom: 4px;
 }
 .pub-venue {
-  font-size: 0.95em;
+  font-size: 0.9em;
   font-style: italic;
   color: #444;
 }
 .pub-links a {
-  margin-right: 10px;
+  margin-right: 12px;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.9em;
   color: #0056b3;
 }
@@ -126,174 +124,157 @@ h2 {
   text-decoration: underline;
 }
 
-
-/* --- Back to Top Button --- */
-#topBtn {
-  display: none;
-  position: fixed; bottom: 30px; right: 30px;
-  padding: 10px 15px; border: none; border-radius: 50%;
-  background-color: #0056b3; color: #fff; cursor: pointer;
-  font-size: 18px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+/* --- Awards List --- */
+.awards-list {
+  list-style: none;
+  padding: 0;
 }
-#topBtn:hover { background-color: #004494; }
+.award-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.award-item:last-child {
+  border-bottom: none;
+}
+.award-name {
+  flex-grow: 1;
+  padding-right: 20px;
+}
+.award-year {
+  flex-shrink: 0;
+  font-weight: 500;
+  color: #555;
+}
+
 
 /* --- Responsive Design --- */
-@media(max-width: 768px){
-  body { font-size: 16px; }
-  header {
+@media(max-width: 800px){
+  .container {
     flex-direction: column;
+  }
+  .sidebar {
+    position: static;
+    width: 100%;
+    padding-right: 0;
     text-align: center;
+    margin-bottom: 40px;
   }
-  header img {
-    margin-right: 0;
-    margin-bottom: 20px;
-    width: 120px;
-    height: 120px;
+  .sidebar img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
   }
-  h1 { font-size: 2.2em; }
-  nav a { margin: 0 15px; }
-}
-@media(max-width: 480px){
-  nav a { margin: 0 10px; font-size: 0.9em; }
+  .sidebar-links a {
+    display: inline-block;
+    margin: 0 10px;
+    border-bottom: none;
+  }
+  .sidebar-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="#about" class="active">About</a>
-  <a href="#research">Research</a>
-  <a href="#publications">Publications</a>
-  <a href="#contact">Contact</a>
-</nav>
-
-<header>
-  <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
-  <div class="header-text">
+<div class="container">
+  <aside class="sidebar">
+    <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
     <h1>Haokai Ding</h1>
-    <p>Bachelor of Engineering Student at Shenzhen Technology University [cite: 4, 6]</p>
-    <p class="contact">
-      📧 <a href="mailto:hk_ding@outlook.com">Email</a> |
-      <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> |
-      <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a> |
-      <a href="[Your GitHub URL]" target="_blank">GitHub</a>
+    <p>
+      Undergraduate Student<br>
+      Future Technology School<br>
+      Shenzhen Technology University
     </p>
-  </div>
-</header>
+    <div class="sidebar-links">
+      <a href="mailto:hk_ding@outlook.com">Email</a>
+      <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a>
+      <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a>
+      <a href="#">CV</a> <a href="[Your GitHub URL]" target="_blank">GitHub</a>
+    </div>
+  </aside>
 
-<section id="about">
-  <h2>🧑 About Me</h2>
-  <p>
-    Welcome! I am Haokai Ding, an undergraduate student at the Future Technology School, Shenzhen Technology University, expecting my Bachelor of Engineering degree in July 2026[cite: 4, 6, 7].
-  </p>
-  <p>
-    My research is centered on the design and application of novel robotic mechanisms and advanced spectroscopy techniques. My recent work includes developing underactuated robotic grippers based on the Peaucellier linkage, which has resulted in three accepted papers at the 2025 IEEE ARM, CASE, and IROS conferences[cite: 11, 13, 15, 27]. I also have experience in utilizing excimer lasers for Laser-Induced Breakdown Spectroscopy (LIBS) and developing automated detection workflows with LabVIEW[cite: 17, 18, 21].
-  </p>
-</section>
+  <main class="main-content">
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        I am an undergraduate student at the <strong>Future Technology School, Shenzhen Technology University</strong>, expecting my Bachelor of Engineering degree in July 2026.
+      </p>
+      <p>
+        My research is centered on the design and application of novel robotic mechanisms and advanced spectroscopy techniques. My recent work includes developing underactuated robotic grippers based on the Peaucellier linkage, which has resulted in three accepted papers at premier IEEE conferences (ARM, CASE, and IROS 2025). I also have hands-on experience in utilizing excimer lasers for Laser-Induced Breakdown Spectroscopy (LIBS) and developing automated detection workflows with LabVIEW.
+      </p>
+      <p>
+        <strong>Research Interests:</strong> Robotics and Mechatronics, Underactuated Mechanisms, Gripper Design, Laser-Induced Breakdown Spectroscopy (LIBS), and Automated Systems.
+      </p>
+    </section>
 
-<section id="research">
-  <h2>🔬 Research Interests</h2>
-  <p>My primary research interests include:</p>
-  <ul>
-    <li>Robotics and Mechatronics</li>
-    <li>Underactuated Mechanisms and Gripper Design</li>
-    <li>Laser-Induced Breakdown Spectroscopy (LIBS)</li>
-    <li>Sensors and Automated Systems</li>
-  </ul>
-</section>
+    <section id="publications">
+      <h2>Publications</h2>
+      <ul class="publication-list">
+        <li class="publication-item">
+          <div class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
+          <div class="pub-authors"><b>Haokai Ding</b>, W.Zhang*</div>
+          <div class="pub-venue">Proceedings of the 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</div>
+          <div class="pub-links">
+            <a href="#" style="color: #333; pointer-events: none;">[Accepted]</a>
+          </div>
+        </li>
+        <li class="publication-item">
+          <div class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
+          <div class="pub-authors"><b>Haokai Ding</b>, Z.Chen, T.Yang*, W.Zhang*</div>
+          <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Automation Science and Engineering (CASE)</div>
+          <div class="pub-links">
+            <a href="#" style="color: #333; pointer-events: none;">[Published]</a>
+          </div>
+        </li>
+        <li class="publication-item">
+          <div class="pub-title">Peaucellier Gripper: A Novel Underactuated Gripper for Linear Pinching and Self-Adaptive Grasp with the Peaucellier Linkage</div>
+          <div class="pub-authors"><b>Haokai Ding</b>, J.Fan, Z.Zhu, Y.Zhao, K.Chen*, W.Zhang*</div>
+          <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Advanced Robotics and Mechatronics (ARM)</div>
+          <div class="pub-links">
+            <a href="#" style="color: #333; pointer-events: none;">[Published]</a>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-<section id="publications">
-  <h2>📚 Publications</h2>
-  <ul id="all-pubs" class="publication-list">
-    <li class="publication-item" data-year="2025">
-      <div class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping [cite: 15]</div>
-      <div class="pub-authors"><b>Haokai Ding</b>, W.Zhang* [cite: 15]</div>
-      <div class="pub-venue">Proceedings of the 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) [cite: 15]</div>
-      <div class="pub-links">
-        <a href="#" style="color: #777; pointer-events: none;">[Accepted]</a>
-      </div>
-    </li>
-    <li class="publication-item" data-year="2025">
-      <div class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping [cite: 13]</div>
-      <div class="pub-authors"><b>Haokai Ding</b>, Z.Chen, T.Yang*, W.Zhang* [cite: 14]</div>
-      <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Automation Science and Engineering (CASE) [cite: 14]</div>
-       <div class="pub-links">
-        <a href="#" style="color: #777; pointer-events: none;">[Published]</a>
-      </div>
-    </li>
-     <li class="publication-item" data-year="2025">
-      <div class="pub-title">Peaucellier Gripper: A Novel Underactuated Gripper for Linear Pinching and Self-Adaptive Grasp with the Peaucellier Linkage [cite: 11]</div>
-      <div class="pub-authors"><b>Haokai Ding</b>, J.Fan, Z.Zhu, Y.Zhao, K.Chen*, W.Zhang* [cite: 12]</div>
-      <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Advanced Robotics and Mechatronics (ARM) [cite: 12]</div>
-       <div class="pub-links">
-        <a href="#" style="color: #777; pointer-events: none;">[Published]</a>
-      </div>
-    </li>
-  </ul>
-</section>
+    <section id="awards">
+        <h2>Honors & Awards</h2>
+        <div class="awards-list">
+            <div class="award-item">
+                <span class="award-name">Shenzhen Technology University "President's Award" (Highest honor)</span>
+                <span class="award-year">2024</span>
+            </div>
+            <div class="award-item">
+                <span class="award-name">Research and Innovation Award (First Prize)</span>
+                <span class="award-year">2024</span>
+            </div>
+             <div class="award-item">
+                <span class="award-name">Gold Prize, The 9th China "Internet+" Innovation Competition (Guangdong Division)</span>
+                <span class="award-year">2023</span>
+            </div>
+            <div class="award-item">
+                <span class="award-name">Second Prize, The 17th "Challenge Cup" Extracurricular Science Competition (Guangdong Division)</span>
+                <span class="award-year">2023</span>
+            </div>
+            <div class="award-item">
+                <span class="award-name">Research and Innovation Award (First Prize)</span>
+                <span class="award-year">2023</span>
+            </div>
+            <div class="award-item">
+                <span class="award-name">CHENHSONG Scholarship (Dean's Award & Academic Excellence)</span>
+                <span class="award-year">2023</span>
+            </div>
+        </div>
+    </section>
 
-<section id="contact">
-  <h2>✉️ Contact</h2>
-  <p>The best way to reach me is by email: <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a>[cite: 2].</p>
-</section>
-
-<button id="topBtn" title="Go to top">↑</button>
-
-<script>
-// --- Back to top button ---
-const topBtn = document.getElementById("topBtn");
-window.onscroll = function() {
-  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-    topBtn.style.display = "block";
-  } else {
-    topBtn.style.display = "none";
-  }
-};
-topBtn.onclick = function() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-// --- Active navigation link on scroll ---
-const sections = document.querySelectorAll('section, header');
-const navLinks = document.querySelectorAll('nav a');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop;
-    if (pageYOffset >= sectionTop - 60) { // 60 is nav height offset
-      current = section.getAttribute('id');
-    }
-  });
-  
-  if (current === null || current === '') {
-      current = 'about';
-  }
-
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    // The 'about' section is the header, which has no ID, so we handle it special
-    if (link.getAttribute('href') === '#about' && current === 'about') {
-         link.classList.add('active');
-    } else if (link.href.includes('#' + current)) {
-      link.classList.add('active');
-    }
-  });
-});
-
-// --- Sort publications by year (descending) ---
-function sortPublications() {
-  const container = document.getElementById('all-pubs');
-  const pubs = Array.from(container.children);
-  pubs.sort((a, b) => {
-    const yearA = parseInt(a.dataset.year, 10);
-    const yearB = parseInt(b.dataset.year, 10);
-    return yearB - yearA; // Sort descending
-  });
-  pubs.forEach(pub => container.appendChild(pub));
-}
-document.addEventListener('DOMContentLoaded', sortPublications);
-</script>
+  </main>
+</div>
 
 </body>
 </html>
