@@ -172,7 +172,7 @@ h2 {
   <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
   <div class="header-text">
     <h1>Haokai Ding</h1>
-    <p>PhD Student in [Your Field] at [Your University/Institution]</p>
+    <p>Bachelor of Engineering Student at Shenzhen Technology University [cite: 4, 6]</p>
     <p class="contact">
       📧 <a href="mailto:hk_ding@outlook.com">Email</a> |
       <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> |
@@ -185,21 +185,21 @@ h2 {
 <section id="about">
   <h2>🧑 About Me</h2>
   <p>
-    Welcome! I am Haokai Ding, a [Your Year, e.g., first-year PhD student] in the [Your Department] at [Your University]. I am fortunate to be advised by [Your Advisor's Name].
+    Welcome! I am Haokai Ding, an undergraduate student at the Future Technology School, Shenzhen Technology University, expecting my Bachelor of Engineering degree in July 2026[cite: 4, 6, 7].
   </p>
   <p>
-    My research focuses on [briefly describe your main research area]. I am particularly interested in [mention a specific sub-topic or problem]. Before starting my PhD, I received my [Your Degree, e.g., B.S. in Computer Science] from [Your Undergraduate University].
+    My research is centered on the design and application of novel robotic mechanisms and advanced spectroscopy techniques. My recent work includes developing underactuated robotic grippers based on the Peaucellier linkage, which has resulted in three accepted papers at the 2025 IEEE ARM, CASE, and IROS conferences[cite: 11, 13, 15, 27]. I also have experience in utilizing excimer lasers for Laser-Induced Breakdown Spectroscopy (LIBS) and developing automated detection workflows with LabVIEW[cite: 17, 18, 21].
   </p>
 </section>
 
 <section id="research">
   <h2>🔬 Research Interests</h2>
-  <p>I am broadly interested in the following areas:</p>
+  <p>My primary research interests include:</p>
   <ul>
-    <li>Applied Mathematics</li>
-    <li>Machine Learning & Deep Learning</li>
-    <li>Scientific Computing & Numerical Analysis</li>
-    <li>[Another Research Interest]</li>
+    <li>Robotics and Mechatronics</li>
+    <li>Underactuated Mechanisms and Gripper Design</li>
+    <li>Laser-Induced Breakdown Spectroscopy (LIBS)</li>
+    <li>Sensors and Automated Systems</li>
   </ul>
 </section>
 
@@ -207,27 +207,35 @@ h2 {
   <h2>📚 Publications</h2>
   <ul id="all-pubs" class="publication-list">
     <li class="publication-item" data-year="2025">
-      <div class="pub-title">Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</div>
-      <div class="pub-authors">Yating Liu, <b>Haokai Ding</b>, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang</div>
-      <div class="pub-venue">Polymers, 2025</div>
+      <div class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping [cite: 15]</div>
+      <div class="pub-authors"><b>Haokai Ding</b>, W.Zhang* [cite: 15]</div>
+      <div class="pub-venue">Proceedings of the 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) [cite: 15]</div>
       <div class="pub-links">
-        <a href="https://doi.org/10.3390/polym17152136" target="_blank">[DOI]</a>
-        </div>
-    </li>
-    <li class="publication-item" data-year="2025">
-      <div class="pub-title">Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</div>
-      <div class="pub-authors">Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, <b>Haokai Ding</b>, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang</div>
-      <div class="pub-venue">E3S Web of Conferences, 2025</div>
-      <div class="pub-links">
-        <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank">[DOI]</a>
+        <a href="#" style="color: #777; pointer-events: none;">[Accepted]</a>
       </div>
     </li>
-    </ul>
+    <li class="publication-item" data-year="2025">
+      <div class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping [cite: 13]</div>
+      <div class="pub-authors"><b>Haokai Ding</b>, Z.Chen, T.Yang*, W.Zhang* [cite: 14]</div>
+      <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Automation Science and Engineering (CASE) [cite: 14]</div>
+       <div class="pub-links">
+        <a href="#" style="color: #777; pointer-events: none;">[Published]</a>
+      </div>
+    </li>
+     <li class="publication-item" data-year="2025">
+      <div class="pub-title">Peaucellier Gripper: A Novel Underactuated Gripper for Linear Pinching and Self-Adaptive Grasp with the Peaucellier Linkage [cite: 11]</div>
+      <div class="pub-authors"><b>Haokai Ding</b>, J.Fan, Z.Zhu, Y.Zhao, K.Chen*, W.Zhang* [cite: 12]</div>
+      <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Advanced Robotics and Mechatronics (ARM) [cite: 12]</div>
+       <div class="pub-links">
+        <a href="#" style="color: #777; pointer-events: none;">[Published]</a>
+      </div>
+    </li>
+  </ul>
 </section>
 
 <section id="contact">
   <h2>✉️ Contact</h2>
-  <p>The best way to reach me is by email: <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a>.</p>
+  <p>The best way to reach me is by email: <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a>[cite: 2].</p>
 </section>
 
 <button id="topBtn" title="Go to top">↑</button>
@@ -257,14 +265,17 @@ window.addEventListener('scroll', () => {
       current = section.getAttribute('id');
     }
   });
-  // The 'about' section is tied to the header in this logic
-  if (current === null && pageYOffset < 200) {
+  
+  if (current === null || current === '') {
       current = 'about';
   }
 
   navLinks.forEach(link => {
     link.classList.remove('active');
-    if (link.href.includes('#' + current)) {
+    // The 'about' section is the header, which has no ID, so we handle it special
+    if (link.getAttribute('href') === '#about' && current === 'about') {
+         link.classList.add('active');
+    } else if (link.href.includes('#' + current)) {
       link.classList.add('active');
     }
   });
@@ -273,18 +284,14 @@ window.addEventListener('scroll', () => {
 // --- Sort publications by year (descending) ---
 function sortPublications() {
   const container = document.getElementById('all-pubs');
-  // Convert HTMLCollection to Array to use sort()
   const pubs = Array.from(container.children);
   pubs.sort((a, b) => {
-    // Get year from data-year attribute
     const yearA = parseInt(a.dataset.year, 10);
     const yearB = parseInt(b.dataset.year, 10);
     return yearB - yearA; // Sort descending
   });
-  // Append sorted items back to the container
   pubs.forEach(pub => container.appendChild(pub));
 }
-// Run sort on page load
 document.addEventListener('DOMContentLoaded', sortPublications);
 </script>
 
