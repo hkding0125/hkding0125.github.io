@@ -1,279 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Haokai Ding - Academic Homepage</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Haokai Ding - Academic Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- General Style Reset & Typography --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+        .container {
+            display: flex;
+            max-width: 1100px;
+            width: 100%;
+            margin: 40px 20px;
+        }
 
-<style>
-/* --- General Style Reset & Typography --- */
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #ffffff;
-  color: #333;
-  line-height: 1.6;
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-}
+        /* --- Right Sidebar (Profile) --- */
+        .sidebar {
+            width: 250px; /* Slightly reduced width */
+            flex-shrink: 0;
+            padding-right: 30px; /* Adjusted padding */
+            position: sticky;
+            top: 40px;
+            align-self: flex-start;
+        }
+        .sidebar img {
+            width: 100px; /* Smaller image */
+            height: 100px;
+            border-radius: 50%; /* Make it circular */
+            object-fit: cover; /* Ensure the image fills the circle without distortion */
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .sidebar h1 {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: #1a1a1a;
+        }
+        .sidebar p {
+            font-size: 0.9em;
+            color: #555;
+            margin: 0 0 15px 0;
+        }
+        .sidebar-links a {
+            display: block;
+            text-decoration: none;
+            color: #0056b3;
+            font-weight: 500;
+            padding: 6px 0;
+            border-bottom: 1px solid #eee;
+            transition: color 0.2s;
+            font-size: 0.9em; /* Slightly smaller link font */
+        }
+        .sidebar-links a:hover {
+            color: #003d7a;
+        }
 
-.container {
-  display: flex;
-  max-width: 1100px;
-  width: 100%;
-  margin: 40px 20px;
-}
+        /* --- Left Main Content Area --- */
+        .main-content {
+            flex-grow: 1;
+        }
+        section {
+            margin-bottom: 35px; /* Slightly reduced section margin */
+        }
+        h2 {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1a1a1a;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 6px;
+            margin-bottom: 15px;
+        }
+        .main-content p, .main-content ul {
+            margin-bottom: 0.9em;
+            font-size: 0.95em;
+        }
+        .main-content ul {
+            list-style-position: outside;
+            padding-left: 20px;
+        }
 
-/* --- Right Sidebar (Profile) --- */
-.sidebar {
-  width: 280px;
-  flex-shrink: 0;
-  padding-right: 40px;
-  position: sticky;
-  top: 40px;
-  align-self: flex-start;
-}
-.sidebar img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-.sidebar h1 {
-  font-size: 2em;
-  font-weight: 700;
-  margin: 0 0 8px 0;
-  color: #1a1a1a;
-}
-.sidebar p {
-  font-size: 1em;
-  color: #555;
-  margin: 0 0 20px 0;
-}
-.sidebar-links a {
-  display: block;
-  text-decoration: none;
-  color: #0056b3;
-  font-weight: 500;
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
-  transition: color 0.2s;
-}
-.sidebar-links a:hover {
-  color: #003d7a;
-}
+        /* --- Publications List --- */
+        .publication-list {
+            list-style: none;
+            padding: 0;
+        }
+        .publication-item {
+            margin-bottom: 20px;
+        }
+        .pub-title {
+            font-weight: 500;
+            font-size: 1em;
+            margin-bottom: 3px;
+        }
+        .pub-authors {
+            font-size: 0.85em;
+            color: #555;
+            margin-bottom: 3px;
+        }
+        .pub-venue {
+            font-size: 0.85em;
+            font-style: italic;
+            color: #444;
+        }
+        .pub-links a {
+            margin-right: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.8em;
+            color: #0056b3;
+        }
+        .pub-links a:hover {
+            text-decoration: underline;
+        }
 
-/* --- Left Main Content Area --- */
-.main-content {
-  flex-grow: 1;
-}
-section {
-  margin-bottom: 40px;
-}
-h2 {
-  font-size: 1.6em;
-  font-weight: 700;
-  color: #1a1a1a;
-  border-bottom: 2px solid #0056b3;
-  padding-bottom: 8px;
-  margin-bottom: 20px;
-}
-.main-content p, .main-content ul {
-  margin-bottom: 1em;
-}
-.main-content ul {
-  list-style-position: outside;
-  padding-left: 20px;
-}
-
-/* --- Publications List --- */
-.publication-list {
-  list-style: none;
-  padding: 0;
-}
-.publication-item {
-  margin-bottom: 25px;
-}
-.pub-title {
-  font-weight: 500;
-  font-size: 1.05em;
-  margin-bottom: 4px;
-}
-.pub-authors {
-  font-size: 0.9em;
-  color: #555;
-  margin-bottom: 4px;
-}
-.pub-venue {
-  font-size: 0.9em;
-  font-style: italic;
-  color: #444;
-}
-.pub-links a {
-  margin-right: 12px;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.9em;
-  color: #0056b3;
-}
-.pub-links a:hover {
-  text-decoration: underline;
-}
-
-/* --- Awards List --- */
-.awards-list {
-  list-style: none;
-  padding: 0;
-}
-.award-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #f0f0f0;
-}
-.award-item:last-child {
-  border-bottom: none;
-}
-.award-name {
-  flex-grow: 1;
-  padding-right: 20px;
-}
-.award-year {
-  flex-shrink: 0;
-  font-weight: 500;
-  color: #555;
-}
+        /* --- Awards List --- */
+        .awards-list {
+            list-style: none;
+            padding: 0;
+        }
+        .award-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9em;
+        }
+        .award-item:last-child {
+            border-bottom: none;
+        }
+        .award-name {
+            flex-grow: 1;
+            padding-right: 20px;
+        }
+        .award-year {
+            flex-shrink: 0;
+            font-weight: 500;
+            color: #555;
+        }
 
 
-/* --- Responsive Design --- */
-@media(max-width: 800px){
-  .container {
-    flex-direction: column;
-  }
-  .sidebar {
-    position: static;
-    width: 100%;
-    padding-right: 0;
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  .sidebar img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-  .sidebar-links a {
-    display: inline-block;
-    margin: 0 10px;
-    border-bottom: none;
-  }
-  .sidebar-links {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-}
-</style>
+        /* --- Responsive Design --- */
+        @media(max-width: 800px){
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                position: static;
+                width: 100%;
+                padding-right: 0;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+            .sidebar img {
+                width: 100px;
+                height: 100px;
+            }
+            .sidebar-links {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .sidebar-links a {
+                display: inline-block;
+                margin: 0 8px;
+                border-bottom: none;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-  <aside class="sidebar">
-    <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
-    <h1>Haokai Ding</h1>
-    <p>
-      Undergraduate Student<br>
-      Future Technology School<br>
-      Shenzhen Technology University
-    </p>
-    <div class="sidebar-links">
-      <a href="mailto:hk_ding@outlook.com">Email</a>
-      <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a>
-      <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a>
-      <a href="#">CV</a> <a href="[Your GitHub URL]" target="_blank">GitHub</a>
-    </div>
-  </aside>
-
-  <main class="main-content">
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        I am an undergraduate student at the <strong>Future Technology School, Shenzhen Technology University</strong>, expecting my Bachelor of Engineering degree in July 2026.
-      </p>
-      <p>
-        My research is centered on the design and application of novel robotic mechanisms and advanced spectroscopy techniques. My recent work includes developing underactuated robotic grippers based on the Peaucellier linkage, which has resulted in three accepted papers at premier IEEE conferences (ARM, CASE, and IROS 2025). I also have hands-on experience in utilizing excimer lasers for Laser-Induced Breakdown Spectroscopy (LIBS) and developing automated detection workflows with LabVIEW.
-      </p>
-      <p>
-        <strong>Research Interests:</strong> Robotics and Mechatronics, Underactuated Mechanisms, Gripper Design, Laser-Induced Breakdown Spectroscopy (LIBS), and Automated Systems.
-      </p>
-    </section>
-
-    <section id="publications">
-      <h2>Publications</h2>
-      <ul class="publication-list">
-        <li class="publication-item">
-          <div class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
-          <div class="pub-authors"><b>Haokai Ding</b>, W.Zhang*</div>
-          <div class="pub-venue">Proceedings of the 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</div>
-          <div class="pub-links">
-            <a href="#" style="color: #333; pointer-events: none;">[Accepted]</a>
-          </div>
-        </li>
-        <li class="publication-item">
-          <div class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
-          <div class="pub-authors"><b>Haokai Ding</b>, Z.Chen, T.Yang*, W.Zhang*</div>
-          <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Automation Science and Engineering (CASE)</div>
-          <div class="pub-links">
-            <a href="#" style="color: #333; pointer-events: none;">[Published]</a>
-          </div>
-        </li>
-        <li class="publication-item">
-          <div class="pub-title">Peaucellier Gripper: A Novel Underactuated Gripper for Linear Pinching and Self-Adaptive Grasp with the Peaucellier Linkage</div>
-          <div class="pub-authors"><b>Haokai Ding</b>, J.Fan, Z.Zhu, Y.Zhao, K.Chen*, W.Zhang*</div>
-          <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Advanced Robotics and Mechatronics (ARM)</div>
-          <div class="pub-links">
-            <a href="#" style="color: #333; pointer-events: none;">[Published]</a>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <section id="awards">
-        <h2>Honors & Awards</h2>
-        <div class="awards-list">
-            <div class="award-item">
-                <span class="award-name">Shenzhen Technology University "President's Award" (Highest honor)</span>
-                <span class="award-year">2024</span>
-            </div>
-            <div class="award-item">
-                <span class="award-name">Research and Innovation Award (First Prize)</span>
-                <span class="award-year">2024</span>
-            </div>
-             <div class="award-item">
-                <span class="award-name">Gold Prize, The 9th China "Internet+" Innovation Competition (Guangdong Division)</span>
-                <span class="award-year">2023</span>
-            </div>
-            <div class="award-item">
-                <span class="award-name">Second Prize, The 17th "Challenge Cup" Extracurricular Science Competition (Guangdong Division)</span>
-                <span class="award-year">2023</span>
-            </div>
-            <div class="award-item">
-                <span class="award-name">Research and Innovation Award (First Prize)</span>
-                <span class="award-year">2023</span>
-            </div>
-            <div class="award-item">
-                <span class="award-name">CHENHSONG Scholarship (Dean's Award & Academic Excellence)</span>
-                <span class="award-year">2023</span>
-            </div>
+    <aside class="sidebar">
+        <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
+        <h1>Haokai Ding</h1>
+        <p>
+            Undergraduate Student<br>
+            Future Technology School<br>
+            Shenzhen Technology University
+        </p>
+        <div class="sidebar-links">
+            <a href="mailto:hk_ding@outlook.com">Email</a>
+            <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a>
+            <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a>
+            <a href="#">CV</a>
+            <a href="[Your GitHub URL]" target="_blank">GitHub</a>
         </div>
-    </section>
+    </aside>
 
-  </main>
+    <main class="main-content">
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                I am an undergraduate student at the <strong>Future Technology School, Shenzhen Technology University</strong>, expecting my Bachelor of Engineering degree in July 2026.
+            </p>
+            <p>
+                My research is centered on the design and application of novel robotic mechanisms and advanced spectroscopy techniques. My recent work includes developing underactuated robotic grippers based on the Peaucellier linkage, which has resulted in three accepted papers at premier IEEE conferences (ARM, CASE, and IROS 2025). I also have hands-on experience in utilizing excimer lasers for Laser-Induced Breakdown Spectroscopy (LIBS) and developing automated detection workflows with LabVIEW.
+            </p>
+            <p>
+                <strong>Research Interests:</strong> Robotics and Mechatronics, Underactuated Mechanisms, Gripper Design, Laser-Induced Breakdown Spectroscopy (LIBS), and Automated Systems.
+            </p>
+        </section>
+
+        <section id="publications">
+            <h2>Publications</h2>
+            <ul class="publication-list">
+                <li class="publication-item">
+                    <div class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
+                    <div class="pub-authors"><b>Haokai Ding</b>, W.Zhang*</div>
+                    <div class="pub-venue">Proceedings of the 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</div>
+                    <div class="pub-links">
+                        <a href="#" style="color: #333; pointer-events: none;">[Accepted]</a>
+                    </div>
+                </li>
+                <li class="publication-item">
+                    <div class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
+                    <div class="pub-authors"><b>Haokai Ding</b>, Z.Chen, T.Yang*, W.Zhang*</div>
+                    <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Automation Science and Engineering (CASE)</div>
+                    <div class="pub-links">
+                        <a href="#" style="color: #333; pointer-events: none;">[Published]</a>
+                    </div>
+                </li>
+                <li class="publication-item">
+                    <div class="pub-title">Peaucellier Gripper: A Novel Underactuated Gripper for Linear Pinching and Self-Adaptive Grasp with the Peaucellier Linkage</div>
+                    <div class="pub-authors"><b>Haokai Ding</b>, J.Fan, Z.Zhu, Y.Zhao, K.Chen*, W.Zhang*</div>
+                    <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Advanced Robotics and Mechatronics (ARM)</div>
+                    <div class="pub-links">
+                        <a href="#" style="color: #333; pointer-events: none;">[Published]</a>
+                    </div>
+                </li>
+                <li class="publication-item" data-year="2025">
+                    <div class="pub-title">Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</div>
+                    <div class="pub-authors">Yating Liu, <b>Haokai Ding</b>, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang</div>
+                    <div class="pub-venue">Polymers 17, no. 15: 2136</div>
+                    <div class="pub-links">
+                        <a href="https://doi.org/10.3390/polym17152136" target="_blank">[DOI]</a>
+                    </div>
+                </li>
+                <li class="publication-item" data-year="2025">
+                    <div class="pub-title">Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</div>
+                    <div class="pub-authors">Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, <b>Haokai Ding</b>, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang</div>
+                    <div class="pub-venue">E3S Web Conf., 615 (2025) 02010</div>
+                    <div class="pub-links">
+                        <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank">[DOI]</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section id="awards">
+            <h2>Honors & Awards</h2>
+            <div class="awards-list">
+                <div class="award-item">
+                    <span class="award-name">Shenzhen Technology University "President's Award" (Highest honor)</span>
+                    <span class="award-year">2024</span>
+                </div>
+                <div class="award-item">
+                    <span class="award-name">Research and Innovation Award (First Prize)</span>
+                    <span class="award-year">2024</span>
+                </div>
+                <div class="award-item">
+                    <span class="award-name">Gold Prize, The 9th China "Internet+" Innovation Competition (Guangdong Division)</span>
+                    <span class="award-year">2023</span>
+                </div>
+                <div class="award-item">
+                    <span class="award-name">Second Prize, The 17th "Challenge Cup" Extracurricular Science Competition (Guangdong Division)</span>
+                    <span class="award-year">2023</span>
+                </div>
+                <div class="award-item">
+                    <span class="award-name">Research and Innovation Award (First Prize)</span>
+                    <span class="award-year">2023</span>
+                </div>
+                <div class="award-item">
+                    <span class="award-name">CHENHSONG Scholarship (Dean's Award & Academic Excellence)</span>
+                    <span class="award-year">2023</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
 </div>
 
 </body>
