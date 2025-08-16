@@ -39,30 +39,28 @@ nav a {
 }
 nav a:hover, nav a.active { text-decoration: underline; }
 
-/* Header */
+/* Header 左右布局 */
 header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
   margin: 40px 0;
 }
 header img {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
+  width: 200px;
+  height: 120px;
   object-fit: cover;
-  margin-bottom: 20px;
+  margin-right: 20px;
+  border-radius: 6px;
 }
-h1 {
-  font-size: 2.6em;
+.header-text h1 {
+  font-size: 2.4em;
   font-weight: 700;
   margin-bottom: 10px;
 }
-.contact a {
+.header-text .contact a {
   color:#0d6efd;
   text-decoration:none;
-  margin:0 5px;
+  margin-right: 8px;
 }
 
 /* Sections */
@@ -74,19 +72,31 @@ section {
 h2 { font-size: 1.8em; margin-bottom: 15px; color: #0d6efd; }
 h3 { font-size: 1.4em; margin-top:20px; margin-bottom:10px; }
 
-/* Publications grid */
+/* Publications grid with year column */
 .pub-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
+
 .pub-card {
+  display: flex;
+  align-items: flex-start;
+}
+
+.pub-year {
+  flex: 0 0 60px;
+  font-weight: 700;
+  font-size: 1.2em;
+  color: #0d6efd;
+  margin-right: 10px;
+}
+
+.pub-info {
   line-height: 1.5;
   font-size: 1em;
 }
-.pub-card strong {
-  margin-right: 6px;
-}
+
 .doi-btn {
   margin-left: 6px;
   padding: 4px 8px;
@@ -109,13 +119,15 @@ h3 { font-size: 1.4em; margin-top:20px; margin-bottom:10px; }
 
 /* Responsive */
 @media(max-width:700px){
-  header img { width:120px;height:120px;}
+  header { flex-direction: column; align-items: center; text-align: center; }
+  header img { width:160px;height:100px; margin-bottom:15px;}
   h1 { font-size:2.2em;}
   nav a { margin:0 12px;}
   .pub-grid { grid-template-columns: 1fr; }
+  .pub-year { flex: 0 0 50px; font-size:1.1em; margin-right:8px; }
 }
 @media(max-width:400px){
-  header img { width:100px;height:100px;}
+  header img { width:120px;height:80px;}
   h1 { font-size:1.8em;}
   nav a { margin:0 8px; font-size:0.9em;}
 }
@@ -134,12 +146,14 @@ h3 { font-size: 1.4em; margin-top:20px; margin-bottom:10px; }
 <!-- Header -->
 <header>
   <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
-  <h1>Haokai Ding</h1>
-  <p class="contact">
-    📧 <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a> |
-    🔗 <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> |
-    <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a>
-  </p>
+  <div class="header-text">
+    <h1>Haokai Ding</h1>
+    <p class="contact">
+      📧 <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a> |
+      🔗 <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> |
+      <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a>
+    </p>
+  </div>
 </header>
 
 <!-- About -->
@@ -159,12 +173,18 @@ h3 { font-size: 1.4em; margin-top:20px; margin-bottom:10px; }
   <h2>Publications</h2>
   <div id="all-pubs" class="pub-grid">
     <div class="pub-card" data-year="2025">
-      <strong>2025.</strong> Yating Liu, Haokai Ding, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang, Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries, Polymers 17, no. 15: 2136.
-      <a href="https://doi.org/10.3390/polym17152136" target="_blank" class="doi-btn">DOI</a>
+      <div class="pub-year">2025</div>
+      <div class="pub-info">
+        Yating Liu, Haokai Ding, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang, Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries, Polymers 17, no. 15: 2136.
+        <a href="https://doi.org/10.3390/polym17152136" target="_blank" class="doi-btn">DOI</a>
+      </div>
     </div>
     <div class="pub-card" data-year="2025">
-      <strong>2025.</strong> Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, Haokai Ding, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang, Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology, E3S Web Conf., 615 (2025) 02010.
-      <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank" class="doi-btn">DOI</a>
+      <div class="pub-year">2025</div>
+      <div class="pub-info">
+        Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, Haokai Ding, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang, Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology, E3S Web Conf., 615 (2025) 02010.
+        <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank" class="doi-btn">DOI</a>
+      </div>
     </div>
   </div>
 </section>
