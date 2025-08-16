@@ -37,8 +37,8 @@ nav a:hover, nav a.active { color: #0056b3; }
 header {
   display: flex;
   flex-direction: column;
-  align-items: center; /* 水平居中 */
-  justify-content: center; /* 垂直居中 */
+  align-items: center;
+  justify-content: center;
   text-align: center;
   margin: 40px 0;
 }
@@ -48,17 +48,17 @@ header img {
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #0d6efd;
-  margin-bottom: 20px; /* 头像与文字间距 */
+  margin-bottom: 20px;
 }
 h1 {
   margin: 0;
   font-size: 2.6em;
   font-weight: 700;
   color: #0d6efd;
-  line-height: 1.2; /* 文字紧凑 */
+  line-height: 1.2;
 }
 .contact {
-  margin-top: 8px; /* 姓名与联系方式间距 */
+  margin-top: 8px;
 }
 .contact a { color: #0d6efd; text-decoration: none; transition: color 0.2s; }
 .contact a:hover { text-decoration: underline; color: #0056b3; }
@@ -70,6 +70,9 @@ h1 {
   padding: 20px 25px;
   margin: 25px 0;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 文字靠上 */
 }
 
 /* Section titles */
@@ -89,7 +92,7 @@ h3 { font-size: 1.4em; color: #0d6efd; margin-top: 15px; margin-bottom: 8px; }
   margin: 15px 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: flex-start; /* 文字靠上 */
   transition: transform 0.2s, box-shadow 0.2s;
 }
 .pub-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
