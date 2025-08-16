@@ -128,9 +128,6 @@
             margin-right: 15px;
             object-fit: contain;
         }
-        .entry-logo:last-of-type {
-            margin-right: 15px; /* Ensure margin is consistent */
-        }
         .entry-details {
             font-size: 0.95em;
         }
@@ -160,19 +157,20 @@
         }
 
 
-        /* --- Publications List --- */
+        /* --- Publications List (REVISED) --- */
         .publication-list {
             list-style: none;
             padding: 0;
         }
         .publication-item {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             display: flex;
         }
         .pub-index {
             flex-shrink: 0;
             width: 40px;
             font-weight: 500;
+            color: #333;
         }
         .pub-details {
             flex-grow: 1;
@@ -180,40 +178,51 @@
         .pub-title {
             font-weight: 500;
             font-size: 1em;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
         .pub-authors {
-            font-size: 0.85em;
+            font-size: 0.9em;
             color: #555;
+            margin-bottom: 4px;
+        }
+        .pub-authors b {
+            color: #333; /* Make bold name less stark */
         }
         .pub-venue {
-            font-size: 0.85em;
-            font-style: italic;
-            color: #444;
-            margin-top: 3px;
+            font-size: 0.9em;
+            color: #555;
+            font-style: normal; /* Removed italics to match example */
         }
         .pub-links {
-            display: flex;
-            align-items: center;
-            margin-top: 4px;
+            margin-top: 6px;
         }
         .pub-links a, .pub-links span {
-            margin-right: 10px;
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 5px; /* Allows wrapping */
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.8em;
         }
-        .pub-links a { color: #0056b3; }
-        .pub-links a:hover { text-decoration: underline; }
-        .pub-status { color: #333; pointer-events: none; }
-        .author-tag {
+        .pub-links a {
+             color: #0056b3;
+             font-size: 0.85em;
+        }
+        .pub-links a:hover {
+            text-decoration: underline;
+        }
+        .pub-status, .author-tag {
             background-color: #e7f1ff;
             color: #0056b3;
-            padding: 3px 6px;
+            padding: 2px 8px;
             border-radius: 4px;
             font-size: 0.75em;
             font-weight: 500;
         }
+        .pub-status { /* Slightly different style for status */
+            background-color: #f0f0f0;
+            color: #555;
+        }
+
 
         /* --- Awards List --- */
         .awards-list { list-style: none; padding: 0; }
@@ -466,7 +475,7 @@
                 <div class="award-item">
                     <span class="award-name">
                         <span class="lang-en">CHENHSONG Scholarship (Dean's Award & Academic Excellence)</span>
-                        <span class="lang-zh">陈鸿松奖学金 (院长奖学金, 学业卓越奖)</span>
+                        <span class="lang-zh">震雄奖学金 (院长奖学金, 学业卓越奖)</span>
                     </span>
                     <span class="award-year">2023</span>
                 </div>
@@ -492,8 +501,6 @@
 
         // Show the selected language elements
         document.querySelectorAll(`.lang-${lang}`).forEach(el => {
-            // Use 'inline' for spans, 'block' for block-level elements if needed.
-            // '' resets to default display property from CSS, which is safer.
             el.style.display = ''; 
         });
 
