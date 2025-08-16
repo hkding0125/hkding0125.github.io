@@ -45,28 +45,22 @@
         .sidebar h1 {
             font-size: 1.8em;
             font-weight: 700;
-            margin: 0 0 8px 0;
+            margin: 0 0 12px 0;
             color: #1a1a1a;
         }
-        .sidebar p {
+        .sidebar .contact-block {
             font-size: 0.9em;
             color: #555;
-            margin: 0 0 15px 0;
+            line-height: 1.5;
         }
-        .sidebar-links a {
-            display: block;
-            text-decoration: none;
+        .sidebar .contact-block a {
             color: #0056b3;
-            font-weight: 500;
-            padding: 6px 0;
-            border-bottom: 1px solid #eee;
-            transition: color 0.2s;
-            font-size: 0.9em;
-            word-wrap: break-word; /* Ensure long emails don't overflow */
+            text-decoration: none;
         }
-        .sidebar-links a:hover {
-            color: #003d7a;
+        .sidebar .contact-block a:hover {
+            text-decoration: underline;
         }
+
 
         /* --- Left Main Content Area --- */
         .main-content {
@@ -201,16 +195,6 @@
             .sidebar img {
                 width: 120px;
             }
-            .sidebar-links {
-                display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            .sidebar-links a {
-                display: inline-block;
-                margin: 0 8px;
-                border-bottom: none;
-            }
         }
     </style>
 </head>
@@ -220,20 +204,15 @@
     <aside class="sidebar">
         <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
         <h1>Haokai Ding</h1>
-        <p>
-            Undergraduate Student<br>
-            Future Technology School<br>
-            Shenzhen Technology University
+        <p class="contact-block">
+            Future Technology School, Shenzhen Technology University (Shenzhen, Guangdong)<br>
+            Shenzhen X-Institute<br>
+            <br>
+            E-mail: <a href="mailto:dinghaokai@x-institute.edu.cn">dinghaokai@x-institute.edu.cn</a><br>
+            E-mail: <a href="mailto:202200101041@stumail.sztu.edu.cn">202200101041@stumail.sztu.edu.cn</a><br>
+            E-mail: <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a><br>
+            Contact/Phone: (+86) 13301938580
         </p>
-        <div class="sidebar-links">
-            <a href="mailto:dinghaokai@x-institute.edu.cn">dinghaokai@x-institute.edu.cn</a>
-            <a href="mailto:202200101041@stumail.sztu.edu.cn">202200101041@stumail.sztu.edu.cn</a>
-            <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a>
-            <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a>
-            <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a>
-            <a href="#">CV</a>
-            <a href="[Your GitHub URL]" target="_blank">GitHub</a>
-        </div>
     </aside>
 
     <main class="main-content">
