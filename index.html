@@ -157,7 +157,7 @@
         }
 
 
-        /* --- Publications List (REVISED) --- */
+        /* --- Publications List --- */
         .publication-list {
             list-style: none;
             padding: 0;
@@ -186,12 +186,12 @@
             margin-bottom: 4px;
         }
         .pub-authors b {
-            color: #333; /* Make bold name less stark */
+            color: #333;
         }
         .pub-venue {
             font-size: 0.9em;
             color: #555;
-            font-style: normal; /* Removed italics to match example */
+            font-style: normal;
         }
         .pub-links {
             margin-top: 6px;
@@ -199,7 +199,7 @@
         .pub-links a, .pub-links span {
             display: inline-block;
             margin-right: 8px;
-            margin-bottom: 5px; /* Allows wrapping */
+            margin-bottom: 5px;
             text-decoration: none;
             font-weight: 500;
         }
@@ -210,17 +210,23 @@
         .pub-links a:hover {
             text-decoration: underline;
         }
-        .pub-status, .author-tag {
-            background-color: #e7f1ff;
-            color: #0056b3;
+        .pub-status {
+            background-color: #f0f0f0;
+            color: #555;
             padding: 2px 8px;
             border-radius: 4px;
             font-size: 0.75em;
-            font-weight: 500;
         }
-        .pub-status { /* Slightly different style for status */
-            background-color: #f0f0f0;
-            color: #555;
+        .author-tag {
+            display: inline-flex; /* Use flexbox for alignment */
+            align-items: center;   /* Vertical alignment */
+            justify-content: center; /* Horizontal alignment */
+            background-color: #e7f1ff;
+            color: #0056b3;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 500;
         }
 
 
