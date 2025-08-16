@@ -64,15 +64,17 @@ h1 {
 .contact a:hover { text-decoration: underline; color: #0056b3; }
 
 /* Card layout */
-.card {
+.card.centered {
   background-color: #ffffff;
   border-radius: 16px;
-  padding: 20px 25px;
+  padding: 40px 25px;
   margin: 25px 0;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* 文字靠上 */
+  justify-content: center; /* 垂直居中 */
+  align-items: center;
+  text-align: center;
 }
 
 /* Section titles */
@@ -82,20 +84,26 @@ h2 {
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 h2.visible { opacity: 1; transform: translateY(0); }
-h3 { font-size: 1.4em; color: #0d6efd; margin-top: 15px; margin-bottom: 8px; }
+h3 { font-size: 1.4em; color: #0d6efd; margin-top: 20px; margin-bottom: 10px; }
 
-/* Publications card */
+/* Publications card 微调 */
 .pub-card {
   border-left: 4px solid #0d6efd;
-  border-radius: 12px;
-  padding: 15px 20px;
-  margin: 15px 0;
+  border-radius: 16px;
+  padding: 40px 25px;        
+  margin: 15px 0;             
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* 文字靠上 */
+  align-items: flex-start;    
+  background-color: #fff;
+  font-size: 1em;             
+  line-height: 1.6;           
   transition: transform 0.2s, box-shadow 0.2s;
 }
-.pub-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.pub-card:hover { 
+  transform: translateY(-2px); 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+}
 .pub-card.journal { background-color: #e7f0ff; }
 .pub-card.conference { background-color: #f0f0f0; }
 
@@ -166,13 +174,13 @@ ul li { margin-bottom: 8px; }
 </header>
 
 <!-- About -->
-<section id="about" class="card">
+<section id="about" class="card centered">
   <h2>About Me</h2>
   <p>Welcome! I am Haokai Ding. This is my academic homepage where I share my research, publications, and professional activities.</p>
 </section>
 
 <!-- Research -->
-<section id="research" class="card">
+<section id="research" class="card centered">
   <h2>Research Interests</h2>
   <p>[👉 在这里写你的研究方向，例如 Applied Mathematics, Machine Learning, Scientific Computing 等]</p>
 </section>
@@ -203,7 +211,7 @@ ul li { margin-bottom: 8px; }
 </section>
 
 <!-- Contact -->
-<section id="contact" class="card">
+<section id="contact" class="card centered">
   <h2>Contact</h2>
   <p>If you’d like to get in touch, feel free to reach me at <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a>.</p>
 </section>
