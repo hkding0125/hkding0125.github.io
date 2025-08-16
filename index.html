@@ -9,16 +9,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap">
 
   <style>
-    /* 全局滚动行为 */
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* 全局字体应用 */
-    html, body, h1, h2, p, ul, li, a {
+    html { scroll-behavior: smooth; }
+    html, body, h1, h2, h3, p, ul, li, a {
       font-family: 'Roboto', Helvetica, Arial, sans-serif;
     }
-
     body {
       max-width: 900px;
       margin: 0 auto;
@@ -45,15 +39,10 @@
       font-weight: 500;
       transition: color 0.2s;
     }
-    nav a:hover {
-      color: #0056b3;
-    }
+    nav a:hover { color: #0056b3; }
 
     /* 页眉 */
-    header {
-      text-align: center;
-      margin-bottom: 50px;
-    }
+    header { text-align: center; margin-bottom: 50px; }
     header img {
       width: 160px;
       height: 160px;
@@ -65,27 +54,11 @@
       transition: transform 0.3s;
       border: 2px solid #007bff;
     }
-    header img:hover {
-      transform: scale(1.05);
-    }
-    h1 {
-      margin: 0;
-      font-size: 2.4em;
-      color: #0d6efd;
-      font-weight: 700;
-    }
-    .contact {
-      margin-top: 10px;
-    }
-    .contact a {
-      color: #0d6efd;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .contact a:hover {
-      color: #0056b3;
-      text-decoration: underline;
-    }
+    header img:hover { transform: scale(1.05); }
+    h1 { margin: 0; font-size: 2.4em; color: #0d6efd; font-weight: 700; }
+    .contact { margin-top: 10px; }
+    .contact a { color: #0d6efd; text-decoration: none; transition: color 0.2s; }
+    .contact a:hover { color: #0056b3; text-decoration: underline; }
 
     /* 章节标题 */
     h2 {
@@ -99,19 +72,19 @@
       transition: opacity 0.8s ease-out, transform 0.8s ease-out;
       font-weight: 500;
     }
-    h2.visible {
-      opacity: 1;
-      transform: translateY(0);
+    h2.visible { opacity: 1; transform: translateY(0); }
+
+    /* 子标题 h3 */
+    h3 {
+      margin-top: 25px;
+      color: #0d6efd;
+      font-size: 1.4em;
+      font-weight: 500;
     }
 
     /* 段落和列表 */
-    p, ul {
-      font-size: 1em;
-      margin-top: 15px;
-    }
-    ul li {
-      margin-bottom: 10px;
-    }
+    p, ul { font-size: 1em; margin-top: 15px; }
+    ul li { margin-bottom: 10px; }
 
     /* 回到顶部按钮 */
     #topBtn {
@@ -131,9 +104,7 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
       transition: background-color 0.3s;
     }
-    #topBtn:hover {
-      background-color: #0056b3;
-    }
+    #topBtn:hover { background-color: #0056b3; }
 
     /* 响应式优化 */
     @media (max-width: 700px) {
@@ -141,6 +112,7 @@
       header img { width: 120px; height: 120px; max-width: 40vw; max-height: 40vw; }
       h1 { font-size: 2em; }
       h2 { font-size: 1.4em; }
+      h3 { font-size: 1.2em; }
       nav a { margin: 0 10px; }
       #topBtn { bottom: 20px; right: 20px; padding: 10px 14px; font-size: 16px; }
     }
@@ -148,6 +120,7 @@
       header img { width: 100px; height: 100px; max-width: 50vw; max-height: 50vw; }
       h1 { font-size: 1.8em; }
       h2 { font-size: 1.2em; }
+      h3 { font-size: 1em; }
       nav a { margin: 0 5px; font-size: 0.9em; }
       #topBtn { bottom: 15px; right: 15px; padding: 8px 12px; font-size: 14px; }
     }
@@ -190,19 +163,24 @@
 
 <section id="publications">
   <h2>Publications</h2>
+
+  <!-- 期刊论文 -->
+  <h3>Journal Articles</h3>
   <ul>
-    <!-- 期刊论文 -->
     <li>
       Liu, Yating, Haokai Ding, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, and Ning Wang. 
       2025. <i>Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</i>, 
       Polymers 17, no. 15: 2136. 
       <a href="https://doi.org/10.3390/polym17152136" target="_blank">DOI: 10.3390/polym17152136</a>
     </li>
+  </ul>
 
-    <!-- 会议论文 -->
+  <!-- 会议论文 -->
+  <h3>Conference Papers</h3>
+  <ul>
     <li>
       Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, Haokai Ding, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang. 
-      <i>Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</i>, 
+      2025. <i>Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</i>, 
       E3S Web Conf., 615 (2025) 02010. 
       <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank">DOI: 10.1051/e3sconf/202561502010</a>
     </li>
