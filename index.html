@@ -5,16 +5,21 @@
   <title>Haokai Ding - Academic Homepage</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- 引入 Google Fonts Roboto -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap">
 
   <style>
+    /* 全局滚动行为 */
     html {
       scroll-behavior: smooth;
     }
 
-    body {
+    /* 全局字体应用 */
+    html, body, h1, h2, p, ul, li, a {
       font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    }
+
+    body {
       max-width: 900px;
       margin: 0 auto;
       padding: 20px;
@@ -132,54 +137,19 @@
 
     /* 响应式优化 */
     @media (max-width: 700px) {
-      body {
-        padding: 15px;
-      }
-      header img {
-        width: 120px;
-        height: 120px;
-        max-width: 40vw;
-        max-height: 40vw;
-      }
-      h1 {
-        font-size: 2em;
-      }
-      h2 {
-        font-size: 1.4em;
-      }
-      nav a {
-        margin: 0 10px;
-      }
-      #topBtn {
-        bottom: 20px;
-        right: 20px;
-        padding: 10px 14px;
-        font-size: 16px;
-      }
+      body { padding: 15px; }
+      header img { width: 120px; height: 120px; max-width: 40vw; max-height: 40vw; }
+      h1 { font-size: 2em; }
+      h2 { font-size: 1.4em; }
+      nav a { margin: 0 10px; }
+      #topBtn { bottom: 20px; right: 20px; padding: 10px 14px; font-size: 16px; }
     }
     @media (max-width: 400px) {
-      header img {
-        width: 100px;
-        height: 100px;
-        max-width: 50vw;
-        max-height: 50vw;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-      h2 {
-        font-size: 1.2em;
-      }
-      nav a {
-        margin: 0 5px;
-        font-size: 0.9em;
-      }
-      #topBtn {
-        bottom: 15px;
-        right: 15px;
-        padding: 8px 12px;
-        font-size: 14px;
-      }
+      header img { width: 100px; height: 100px; max-width: 50vw; max-height: 50vw; }
+      h1 { font-size: 1.8em; }
+      h2 { font-size: 1.2em; }
+      nav a { margin: 0 5px; font-size: 0.9em; }
+      #topBtn { bottom: 15px; right: 15px; padding: 8px 12px; font-size: 14px; }
     }
   </style>
 </head>
@@ -234,8 +204,11 @@
   </p>
 </section>
 
+<!-- 回到顶部按钮 -->
+<button id="topBtn" title="Go to top">↑</button>
+
 <script>
-  // 监听页面滚动，实现标题渐显动画
+  // 标题渐显动画
   const headers = document.querySelectorAll('h2');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -244,12 +217,21 @@
       }
     });
   }, { threshold: 0.2 });
-
   headers.forEach(h => observer.observe(h));
+
+  // 回到顶部按钮逻辑
+  const topBtn = document.getElementById("topBtn");
+  window.onscroll = function() {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      topBtn.style.display = "block";
+    } else {
+      topBtn.style.display = "none";
+    }
+  };
+  topBtn.onclick = function() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
 </script>
 
 </body>
 </html>
-
-
-
