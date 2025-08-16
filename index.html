@@ -5,44 +5,103 @@
   <title>Haokai Ding - Academic Homepage</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    /* 基础样式 */
     body {
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      max-width: 800px;
-      margin: 40px auto;
+      max-width: 900px;
+      margin: 0 auto;
       padding: 20px;
       line-height: 1.6;
-      background-color: #fafafa;
-      color: #333;
+      background-color: #f8f9fa; /* 浅灰背景 */
+      color: #212529; /* 主文字颜色 */
     }
+
+    /* 页眉 */
     header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
     }
     header img {
       width: 160px;
       height: 160px;
+      max-width: 30vw;
+      max-height: 30vw;
       border-radius: 50%;
-      object-fit: cover; /* 保持比例裁剪填充圆形 */
+      object-fit: cover;
       margin-bottom: 20px;
+      transition: transform 0.3s;
+      border: 2px solid #007bff; /* 蓝色边框增强学术感 */
+    }
+    header img:hover {
+      transform: scale(1.05);
     }
     h1 {
       margin: 0;
-      font-size: 2.2em;
-    }
-    h2 {
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 5px;
-      margin-top: 40px;
-    }
-    a {
-      color: #0066cc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
+      font-size: 2.4em;
+      color: #0d6efd; /* 深蓝色标题 */
     }
     .contact {
+      margin-top: 10px;
+    }
+    .contact a {
+      color: #0d6efd;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact a:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+
+    /* 章节标题 */
+    h2 {
+      border-bottom: 2px solid #dee2e6;
+      padding-bottom: 5px;
+      margin-top: 40px;
+      font-size: 1.6em;
+      color: #0d6efd;
+    }
+
+    /* 段落和列表 */
+    p, ul {
+      font-size: 1em;
       margin-top: 15px;
+    }
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    /* 响应式优化 */
+    @media (max-width: 700px) {
+      body {
+        padding: 15px;
+      }
+      header img {
+        width: 120px;
+        height: 120px;
+        max-width: 40vw;
+        max-height: 40vw;
+      }
+      h1 {
+        font-size: 2em;
+      }
+      h2 {
+        font-size: 1.4em;
+      }
+    }
+    @media (max-width: 400px) {
+      header img {
+        width: 100px;
+        height: 100px;
+        max-width: 50vw;
+        max-height: 50vw;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+      h2 {
+        font-size: 1.2em;
+      }
     }
   </style>
 </head>
@@ -62,7 +121,7 @@
   <h2>About Me</h2>
   <p>
     Welcome! I am Haokai Ding. This is my academic homepage where I share my research,
-    publications, and professional activities.  
+    publications, and professional activities.
   </p>
 </section>
 
