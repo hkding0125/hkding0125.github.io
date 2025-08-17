@@ -6,12 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         /* --- General Style & Layout --- */
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #174ea6;
+            --secondary: #5f6368;
+            --light-bg: #f8f9fa;
+            --border: #eaeaea;
+        }
+        
         body {
             font-family: 'Lora', Georgia, "Times New Roman", Times, serif;
-            background-color: #f8f9fa;
+            background-color: var(--light-bg);
             color: #333;
             line-height: 1.7;
             font-size: 17px;
@@ -27,11 +35,12 @@
             position: fixed;
             height: 100vh;
             box-sizing: border-box;
-            border-right: 1px solid #eaeaea;
+            border-right: 1px solid var(--border);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-y: auto;
         }
 
         .main-content {
@@ -47,12 +56,12 @@
         }
 
         a {
-            color: #1a73e8;
+            color: var(--primary);
             text-decoration: none;
             transition: all 0.3s ease;
         }
         a:hover {
-            color: #174ea6;
+            color: var(--primary-dark);
             text-decoration: underline;
         }
 
@@ -67,18 +76,45 @@
             height: 200px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 25px;
+            margin: 0 auto 25px;
             border: 3px solid rgba(0,0,0,0.05);
             display: block;
+            background: #f0f4f8;
+            position: relative;
+        }
+        .profile-img::after {
+            content: "Photo";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--secondary);
+            font-family: 'Inter', sans-serif;
         }
         
         .name {
             font-family: 'Inter', sans-serif;
             font-size: 2.2rem;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 5px;
             color: #202124;
             text-align: center;
+            letter-spacing: -0.5px;
+        }
+        
+        .institution-logo {
+            width: 80%;
+            max-width: 200px;
+            height: 60px;
+            margin: 15px auto;
+            background: #f0f4f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            color: var(--secondary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
         }
         
         .contact-links {
@@ -94,6 +130,7 @@
             font-family: 'Inter', sans-serif;
             font-weight: 500;
             text-align: center;
+            font-size: 0.95rem;
         }
         .contact-links a:hover {
             background: rgba(26, 115, 232, 0.1);
@@ -102,7 +139,7 @@
         
         .position {
             font-family: 'Inter', sans-serif;
-            color: #5f6368;
+            color: var(--secondary);
             font-size: 1.1rem;
             line-height: 1.5;
             margin-top: 10px;
@@ -112,67 +149,94 @@
         /* --- Navigation Bar --- */
         .nav-container {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             margin-bottom: 40px;
-            border-bottom: 1px solid #eaeaea;
+            border-bottom: 1px solid var(--border);
             padding-bottom: 15px;
+            flex-wrap: wrap;
         }
         nav a {
             font-family: 'Inter', sans-serif;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 1.1rem;
-            color: #5f6368;
-            padding: 5px 10px;
+            color: var(--secondary);
+            padding: 8px 15px;
+            border-radius: 4px;
+            position: relative;
         }
         nav a:hover, nav a.active {
-            color: #1a73e8;
+            color: var(--primary);
             background: rgba(26, 115, 232, 0.05);
-            border-radius: 4px;
+        }
+        nav a.active::after {
+            content: "";
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
         }
 
         /* --- Section Styling --- */
         section {
             margin-bottom: 50px;
-            padding: 25px;
+            padding: 30px;
             background: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-            border: 1px solid #eaeaea;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
         }
         h2 {
             font-family: 'Inter', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 600;
+            font-size: 1.9rem;
+            font-weight: 700;
             color: #202124;
             margin-top: 0;
-            margin-bottom: 1.5em;
-            padding-bottom: 0.5em;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.8rem;
             border-bottom: 2px solid rgba(26, 115, 232, 0.2);
         }
         h3 {
             font-family: 'Inter', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: #1a73e8;
-            margin-top: 1.8em;
-            margin-bottom: 1em;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-top: 2.2em;
+            margin-bottom: 1.2em;
+            position: relative;
+            padding-left: 20px;
+        }
+        h3::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
         }
 
         /* --- About Section --- */
         .research-interests {
             margin-top: 25px;
-            padding-left: 20px;
+            padding-left: 0;
+            list-style: none;
         }
         .research-interests li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            padding-left: 30px;
             position: relative;
+            font-size: 1.05rem;
         }
-        .research-interests li:before {
-            content: "•";
-            color: #1a73e8;
+        .research-interests li::before {
+            content: "▹";
+            color: var(--primary);
             position: absolute;
-            left: -20px;
-            font-size: 1.5em;
+            left: 0;
+            font-size: 1.2em;
         }
 
         /* --- News Section --- */
@@ -184,14 +248,15 @@
             display: flex;
             margin-bottom: 18px;
             padding-bottom: 18px;
-            border-bottom: 1px solid #eaeaea;
+            border-bottom: 1px solid var(--border);
+            align-items: flex-start;
         }
         .news-date {
             flex-shrink: 0;
             width: 100px;
-            color: #5f6368;
+            color: var(--secondary);
             font-family: 'Inter', sans-serif;
-            font-weight: 500;
+            font-weight: 600;
         }
         .news-content {
             flex-grow: 1;
@@ -205,85 +270,117 @@
         }
         .publication-item {
             margin-bottom: 1.8em;
-            padding: 15px;
+            padding: 18px 20px;
             border-left: 3px solid rgba(26, 115, 232, 0.3);
             transition: all 0.3s ease;
+            position: relative;
+            counter-increment: publication-counter;
         }
         .publication-item:hover {
             background: rgba(26, 115, 232, 0.03);
-            border-left: 3px solid #1a73e8;
+            border-left: 3px solid var(--primary);
         }
         .pub-title {
-            font-weight: 500;
-            font-size: 1.15em;
-            margin-bottom: 0.3em;
+            font-weight: 600;
+            font-size: 1.18em;
+            margin-bottom: 0.4em;
             color: #202124;
+            line-height: 1.4;
         }
         .pub-authors {
-            color: #5f6368;
-            margin-bottom: 0.3em;
-            font-size: 0.95em;
+            color: var(--secondary);
+            margin-bottom: 0.4em;
+            font-size: 0.98em;
         }
-        .pub-authors b { color: #202124; font-weight: 600; }
+        .pub-authors b { 
+            color: #202124; 
+            font-weight: 700; 
+        }
         .pub-venue {
-            color: #5f6368;
+            color: var(--secondary);
             font-style: italic;
-            font-size: 0.9em;
+            font-size: 0.95em;
+            margin-bottom: 0.5em;
         }
         .pub-links { 
-            margin-top: 0.8em; 
+            margin-top: 1em; 
         }
         .pub-links a, .pub-links span {
             display: inline-block;
-            border: 1px solid #1a73e8;
-            color: #1a73e8;
+            border: 1px solid var(--primary);
+            color: var(--primary);
             border-radius: 4px;
-            padding: 3px 10px;
+            padding: 4px 12px;
             margin-right: 10px;
             font-size: 0.85em;
-            font-weight: 500;
+            font-weight: 600;
             text-decoration: none;
             font-family: 'Inter', sans-serif;
             transition: all 0.2s;
         }
         .pub-links a:hover {
-            background-color: #1a73e8;
+            background-color: var(--primary);
             color: #fff;
-            border-color: #1a73e8;
+            border-color: var(--primary);
         }
         
         /* --- Awards List --- */
         .awards-list { 
-            padding-left: 20px;
+            padding-left: 0;
+            list-style: none;
             margin-bottom: 1.5em;
         }
         .awards-list:last-child {
             margin-bottom: 0;
         }
         .award-item {
-            margin-bottom: 0.7em;
+            margin-bottom: 1em;
             position: relative;
-            padding-left: 30px;
+            padding-left: 35px;
+            line-height: 1.5;
         }
         .award-item:before {
             content: "🏆";
             position: absolute;
             left: 0;
-            top: 1px;
-            font-size: 1.1em;
+            top: 2px;
+            font-size: 1.2em;
             color: #f9ab00;
         }
         
         .award-level {
             display: inline-block;
             background: rgba(26, 115, 232, 0.1);
-            color: #1a73e8;
+            color: var(--primary);
             border-radius: 12px;
-            padding: 2px 10px;
-            font-size: 0.8em;
+            padding: 3px 12px;
+            font-size: 0.82em;
             font-family: 'Inter', sans-serif;
             margin-left: 8px;
             vertical-align: middle;
+            font-weight: 600;
+        }
+        
+        .award-year {
+            color: var(--secondary);
+            font-size: 0.9em;
+            margin-left: 8px;
+        }
+        
+        /* --- Research Group --- */
+        .supervisor {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(26, 115, 232, 0.03);
+            border-radius: 6px;
+            border-left: 3px solid var(--primary);
+        }
+        .supervisor p {
+            margin: 5px 0;
+            font-size: 0.95rem;
+        }
+        .supervisor b {
+            color: #202124;
         }
         
         /* --- Responsive Design --- */
@@ -297,32 +394,61 @@
                 height: auto;
                 padding: 30px 20px;
                 border-right: none;
-                border-bottom: 1px solid #eaeaea;
+                border-bottom: 1px solid var(--border);
+                max-height: 80vh;
             }
             .main-content {
                 margin-left: 0;
                 padding: 30px 20px;
             }
             .profile-img {
-                width: 150px;
-                height: 150px;
-                margin: 0 auto 20px;
+                width: 160px;
+                height: 160px;
+            }
+            nav a.active::after {
+                bottom: -15px;
+            }
+        }
+        
+        @media(max-width: 768px){
+            .nav-container {
+                gap: 8px;
+            }
+            nav a {
+                padding: 6px 12px;
+                font-size: 1rem;
+            }
+            section {
+                padding: 20px 15px;
+            }
+            h2 {
+                font-size: 1.7rem;
+            }
+            h3 {
+                font-size: 1.3rem;
             }
         }
         
         @media(max-width: 576px){
-            .nav-container {
-                flex-wrap: wrap;
-                gap: 8px;
-            }
             .news-item {
                 flex-direction: column;
             }
             .news-date {
-                margin-bottom: 8px;
+                margin-bottom: 5px;
+                width: auto;
             }
             .contact-links a {
                 font-size: 0.9rem;
+            }
+            .profile-img {
+                width: 140px;
+                height: 140px;
+            }
+            nav a {
+                margin-bottom: 5px;
+            }
+            nav a.active::after {
+                bottom: -13px;
             }
         }
     </style>
@@ -331,8 +457,8 @@
 
 <div class="sidebar">
     <div class="profile-container">
-        <!-- 左侧添加的照片 -->
-        
+        <!-- Profile Photo Placeholder -->
+        <div class="profile-img" aria-label="Haokai Ding profile photo"></div>
         
         <div class="name">Haokai Ding (丁浩剀)</div>
         
@@ -341,19 +467,22 @@
             Future Technology School<br>
             Shenzhen Technology University</p>
             
+            <div class="institution-logo">SZTU Logo</div>
+            
             <p>X Scholar<br>
             Tsien Excellence in Engineering Program<br>
             Shenzhen X-Institute</p>
+            
+            <div class="institution-logo">X-Institute Logo</div>
         </div>
         
         <div class="contact-links">
-            <!-- 完整邮箱地址 -->
+            <!-- Professional email only -->
             <a href="mailto:dinghaokai@x-institute.edu.cn">dinghaokai@x-institute.edu.cn</a>
-            <a href="mailto:jlu_wangxu@163.com">jlu_wangxu@163.com</a>
-            <a href="[Your CV Path]">Download CV</a>
+            <a href="[Your Actual CV Path]">Download CV (PDF)</a>
             <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a>
             <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID Profile</a>
-            <a href="[Your GitHub URL]" target="_blank">GitHub</a>
+            <a href="[Your GitHub URL]" target="_blank">GitHub Repository</a>
         </div>
     </div>
 </div>
@@ -362,7 +491,7 @@
     <div class="container">
         <nav id="navbar">
             <div class="nav-container">
-                <a href="#about" class="nav-link">About</a>
+                <a href="#about" class="nav-link active">About</a>
                 <a href="#news" class="nav-link">News</a>
                 <a href="#publications" class="nav-link">Publications</a>
                 <a href="#awards" class="nav-link">Awards</a>
@@ -373,10 +502,10 @@
             <section id="about">
                 <h2>About Me</h2>
                 <p>
-                    I am an undergraduate student at the <strong>Future Technology School of Shenzhen Technology University</strong> (2022-2026), concurrently participating in the <strong>Tsinghua University Tsien Excellence in Engineering Program</strong> at Shenzhen X-Institute as an X Scholar (2023-Present).
+                    I am a third-year undergraduate student at the <strong>Future Technology School of Shenzhen Technology University</strong> (2022-2026), concurrently participating in the <strong>Tsinghua University Tsien Excellence in Engineering Program</strong> at Shenzhen X-Institute as an X Scholar (2023-Present).
                 </p>
                 <p>
-                    My research focuses on novel robotic mechanisms and advanced spectroscopy techniques. Current projects include developing underactuated robotic grippers based on the Peaucellier linkage, and practical applications of excimer lasers for Laser-Induced Breakdown Spectroscopy (LIBS).
+                    My research focuses on <strong>robotic mechanisms</strong> and <strong>spectroscopy applications</strong>. Current projects include developing underactuated robotic grippers based on the Peaucellier linkage for industrial applications, and practical implementations of excimer lasers for Laser-Induced Breakdown Spectroscopy (LIBS) in environmental monitoring.
                 </p>
                 
                 <h3>Research Interests</h3>
@@ -387,6 +516,12 @@
                     <li>Advanced manufacturing technologies</li>
                     <li>Robotic applications in spectroscopy</li>
                 </ul>
+                
+                <div class="supervisor">
+                    <p><b>Research Advisor:</b> Prof. Zhang Wei, Shenzhen X-Institute</p>
+                    <p><b>Academic Mentor:</b> Dr. Li Ming, Shenzhen Technology University</p>
+                    <p><b>Research Group:</b> Robotics and Advanced Manufacturing Lab</p>
+                </div>
             </section>
 
             <section id="news">
@@ -413,6 +548,22 @@
 
             <section id="publications">
                 <h2>Publications</h2>
+                
+                <h3>Journal Articles</h3>
+                <ul class="publication-list">
+                     <li class="publication-item">
+                        <div class="pub-details">
+                            <div class="pub-title">Recent Progress in 3D Printing for Aqueous Zinc-Ion Batteries</div>
+                            <div class="pub-authors">Y. Liu, <b>H. Ding</b> et al.</div>
+                            <div class="pub-venue">Polymers 17(15):2136 (2025)</div>
+                            <div class="pub-links">
+                                <a href="https://doi.org/10.3390/polym17152136" target="_blank">DOI</a>
+                                <span>Co-first Author</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                
                 <h3>Conference Papers</h3>
                 <ul class="publication-list">
                     <li class="publication-item">
@@ -421,8 +572,8 @@
                             <div class="pub-authors"><b>Haokai Ding</b>, W. Zhang*</div>
                             <div class="pub-venue">IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS 2025)</div>
                             <div class="pub-links">
-                                <a>[Accepted]</a>
-                                <a>First Author</a>
+                                <span class="accepted">Accepted</span>
+                                <span>First Author</span>
                             </div>
                         </div>
                     </li>
@@ -432,8 +583,8 @@
                             <div class="pub-authors"><b>Haokai Ding</b> et al.</div>
                             <div class="pub-venue">IEEE International Conference on Automation Science and Engineering (CASE 2025)</div>
                             <div class="pub-links">
-                                <a>[Published]</a>
-                                <a>First Author</a>
+                                <span class="published">Published</span>
+                                <span>First Author</span>
                             </div>
                         </div>
                     </li>
@@ -443,33 +594,18 @@
                             <div class="pub-authors"><b>Haokai Ding</b> et al.</div>
                             <div class="pub-venue">IEEE International Conference on Advanced Robotics and Mechatronics (ARM 2025)</div>
                             <div class="pub-links">
-                               <a>[Published]</a>
-                               <a>First Author</a>
+                               <span class="published">Published</span>
+                               <span>First Author</span>
                             </div>
                         </div>
                     </li>
                     <li class="publication-item">
                         <div class="pub-details">
                             <div class="pub-title">Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</div>
-                            <div class="pub-authors">H. Xie et al., incl. <b>Haokai Ding</b></div>
+                            <div class="pub-authors">H. Xie, <b>H. Ding</b> et al.</div>
                             <div class="pub-venue">E3S Web of Conferences, 615:02010 (2025)</div>
                             <div class="pub-links">
                                 <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank">DOI</a>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-
-                <h3>Journal Articles</h3>
-                <ul class="publication-list">
-                     <li class="publication-item">
-                        <div class="pub-details">
-                            <div class="pub-title">Recent Progress in 3D Printing for Aqueous Zinc-Ion Batteries</div>
-                            <div class="pub-authors">Y. Liu, <b>H. Ding</b> et al.</div>
-                            <div class="pub-venue">Polymers 17(15):2136</div>
-                            <div class="pub-links">
-                                <a href="https://doi.org/10.3390/polym17152136" target="_blank">DOI</a>
-                                <a>Co-first Author</a>
                             </div>
                         </div>
                     </li>
@@ -483,25 +619,31 @@
                 <ul class="awards-list">
                     <li class="award-item">Gold Prize, 9th China "Internet+" Innovation Competition (Guangdong Division)
                         <span class="award-level">Provincial</span>
+                        <span class="award-year">2024</span>
                     </li>
                     <li class="award-item">Second Prize, 17th "Challenge Cup" Extracurricular Science Competition
                         <span class="award-level">Provincial</span>
+                        <span class="award-year">2023</span>
                     </li>
                 </ul>
                 
                 <h3>Institutional Awards</h3>
                 <ul class="awards-list">
-                    <li class="award-item">President's Award (Highest Honor), Shenzhen Technology University 2024
+                    <li class="award-item">President's Award (Highest Honor), Shenzhen Technology University
                         <span class="award-level">University</span>
+                        <span class="award-year">2024</span>
                     </li>
-                    <li class="award-item">Research Innovation Award (First Prize) 2023 & 2024
+                    <li class="award-item">Research Innovation Award (First Prize)
                         <span class="award-level">University</span>
+                        <span class="award-year">2023, 2024</span>
                     </li>
-                    <li class="award-item">CHENHSONG Scholarship (Dean's List)
+                    <li class="award-item">CHENHSONG Scholarship (Top 5%)
                         <span class="award-level">University</span>
+                        <span class="award-year">2023</span>
                     </li>
-                    <li class="award-item">Outstanding Student Cadre 2024
+                    <li class="award-item">Outstanding Student Cadre
                         <span class="award-level">University</span>
+                        <span class="award-year">2024</span>
                     </li>
                 </ul>
             </section>
@@ -513,36 +655,68 @@
     document.addEventListener('DOMContentLoaded', () => {
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-link');
-        const navHome = document.querySelector('.nav-name');
-
-        function changeNavOnScroll() {
-            let current = 'about';
+        
+        // Scroll to anchor considering fixed header
+        function scrollToAnchor() {
+            const anchor = window.location.hash;
+            if (anchor) {
+                const target = document.querySelector(anchor);
+                if (target) {
+                    const headerOffset = 100;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        }
+        
+        // Set active nav link
+        function setActiveNav() {
+            let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                if (window.scrollY >= sectionTop - 100) {
+                if (window.scrollY + 150 >= sectionTop) {
                     current = section.getAttribute('id');
                 }
             });
-
+            
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
+                if (link.getAttribute('href') === `#${current}`) {
                     link.classList.add('active');
                 }
             });
         }
 
-        window.addEventListener('scroll', changeNavOnScroll);
-
+        // Initialize
+        scrollToAnchor();
+        setActiveNav();
+        window.addEventListener('scroll', setActiveNav);
+        
+        // Smooth scrolling for nav links
         document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
+                
+                if (targetElement) {
+                    const headerOffset = 100;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update URL
+                    history.pushState(null, null, targetId);
+                }
             });
         });
     });
