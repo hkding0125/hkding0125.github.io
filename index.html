@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* --- General Style & Layout --- */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #ffffff;
@@ -18,14 +17,11 @@
             display: flex;
             justify-content: center;
         }
-
         .container {
             max-width: 900px;
             width: 100%;
             margin: 40px 20px;
         }
-
-        /* --- Language Switcher --- */
         #lang-switcher {
             text-align: right;
             margin-bottom: 20px;
@@ -43,8 +39,6 @@
             color: #0056b3;
             background-color: #e7f1ff;
         }
-
-        /* --- Header & Contact Info --- */
         header {
             display: flex;
             align-items: flex-start;
@@ -74,11 +68,7 @@
         .contact-info a:hover {
             text-decoration: underline;
         }
-
-        /* --- Main Content Styling --- */
-        section {
-            margin-bottom: 30px;
-        }
+        section { margin-bottom: 30px; }
         h2 {
             font-size: 1.6em;
             font-weight: 500;
@@ -100,185 +90,51 @@
             margin-top: 20px;
             margin-bottom: 15px;
         }
-        .main-content p, .main-content ul {
-            margin-bottom: 1em;
-            font-size: 0.95em;
-        }
+        .main-content p, .main-content ul { margin-bottom: 1em; font-size: 0.95em; }
 
-        /* --- Education Section --- */
-        .education-entry {
-            margin-bottom: 25px;
-        }
-        .entry-line-1 {
-            display: flex;
-            align-items: center;
-        }
-        .entry-line-2 {
-            text-align: right;
-            margin-top: 4px;
-        }
-        .entry-role {
-            font-weight: 500;
-            margin-right: 10px;
-            font-size: 1em;
-        }
-        .entry-logo {
-            width: 60px;
-            height: 60px;
-            margin-right: 15px;
-            object-fit: contain;
-        }
-        .entry-details {
-            font-size: 0.95em;
-        }
-        .entry-details a {
-            font-weight: 500;
-            color: #0056b3;
-            text-decoration: none;
-        }
-        .entry-details a:hover {
-            text-decoration: underline;
-        }
-        .entry-date {
-            color: #666;
-            font-size: 0.9em;
-        }
-        .education-entry ul {
-            margin-top: 8px;
-            padding-left: 25px;
-            font-size: 0.95em;
-        }
-        .education-entry ul li a {
-            color: #0056b3;
-            text-decoration: none;
-        }
-        .education-entry ul li a:hover {
-            text-decoration: underline;
-        }
+        .education-entry { margin-bottom: 25px; }
+        .entry-line-1 { display: flex; align-items: center; }
+        .entry-line-2 { text-align: right; margin-top: 4px; }
+        .entry-role { font-weight: 500; margin-right: 10px; font-size: 1em; }
+        .entry-logo { width: 60px; height: 60px; margin-right: 15px; object-fit: contain; }
+        .entry-details { font-size: 0.95em; }
+        .entry-details a { font-weight: 500; color: #0056b3; text-decoration: none; }
+        .entry-details a:hover { text-decoration: underline; }
+        .entry-date { color: #666; font-size: 0.9em; }
+        .education-entry ul { margin-top: 8px; padding-left: 25px; font-size: 0.95em; }
+        .education-entry ul li a { color: #0056b3; text-decoration: none; }
+        .education-entry ul li a:hover { text-decoration: underline; }
 
-        /* --- Publications List --- */
-        .publication-list {
-            list-style: none;
-            padding: 0;
-        }
-        .publication-item {
-            margin-bottom: 25px;
-            display: flex;
-        }
-        .pub-index {
-            flex-shrink: 0;
-            width: 40px;
-            font-weight: 500;
-            color: #333;
-        }
-        .pub-details {
-            flex-grow: 1;
-        }
-        .pub-title {
-            font-weight: 500;
-            font-size: 1em;
-            margin-bottom: 4px;
-        }
-        .pub-authors {
-            font-size: 0.9em;
-            color: #555;
-            margin-bottom: 4px;
-        }
-        .pub-authors b {
-            color: #333;
-        }
-        .pub-venue {
-            font-size: 0.9em;
-            color: #555;
-            font-style: normal;
-        }
-        .pub-links {
-            margin-top: 6px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            align-items: center;
-        }
+        .publication-list { list-style: none; padding: 0; }
+        .publication-item { margin-bottom: 25px; display: flex; }
+        .pub-index { flex-shrink: 0; width: 40px; font-weight: 500; color: #333; }
+        .pub-details { flex-grow: 1; }
+        .pub-title { font-weight: 500; font-size: 1em; margin-bottom: 4px; }
+        .pub-authors { font-size: 0.9em; color: #555; margin-bottom: 4px; }
+        .pub-authors b { color: #333; }
+        .pub-venue { font-size: 0.9em; color: #555; font-style: normal; }
+        .pub-links { margin-top: 6px; }
         .pub-links a, .pub-links span {
-            display: inline-block;
-            text-decoration: none;
-            font-weight: 500;
-            vertical-align: middle;
+            display: inline-block; margin-right: 8px; margin-bottom: 5px; text-decoration: none;
+            font-weight: 500; vertical-align: middle;
         }
-        .pub-links a {
-             color: #0056b3;
-             font-size: 0.85em;
-        }
-        .pub-links a:hover {
-            text-decoration: underline;
-        }
-        .pub-status {
-            background-color: #f0f0f0;
-            color: #555;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.75em;
-        }
+        .pub-links a { color: #0056b3; font-size: 0.85em; }
+        .pub-links a:hover { text-decoration: underline; }
+        .pub-status { background-color: #f0f0f0; color: #555; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; }
+
         .author-tag {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #e7f1ff;
-            color: #0056b3;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.75em;
-            font-weight: 500;
-        }
-        .latest-tag {
-            background-color: #ffd700;
-            color: #000;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.75em;
-            font-weight: 500;
+            display: inline-flex; align-items: center; justify-content: center;
+            background-color: #e7f1ff; color: #0056b3; padding: 3px 8px;
+            border-radius: 4px; font-size: 0.75em; font-weight: 500;
         }
 
-        /* --- Awards List --- */
         .awards-list { list-style: none; padding: 0; }
-        .award-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 12px;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 0.9em;
-            transition: background-color 0.2s;
-        }
-        .award-highlight {
-            background-color: #fffbe6;
-            border-left: 3px solid #ffd700;
-            border-radius: 4px;
-            padding-left: 9px;
-        }
+        .award-item { display: flex; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid #f0f0f0; font-size: 0.9em; transition: background-color 0.2s; }
+        .award-highlight { background-color: #fffbe6; border-left: 3px solid #ffd700; border-radius: 4px; padding-left: 9px; }
         .award-item:last-child { border-bottom: none; }
         .award-name { flex-grow: 1; padding-right: 20px; }
         .award-year { flex-shrink: 0; font-weight: 500; color: #555; }
 
-        /* --- Collapsible --- */
-        .collapsible {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-        }
-        .toggle-btn {
-            background: none;
-            border: none;
-            font-size: 0.9em;
-            font-weight: 500;
-            cursor: pointer;
-            color: #0056b3;
-        }
-        .publication-list.collapsed {
-            display: none;
-        }
-
-        /* --- Responsive Design --- */
         @media(max-width: 768px){
             header { flex-direction: column; text-align: center; align-items: center; }
             header img { margin-right: 0; margin-bottom: 20px; }
@@ -317,27 +173,53 @@
     </header>
 
     <main class="main-content">
+        <!-- Education Section -->
         <section id="education">
-            <h2>
-                <span class="lang-en">Education</span>
-                <span class="lang-zh">教育背景</span>
-            </h2>
+            <h2><span class="lang-en">Education</span><span class="lang-zh">教育背景</span></h2>
             <hr>
-            <!-- Education entries omitted for brevity (same as your original code) -->
+            <div class="education-entry">
+                <div class="entry-line-1">
+                    <strong class="entry-role"><span class="lang-en">Undergraduate:</span><span class="lang-zh">本科:</span></strong>
+                    <img class="entry-logo" src="my-academic-site/images/深圳技术大学校徽_00.jpg" alt="SZTU Logo">
+                    <div class="entry-details">
+                        <a href="https://www.sztu.edu.cn/" target="_blank">
+                            <span class="lang-en">Shenzhen Technology University</span>
+                            <span class="lang-zh">深圳技术大学</span>
+                        </a>
+                        <span class="lang-en">, Future Technology School--Bachelor of Engineering</span>
+                        <span class="lang-zh">, 未来技术学院 -- 工学学士</span>
+                    </div>
+                </div>
+                <div class="entry-line-2"><div class="entry-date">2022.09–2026.07</div></div>
+                <ul>
+                    <li><span class="lang-en">Main Courses: C++, Python, Digital Circuits, Sensors and Actuators, Engineering Project Design</span><span class="lang-zh">主修课程: C++, Python, 数字电路, 传感器与执行器, 工程项目设计</span></li>
+                    <li><span class="lang-en">Main Research: Laser-Induced Breakdown Spectroscopy (LIBS)</span><span class="lang-zh">主要研究: 激光诱导击穿光谱 (LIBS)</span></li>
+                </ul>
+            </div>
+            <div class="education-entry">
+                <div class="entry-line-1">
+                    <strong class="entry-role"><span class="lang-en">Joint Training:</span><span class="lang-zh">联合培养:</span></strong>
+                    <img class="entry-logo" src="my-academic-site/images/Tsinghua_University_Logo.svg" alt="Tsinghua University Logo">
+                    <img class="entry-logo" src="my-academic-site/images/x-institue_logo.jpg" alt="X-Institute Logo">
+                    <div class="entry-details">
+                        <a href="https://www.x-institute.edu.cn/" target="_blank">
+                            <span class="lang-en">Tsinghua University Tsien Excellence in Engineering Program - Shenzhen X-Institute</span>
+                            <span class="lang-zh">清华大学钱学森班 - 深圳零一学院</span>
+                        </a>--<span class="lang-en">X Scholar</span><span class="lang-zh">零一学者</span>
+                    </div>
+                </div>
+                <div class="entry-line-2"><div class="entry-date">2023.09–Present</div></div>
+                <ul>
+                    <li><span class="lang-en">Main Research: Underactuated Robotic Grippers, Peaucellier Linkages, <a href="https://www.x-institute.edu.cn/accompany/xidea" target="_blank">See Qian Class Step-by-Step Training Program</a></span><span class="lang-zh">主要研究: 欠驱动机器人抓手, 佩索利耶连杆, <a href="https://www.x-institute.edu.cn/accompany/xidea" target="_blank">见钱班进阶式培养计划</a></span></li>
+                </ul>
+            </div>
         </section>
 
+        <!-- Publications Section -->
         <section id="publications">
-            <h2>
-                <span class="lang-en">Publications</span>
-                <span class="lang-zh">学术出版</span>
-            </h2>
+            <h2><span class="lang-en">Publications</span><span class="lang-zh">学术出版</span></h2>
             <hr>
-
-            <h3 class="collapsible">
-                <span class="lang-en">Conference Papers</span>
-                <span class="lang-zh">会议论文</span>
-                <button class="toggle-btn">▼</button>
-            </h3>
+            <h3><span class="lang-en">Conference Papers</span><span class="lang-zh">会议论文</span></h3>
             <ul class="publication-list">
                 <li class="publication-item">
                     <div class="pub-index">[C4]</div>
@@ -348,71 +230,96 @@
                         <div class="pub-links">
                             <span class="pub-status">[Accepted]</span>
                             <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
-                            <span>[EI]</span>
-                            <span class="latest-tag"><span class="lang-en">Latest</span><span class="lang-zh">最新论文</span></span>
                         </div>
                     </div>
                 </li>
-                <!-- Other conference papers here with [EI] -->
+                <li class="publication-item">
+                    <div class="pub-index">[C3]</div>
+                    <div class="pub-details">
+                        <div class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
+                        <div class="pub-authors"><b>Haokai Ding</b>, Z.Chen, T.Yang*, W.Zhang*</div>
+                        <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Automation Science and Engineering (CASE)</div>
+                        <div class="pub-links">
+                            <span class="pub-status">[Published]</span>
+                            <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
+                        </div>
+                    </div>
+                </li>
+                <li class="publication-item">
+                    <div class="pub-index">[C2]</div>
+                    <div class="pub-details">
+                        <div class="pub-title">Peaucellier Gripper: A Novel Underactuated Gripper for Linear Pinching and Self-Adaptive Grasp with the Peaucellier Linkage</div>
+                        <div class="pub-authors"><b>Haokai Ding</b>, J.Fan, Z.Zhu, Y.Zhao, K.Chen*, W.Zhang*</div>
+                        <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Advanced Robotics and Mechatronics (ARM)</div>
+                        <div class="pub-links">
+                            <span class="pub-status">[Published]</span>
+                            <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
+                        </div>
+                    </div>
+                </li>
+                <li class="publication-item">
+                    <div class="pub-index">[C1]</div>
+                    <div class="pub-details">
+                        <div class="pub-title">Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</div>
+                        <div class="pub-authors">Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, <b>Haokai Ding</b>, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang</div>
+                        <div class="pub-venue">E3S Web Conf., 615 (2025) 02010</div>
+                        <div class="pub-links">
+                            <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank">[DOI]</a>
+                        </div>
+                    </div>
+                </li>
             </ul>
 
-            <h3 class="collapsible">
-                <span class="lang-en">Journal Papers</span>
-                <span class="lang-zh">期刊论文</span>
-                <button class="toggle-btn">▼</button>
-            </h3>
+            <h3><span class="lang-en">Journal Articles</span><span class="lang-zh">期刊论文</span></h3>
             <ul class="publication-list">
                 <li class="publication-item">
                     <div class="pub-index">[J1]</div>
                     <div class="pub-details">
-                        <div class="pub-title">Rapid Analysis of Heavy Metal Adsorption of SCG by LIBS Based on Convolutional Neural Network</div>
-                        <div class="pub-authors"><b>Haokai Ding</b>, Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang</div>
-                        <div class="pub-venue">Analytical and Bioanalytical Chemistry, 2025</div>
+                        <div class="pub-title">Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</div>
+                        <div class="pub-authors">Yating Liu, <b>Haokai Ding</b>, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang</div>
+                        <div class="pub-venue">Polymers 17, no. 15: 2136</div>
                         <div class="pub-links">
-                            <span class="pub-status">[Published]</span>
-                            <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
-                            <span>[SCI Q1]</span>
-                            <span class="latest-tag"><span class="lang-en">Latest</span><span class="lang-zh">最新论文</span></span>
+                            <a href="https://doi.org/10.3390/polym17152136" target="_blank">[DOI]</a>
+                            <span class="author-tag"><span class="lang-en">Co-first Author</span><span class="lang-zh">共同第一作者</span></span>
                         </div>
                     </div>
                 </li>
-                <!-- Other journal papers here with [SCI Q1] -->
             </ul>
         </section>
 
+        <!-- Awards Section -->
         <section id="awards">
-            <h2>
-                <span class="lang-en">Honors & Awards</span>
-                <span class="lang-zh">荣誉与奖项</span>
-            </h2>
+            <h2><span class="lang-en">Honors & Awards</span><span class="lang-zh">荣誉奖项</span></h2>
             <hr>
-            <!-- Awards entries same as original code -->
+            <h3><span class="lang-en">Provincial-Level & Above</span><span class="lang-zh">省级及以上</span></h3>
+            <div class="awards-list">
+                <div class="award-item award-highlight">
+                    <span class="award-name"><span class="lang-en">1st Prize, National Undergraduate Innovation Competition in Robotics</span><span class="lang-zh">全国大学生机器人创新竞赛一等奖</span></span>
+                    <span class="award-year">2025</span>
+                </div>
+                <div class="award-item">
+                    <span class="award-name"><span class="lang-en">Excellent Student, Shenzhen Technology University</span><span class="lang-zh">深圳技术大学优秀学生</span></span>
+                    <span class="award-year">2024</span>
+                </div>
+            </div>
         </section>
+
     </main>
 </div>
 
 <script>
-    // --- Language Switching Logic ---
     function setLanguage(lang) {
         document.querySelectorAll('.lang-en, .lang-zh').forEach(el => el.style.display = 'none');
         document.querySelectorAll(`.lang-${lang}`).forEach(el => el.style.display = '');
         document.querySelectorAll('.lang-link').forEach(link => link.classList.remove('active'));
         document.querySelector(`.lang-link[onclick="setLanguage('${lang}')"]`).classList.add('active');
-        try { localStorage.setItem('preferredLanguage', lang); } catch(e) {}
+        try { localStorage.setItem('preferredLanguage', lang); } catch(e){console.error(e);}
     }
-    document.addEventListener('DOMContentLoaded', () => {
-        let preferredLanguage = localStorage.getItem('preferredLanguage') || 'en';
-        setLanguage(preferredLanguage);
 
-        // --- Collapsible functionality ---
-        document.querySelectorAll('.collapsible').forEach(header => {
-            const button = header.querySelector('.toggle-btn');
-            const list = header.nextElementSibling;
-            button.addEventListener('click', () => {
-                list.classList.toggle('collapsed');
-                button.textContent = list.classList.contains('collapsed') ? '►' : '▼';
-            });
-        });
+    document.addEventListener('DOMContentLoaded', () => {
+        let preferredLanguage = 'en';
+        try { const savedLang = localStorage.getItem('preferredLanguage'); if(savedLang) preferredLanguage = savedLang; } catch(e){console.error(e);}
+        setLanguage(preferredLanguage);
     });
 </script>
 
