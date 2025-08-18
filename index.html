@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <title>Haokai Ding - Academic Homepage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Source+Serif+Pro:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         /* --- General Style & Layout --- */
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Source Serif Pro', serif; /* IEEE-style serif font for body */
             background-color: #ffffff;
             color: #333;
-            line-height: 1.7;
+            line-height: 1.6;
             font-size: 16px;
             margin: 0;
             padding: 0;
@@ -30,10 +32,11 @@
             text-align: right;
             margin-bottom: 20px;
             font-size: 0.9em;
+            font-family: 'Lato', sans-serif;
         }
         #lang-switcher a {
             color: #888;
-            font-weight: 500;
+            font-weight: 700;
             text-decoration: none;
             padding: 4px 8px;
             border-radius: 4px;
@@ -57,14 +60,15 @@
             margin-right: 30px;
         }
         .header-info h1 {
-            font-size: 2em;
+            font-family: 'Lato', sans-serif; /* Sans-serif for main title */
+            font-size: 2.2em;
             font-weight: 700;
             margin: 0 0 10px 0;
         }
         .contact-info p {
             margin: 0;
             line-height: 1.5;
-            font-size: 0.9em;
+            font-size: 0.95em;
             color: #444;
         }
         .contact-info a {
@@ -79,10 +83,13 @@
         section {
             margin-bottom: 30px;
         }
+        h2, h3, h4 {
+            font-family: 'Lato', sans-serif; /* Sans-serif for all headers */
+            font-weight: 700;
+            color: #1a1a1a;
+        }
         h2 {
             font-size: 1.6em;
-            font-weight: 500;
-            color: #1a1a1a;
             border: none;
             padding-bottom: 0;
             margin: 0;
@@ -94,15 +101,20 @@
             margin: 8px 0 25px 0;
         }
         h3 {
-            font-size: 1.1em;
-            font-weight: 500;
+            font-size: 1.2em;
             color: #333;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+        h4 {
+            font-size: 1.05em;
+            color: #444;
             margin-top: 20px;
             margin-bottom: 15px;
         }
         .main-content p, .main-content ul {
             margin-bottom: 1em;
-            font-size: 0.95em;
+            font-size: 1em;
         }
 
         /* --- Education Section --- */
@@ -118,9 +130,11 @@
             margin-top: 4px;
         }
         .entry-role {
-            font-weight: 500;
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
             margin-right: 10px;
             font-size: 1em;
+            flex-shrink: 0;
         }
         .entry-logo {
             width: 60px;
@@ -129,10 +143,10 @@
             object-fit: contain;
         }
         .entry-details {
-            font-size: 0.95em;
+            font-size: 1em;
         }
         .entry-details a {
-            font-weight: 500;
+            font-weight: 700;
             color: #0056b3;
             text-decoration: none;
         }
@@ -146,7 +160,7 @@
         .education-entry ul {
             margin-top: 8px;
             padding-left: 25px;
-            font-size: 0.95em;
+            font-size: 1em;
         }
         .education-entry ul li a {
             color: #0056b3;
@@ -169,19 +183,20 @@
         .pub-index {
             flex-shrink: 0;
             width: 40px;
-            font-weight: 500;
+            font-weight: 700;
+            font-family: 'Lato', sans-serif;
             color: #333;
         }
         .pub-details {
             flex-grow: 1;
         }
         .pub-title {
-            font-weight: 500;
+            font-weight: 700;
             font-size: 1em;
             margin-bottom: 4px;
         }
         .pub-authors {
-            font-size: 0.9em;
+            font-size: 1em;
             color: #555;
             margin-bottom: 4px;
         }
@@ -189,44 +204,47 @@
             color: #333;
         }
         .pub-venue {
-            font-size: 0.9em;
+            font-size: 1em;
             color: #555;
-            font-style: normal;
+            font-style: italic; /* Italic for venue */
         }
         .pub-links {
             margin-top: 6px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
         }
         .pub-links a, .pub-links span {
-            display: inline-block;
             margin-right: 8px;
             margin-bottom: 5px;
             text-decoration: none;
-            font-weight: 500;
-            vertical-align: middle;
+            font-weight: 700;
+            font-family: 'Lato', sans-serif;
         }
         .pub-links a {
              color: #0056b3;
-             font-size: 0.85em;
+             font-size: 0.9em;
         }
         .pub-links a:hover {
             text-decoration: underline;
         }
         .pub-status {
-            background-color: #f0f0f0;
-            color: #555;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.75em;
-        }
-        .author-tag {
-            display: inline-block;
-            text-align: center;
-            background-color: #e7f1ff;
-            color: #0056b3;
+            background-color: #0056b3;
+            color: #ffffff;
             padding: 3px 8px;
             border-radius: 4px;
             font-size: 0.75em;
-            font-weight: 500;
+        }
+        .publication-state {
+            background-color: #f0f0f0;
+            color: #555;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+        }
+        .author-note {
+            font-size: 0.9em;
+            color: #0056b3;
         }
 
 
@@ -237,7 +255,7 @@
             justify-content: space-between;
             padding: 8px 12px;
             border-bottom: 1px solid #f0f0f0;
-            font-size: 0.9em;
+            font-size: 1em;
             transition: background-color 0.2s;
         }
         .award-highlight {
@@ -248,7 +266,7 @@
         }
         .award-item:last-child { border-bottom: none; }
         .award-name { flex-grow: 1; padding-right: 20px; }
-        .award-year { flex-shrink: 0; font-weight: 500; color: #555; }
+        .award-year { flex-shrink: 0; font-weight: 700; color: #555; font-family: 'Lato', sans-serif;}
 
         /* --- Responsive Design --- */
         @media(max-width: 768px){
@@ -270,7 +288,7 @@
     </div>
 
     <header>
-        <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
+        <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding" onerror="this.onerror=null;this.src='https://placehold.co/120x120/EFEFEF/333333?text=H.D.';">
         <div class="header-info">
             <h1>Haokai Ding (丁浩剀)</h1>
             <div class="contact-info">
@@ -282,7 +300,7 @@
                     <span class="lang-zh">清华大学钱学森班 - 深圳零一学院 (中国, 深圳)</span>
                     <br>
                     E-mail: <a href="mailto:dinghaokai@x-institute.edu.cn">dinghaokai@x-institute.edu.cn</a> | <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a><br>
-                    <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> | <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a> | <a href="[Your GitHub URL]" target="_blank">GitHub</a>
+                    <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> | <a href="https://orcid.org/0009-0001-6158-987" target="_blank">ORCID</a>
                 </p>
             </div>
         </div>
@@ -301,7 +319,7 @@
                         <span class="lang-en">Undergraduate:</span>
                         <span class="lang-zh">本科:</span>
                     </strong>
-                    <img class="entry-logo" src="my-academic-site/images/深圳技术大学校徽_00.jpg" alt="SZTU Logo">
+                    <img class="entry-logo" src="my-academic-site/images/深圳技术大学校徽_00.jpg" alt="SZTU Logo" onerror="this.onerror=null;this.src='https://placehold.co/60x60/EFEFEF/333333?text=SZTU';">
                     <div class="entry-details">
                         <a href="https://www.sztu.edu.cn/" target="_blank">
                             <span class="lang-en">Shenzhen Technology University</span>
@@ -325,8 +343,8 @@
                         <span class="lang-en">Joint Training:</span>
                         <span class="lang-zh">联合培养:</span>
                     </strong>
-                    <img class="entry-logo" src="my-academic-site/images/Tsinghua_University_Logo.svg" alt="Tsinghua University Logo">
-                    <img class="entry-logo" src="my-academic-site/images/x-institue_logo.jpg" alt="X-Institute Logo">
+                    <img class="entry-logo" src="my-academic-site/images/Tsinghua_University_Logo.svg" alt="Tsinghua University Logo" onerror="this.onerror=null;this.src='https://placehold.co/60x60/EFEFEF/333333?text=Tsinghua';">
+                    <img class="entry-logo" src="my-academic-site/images/x-institue_logo.jpg" alt="X-Institute Logo" onerror="this.onerror=null;this.src='https://placehold.co/60x60/EFEFEF/333333?text=X-Inst';">
                     <div class="entry-details">
                         <a href="https://www.x-institute.edu.cn/" target="_blank">
                             <span class="lang-en">Tsinghua University Tsien Excellence in Engineering Program - Shenzhen X-Institute</span>
@@ -352,9 +370,14 @@
             </h2>
             <hr>
             <h3>
+                <span class="lang-en">2025</span>
+                <span class="lang-zh">2025年</span>
+            </h3>
+            
+            <h4>
                 <span class="lang-en">Conference Papers</span>
                 <span class="lang-zh">会议论文</span>
-            </h3>
+            </h4>
             <ul class="publication-list">
                 <li class="publication-item">
                     <div class="pub-index">[C4]</div>
@@ -363,9 +386,9 @@
                         <div class="pub-authors"><b>Haokai Ding</b>, W.Zhang*</div>
                         <div class="pub-venue">Proceedings of the 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</div>
                         <div class="pub-links">
-                            <span class="pub-status">[Accepted]</span>
-                            <span class="pub-status">[EI Compendex]</span>
-                            <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
+                            <span class="publication-state">[Accepted]</span>
+                            <span class="pub-status">[EI]</span>
+                            <span class="author-note"><span class="lang-en">† First Author</span><span class="lang-zh">† 第一作者</span></span>
                         </div>
                     </div>
                 </li>
@@ -376,9 +399,9 @@
                         <div class="pub-authors"><b>Haokai Ding</b>, Z.Chen, T.Yang*, W.Zhang*</div>
                         <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Automation Science and Engineering (CASE)</div>
                         <div class="pub-links">
-                            <span class="pub-status">[Published]</span>
-                            <span class="pub-status">[EI Compendex]</span>
-                            <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
+                            <span class="publication-state">[Published]</span>
+                            <span class="pub-status">[EI]</span>
+                            <span class="author-note"><span class="lang-en">† First Author</span><span class="lang-zh">† 第一作者</span></span>
                         </div>
                     </div>
                 </li>
@@ -389,9 +412,9 @@
                         <div class="pub-authors"><b>Haokai Ding</b>, J.Fan, Z.Zhu, Y.Zhao, K.Chen*, W.Zhang*</div>
                         <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Advanced Robotics and Mechatronics (ARM)</div>
                         <div class="pub-links">
-                            <span class="pub-status">[Published]</span>
-                            <span class="pub-status">[EI Compendex]</span>
-                            <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
+                            <span class="publication-state">[Published]</span>
+                            <span class="pub-status">[EI]</span>
+                            <span class="author-note"><span class="lang-en">† First Author</span><span class="lang-zh">† 第一作者</span></span>
                         </div>
                     </div>
                 </li>
@@ -403,16 +426,16 @@
                         <div class="pub-venue">E3S Web Conf., 615 (2025) 02010</div>
                         <div class="pub-links">
                             <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank">[DOI]</a>
-                            <span class="pub-status">[EI Compendex]</span>
+                            <span class="pub-status">[EI]</span>
                         </div>
                     </div>
                 </li>
             </ul>
         
-            <h3>
+            <h4>
                 <span class="lang-en">Journal Articles</span>
                 <span class="lang-zh">期刊论文</span>
-            </h3>
+            </h4>
             <ul class="publication-list">
                  <li class="publication-item">
                     <div class="pub-index">[J1]</div>
@@ -423,7 +446,7 @@
                         <div class="pub-links">
                             <a href="https://doi.org/10.3390/polym17152136" target="_blank">[DOI]</a>
                             <span class="pub-status">[SCI, JCR Q1]</span>
-                            <span class="author-tag"><span class="lang-en">Co-first Author</span><span class="lang-zh">共同第一作者</span></span>
+                            <span class="author-note"><span class="lang-en">† Co-first Author</span><span class="lang-zh">† 共同第一作者</span></span>
                         </div>
                     </div>
                 </li>
