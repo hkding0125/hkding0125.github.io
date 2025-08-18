@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* --- General Style & Layout --- */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #ffffff;
@@ -17,11 +18,14 @@
             display: flex;
             justify-content: center;
         }
+
         .container {
             max-width: 900px;
             width: 100%;
             margin: 40px 20px;
         }
+
+        /* --- Language Switcher --- */
         #lang-switcher {
             text-align: right;
             margin-bottom: 20px;
@@ -39,6 +43,8 @@
             color: #0056b3;
             background-color: #e7f1ff;
         }
+
+        /* --- Header & Contact Info --- */
         header {
             display: flex;
             align-items: flex-start;
@@ -68,7 +74,11 @@
         .contact-info a:hover {
             text-decoration: underline;
         }
-        section { margin-bottom: 30px; }
+
+        /* --- Main Content Styling --- */
+        section {
+            margin-bottom: 30px;
+        }
         h2 {
             font-size: 1.6em;
             font-weight: 500;
@@ -90,51 +100,157 @@
             margin-top: 20px;
             margin-bottom: 15px;
         }
-        .main-content p, .main-content ul { margin-bottom: 1em; font-size: 0.95em; }
+        .main-content p, .main-content ul {
+            margin-bottom: 1em;
+            font-size: 0.95em;
+        }
 
-        .education-entry { margin-bottom: 25px; }
-        .entry-line-1 { display: flex; align-items: center; }
-        .entry-line-2 { text-align: right; margin-top: 4px; }
-        .entry-role { font-weight: 500; margin-right: 10px; font-size: 1em; }
-        .entry-logo { width: 60px; height: 60px; margin-right: 15px; object-fit: contain; }
-        .entry-details { font-size: 0.95em; }
-        .entry-details a { font-weight: 500; color: #0056b3; text-decoration: none; }
-        .entry-details a:hover { text-decoration: underline; }
-        .entry-date { color: #666; font-size: 0.9em; }
-        .education-entry ul { margin-top: 8px; padding-left: 25px; font-size: 0.95em; }
-        .education-entry ul li a { color: #0056b3; text-decoration: none; }
-        .education-entry ul li a:hover { text-decoration: underline; }
+        /* --- Education Section --- */
+        .education-entry {
+            margin-bottom: 25px;
+        }
+        .entry-line-1 {
+            display: flex;
+            align-items: center;
+        }
+        .entry-line-2 {
+            text-align: right;
+            margin-top: 4px;
+        }
+        .entry-role {
+            font-weight: 500;
+            margin-right: 10px;
+            font-size: 1em;
+        }
+        .entry-logo {
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
+            object-fit: contain;
+        }
+        .entry-details {
+            font-size: 0.95em;
+        }
+        .entry-details a {
+            font-weight: 500;
+            color: #0056b3;
+            text-decoration: none;
+        }
+        .entry-details a:hover {
+            text-decoration: underline;
+        }
+        .entry-date {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .education-entry ul {
+            margin-top: 8px;
+            padding-left: 25px;
+            font-size: 0.95em;
+        }
+        .education-entry ul li a {
+            color: #0056b3;
+            text-decoration: none;
+        }
+        .education-entry ul li a:hover {
+            text-decoration: underline;
+        }
 
-        .publication-list { list-style: none; padding: 0; }
-        .publication-item { margin-bottom: 25px; display: flex; }
-        .pub-index { flex-shrink: 0; width: 40px; font-weight: 500; color: #333; }
-        .pub-details { flex-grow: 1; }
-        .pub-title { font-weight: 500; font-size: 1em; margin-bottom: 4px; }
-        .pub-authors { font-size: 0.9em; color: #555; margin-bottom: 4px; }
-        .pub-authors b { color: #333; }
-        .pub-venue { font-size: 0.9em; color: #555; font-style: normal; }
-        .pub-links { margin-top: 6px; }
+
+        /* --- Publications List --- */
+        .publication-list {
+            list-style: none;
+            padding: 0;
+        }
+        .publication-item {
+            margin-bottom: 25px;
+            display: flex;
+        }
+        .pub-index {
+            flex-shrink: 0;
+            width: 40px;
+            font-weight: 500;
+            color: #333;
+        }
+        .pub-details {
+            flex-grow: 1;
+        }
+        .pub-title {
+            font-weight: 500;
+            font-size: 1em;
+            margin-bottom: 4px;
+        }
+        .pub-authors {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 4px;
+        }
+        .pub-authors b {
+            color: #333;
+        }
+        .pub-venue {
+            font-size: 0.9em;
+            color: #555;
+            font-style: normal;
+        }
+        .pub-links {
+            margin-top: 6px;
+        }
         .pub-links a, .pub-links span {
-            display: inline-block; margin-right: 8px; margin-bottom: 5px; text-decoration: none;
-            font-weight: 500; vertical-align: middle;
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            vertical-align: middle;
         }
-        .pub-links a { color: #0056b3; font-size: 0.85em; }
-        .pub-links a:hover { text-decoration: underline; }
-        .pub-status { background-color: #f0f0f0; color: #555; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; }
-
+        .pub-links a {
+             color: #0056b3;
+             font-size: 0.85em;
+        }
+        .pub-links a:hover {
+            text-decoration: underline;
+        }
+        .pub-status {
+            background-color: #f0f0f0;
+            color: #555;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+        }
         .author-tag {
-            display: inline-flex; align-items: center; justify-content: center;
-            background-color: #e7f1ff; color: #0056b3; padding: 3px 8px;
-            border-radius: 4px; font-size: 0.75em; font-weight: 500;
+            display: inline-block;      /* 更可靠的布局方式 */
+            text-align: center;         /* 强制内部文字居中 */
+            background-color: #e7f1ff;
+            color: #0056b3;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: 500;
         }
 
+
+        /* --- Awards List --- */
         .awards-list { list-style: none; padding: 0; }
-        .award-item { display: flex; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid #f0f0f0; font-size: 0.9em; transition: background-color 0.2s; }
-        .award-highlight { background-color: #fffbe6; border-left: 3px solid #ffd700; border-radius: 4px; padding-left: 9px; }
+        .award-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.9em;
+            transition: background-color 0.2s;
+        }
+        .award-highlight {
+            background-color: #fffbe6;
+            border-left: 3px solid #ffd700;
+            border-radius: 4px;
+            padding-left: 9px;
+        }
         .award-item:last-child { border-bottom: none; }
         .award-name { flex-grow: 1; padding-right: 20px; }
         .award-year { flex-shrink: 0; font-weight: 500; color: #555; }
 
+        /* --- Responsive Design --- */
         @media(max-width: 768px){
             header { flex-direction: column; text-align: center; align-items: center; }
             header img { margin-right: 0; margin-bottom: 20px; }
@@ -166,20 +282,25 @@
                     <span class="lang-zh">清华大学钱学森班 - 深圳零一学院 (中国, 深圳)</span>
                     <br>
                     E-mail: <a href="mailto:dinghaokai@x-institute.edu.cn">dinghaokai@x-institute.edu.cn</a> | <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a><br>
-                    <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> | <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a>
+                    <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> | <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a> | <a href="[Your GitHub URL]" target="_blank">GitHub</a>
                 </p>
             </div>
         </div>
     </header>
 
     <main class="main-content">
-        <!-- Education Section -->
         <section id="education">
-            <h2><span class="lang-en">Education</span><span class="lang-zh">教育背景</span></h2>
+            <h2>
+                <span class="lang-en">Education</span>
+                <span class="lang-zh">教育背景</span>
+            </h2>
             <hr>
             <div class="education-entry">
                 <div class="entry-line-1">
-                    <strong class="entry-role"><span class="lang-en">Undergraduate:</span><span class="lang-zh">本科:</span></strong>
+                    <strong class="entry-role">
+                        <span class="lang-en">Undergraduate:</span>
+                        <span class="lang-zh">本科:</span>
+                    </strong>
                     <img class="entry-logo" src="my-academic-site/images/深圳技术大学校徽_00.jpg" alt="SZTU Logo">
                     <div class="entry-details">
                         <a href="https://www.sztu.edu.cn/" target="_blank">
@@ -190,7 +311,9 @@
                         <span class="lang-zh">, 未来技术学院 -- 工学学士</span>
                     </div>
                 </div>
-                <div class="entry-line-2"><div class="entry-date">2022.09–2026.07</div></div>
+                <div class="entry-line-2">
+                    <div class="entry-date">2022.09–2026.07</div>
+                </div>
                 <ul>
                     <li><span class="lang-en">Main Courses: C++, Python, Digital Circuits, Sensors and Actuators, Engineering Project Design</span><span class="lang-zh">主修课程: C++, Python, 数字电路, 传感器与执行器, 工程项目设计</span></li>
                     <li><span class="lang-en">Main Research: Laser-Induced Breakdown Spectroscopy (LIBS)</span><span class="lang-zh">主要研究: 激光诱导击穿光谱 (LIBS)</span></li>
@@ -198,28 +321,40 @@
             </div>
             <div class="education-entry">
                 <div class="entry-line-1">
-                    <strong class="entry-role"><span class="lang-en">Joint Training:</span><span class="lang-zh">联合培养:</span></strong>
+                    <strong class="entry-role">
+                        <span class="lang-en">Joint Training:</span>
+                        <span class="lang-zh">联合培养:</span>
+                    </strong>
                     <img class="entry-logo" src="my-academic-site/images/Tsinghua_University_Logo.svg" alt="Tsinghua University Logo">
                     <img class="entry-logo" src="my-academic-site/images/x-institue_logo.jpg" alt="X-Institute Logo">
                     <div class="entry-details">
                         <a href="https://www.x-institute.edu.cn/" target="_blank">
                             <span class="lang-en">Tsinghua University Tsien Excellence in Engineering Program - Shenzhen X-Institute</span>
                             <span class="lang-zh">清华大学钱学森班 - 深圳零一学院</span>
-                        </a>--<span class="lang-en">X Scholar</span><span class="lang-zh">零一学者</span>
+                        </a>--
+                        <span class="lang-en">X Scholar</span>
+                        <span class="lang-zh">零一学者</span>
                     </div>
                 </div>
-                <div class="entry-line-2"><div class="entry-date">2023.09–Present</div></div>
+                <div class="entry-line-2">
+                    <div class="entry-date">2023.09–Present</div>
+                </div>
                 <ul>
                     <li><span class="lang-en">Main Research: Underactuated Robotic Grippers, Peaucellier Linkages, <a href="https://www.x-institute.edu.cn/accompany/xidea" target="_blank">See Qian Class Step-by-Step Training Program</a></span><span class="lang-zh">主要研究: 欠驱动机器人抓手, 佩索利耶连杆, <a href="https://www.x-institute.edu.cn/accompany/xidea" target="_blank">见钱班进阶式培养计划</a></span></li>
                 </ul>
             </div>
         </section>
 
-        <!-- Publications Section -->
         <section id="publications">
-            <h2><span class="lang-en">Publications</span><span class="lang-zh">学术出版</span></h2>
+            <h2>
+                <span class="lang-en">Publications</span>
+                <span class="lang-zh">学术出版</span>
+            </h2>
             <hr>
-            <h3><span class="lang-en">Conference Papers</span><span class="lang-zh">会议论文</span></h3>
+            <h3>
+                <span class="lang-en">Conference Papers</span>
+                <span class="lang-zh">会议论文</span>
+            </h3>
             <ul class="publication-list">
                 <li class="publication-item">
                     <div class="pub-index">[C4]</div>
@@ -270,9 +405,12 @@
                 </li>
             </ul>
 
-            <h3><span class="lang-en">Journal Articles</span><span class="lang-zh">期刊论文</span></h3>
+            <h3>
+                <span class="lang-en">Journal Articles</span>
+                <span class="lang-zh">期刊论文</span>
+            </h3>
             <ul class="publication-list">
-                <li class="publication-item">
+                 <li class="publication-item">
                     <div class="pub-index">[J1]</div>
                     <div class="pub-details">
                         <div class="pub-title">Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</div>
@@ -287,38 +425,116 @@
             </ul>
         </section>
 
-        <!-- Awards Section -->
         <section id="awards">
-            <h2><span class="lang-en">Honors & Awards</span><span class="lang-zh">荣誉奖项</span></h2>
+            <h2>
+                <span class="lang-en">Honors & Awards</span>
+                <span class="lang-zh">荣誉奖项</span>
+            </h2>
             <hr>
-            <h3><span class="lang-en">Provincial-Level & Above</span><span class="lang-zh">省级及以上</span></h3>
+            <h3>
+                <span class="lang-en">Provincial-Level & Above</span>
+                <span class="lang-zh">省级及以上</span>
+            </h3>
             <div class="awards-list">
                 <div class="award-item award-highlight">
-                    <span class="award-name"><span class="lang-en">1st Prize, National Undergraduate Innovation Competition in Robotics</span><span class="lang-zh">全国大学生机器人创新竞赛一等奖</span></span>
-                    <span class="award-year">2025</span>
+                    <span class="award-name">
+                        <span class="lang-en">🏆 Gold Prize, The 9th China "Internet+" Innovation Competition (Guangdong Division)</span>
+                        <span class="lang-zh">🏆 第九届中国国际“互联网+”大学生创新创业大赛 (广东省分赛金奖)</span>
+                    </span>
+                    <span class="award-year">2023</span>
                 </div>
                 <div class="award-item">
-                    <span class="award-name"><span class="lang-en">Excellent Student, Shenzhen Technology University</span><span class="lang-zh">深圳技术大学优秀学生</span></span>
+                    <span class="award-name">
+                        <span class="lang-en">Second Prize, The 17th "Challenge Cup" Extracurricular Science Competition (Guangdong Division)</span>
+                        <span class="lang-zh">第十七届“挑战杯”全国大学生课外学术科技作品竞赛 (广东省分赛二等奖)</span>
+                    </span>
+                    <span class="award-year">2023</span>
+                </div>
+            </div>
+
+            <h3>
+                <span class="lang-en">University-Level</span>
+                <span class="lang-zh">校级</span>
+            </h3>
+            <div class="awards-list">
+                 <div class="award-item award-highlight">
+                    <span class="award-name">
+                        <span class="lang-en">🏆 President's Award (Highest Student Honor), Shenzhen Technology University</span>
+                        <span class="lang-zh">🏆 深圳技术大学“校长奖” (学生最高荣誉)</span>
+                    </span>
+                    <span class="award-year">2024</span>
+                </div>
+                <div class="award-item">
+                    <span class="award-name">
+                        <span class="lang-en">Research and Innovation Award (First Prize)</span>
+                        <span class="lang-zh">深圳技术大学“科研创新奖” (一等奖)</span>
+                    </span>
+                    <span class="award-year">2024</span>
+                </div>
+                 <div class="award-item">
+                    <span class="award-name">
+                        <span class="lang-en">Research and Innovation Award (First Prize)</span>
+                        <span class="lang-zh">深圳技术大学“科研创新奖” (一等奖)</span>
+                    </span>
+                    <span class="award-year">2023</span>
+                </div>
+                <div class="award-item">
+                    <span class="award-name">
+                        <span class="lang-en">CHENHSONG Scholarship (Dean's Award & Academic Excellence)</span>
+                        <span class="lang-zh">震雄奖学金 (院长奖学金, 学业卓越奖)</span>
+                    </span>
+                    <span class="award-year">2023</span>
+                </div>
+                 <div class="award-item">
+                    <span class="award-name">
+                        <span class="lang-en">Outstanding Student Cadre Award</span>
+                        <span class="lang-zh">深圳技术大学“优秀学生干部”</span>
+                    </span>
                     <span class="award-year">2024</span>
                 </div>
             </div>
         </section>
-
     </main>
 </div>
 
 <script>
+    // --- Language Switching Logic ---
     function setLanguage(lang) {
-        document.querySelectorAll('.lang-en, .lang-zh').forEach(el => el.style.display = 'none');
-        document.querySelectorAll(`.lang-${lang}`).forEach(el => el.style.display = '');
-        document.querySelectorAll('.lang-link').forEach(link => link.classList.remove('active'));
+        // Hide all language elements first
+        document.querySelectorAll('.lang-en, .lang-zh').forEach(el => {
+            el.style.display = 'none';
+        });
+
+        // Show the selected language elements
+        document.querySelectorAll(`.lang-${lang}`).forEach(el => {
+            el.style.display = ''; 
+        });
+
+        // Update active class on switcher links
+        document.querySelectorAll('.lang-link').forEach(link => {
+            link.classList.remove('active');
+        });
         document.querySelector(`.lang-link[onclick="setLanguage('${lang}')"]`).classList.add('active');
-        try { localStorage.setItem('preferredLanguage', lang); } catch(e){console.error(e);}
+
+        // Save the user's preference in local storage
+        try {
+            localStorage.setItem('preferredLanguage', lang);
+        } catch (e) {
+            console.error('LocalStorage is not available.');
+        }
     }
 
+    // On page load, check for saved language preference
     document.addEventListener('DOMContentLoaded', () => {
-        let preferredLanguage = 'en';
-        try { const savedLang = localStorage.getItem('preferredLanguage'); if(savedLang) preferredLanguage = savedLang; } catch(e){console.error(e);}
+        let preferredLanguage = 'en'; // Default to English
+        try {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang) {
+                preferredLanguage = savedLang;
+            }
+        } catch (e) {
+             console.error('LocalStorage is not available.');
+        }
         setLanguage(preferredLanguage);
     });
 </script>
