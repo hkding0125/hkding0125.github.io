@@ -1,543 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Haokai Ding - Academic Homepage</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        /* --- General Style & Layout --- */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-            color: #333;
-            line-height: 1.7;
-            font-size: 16px;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .container {
-            max-width: 900px;
-            width: 100%;
-            margin: 40px 20px;
-        }
-
-        /* --- Language Switcher --- */
-        #lang-switcher {
-            text-align: right;
-            margin-bottom: 20px;
-            font-size: 0.9em;
-        }
-        #lang-switcher a {
-            color: #888;
-            font-weight: 500;
-            text-decoration: none;
-            padding: 4px 8px;
-            border-radius: 4px;
-            transition: all 0.2s ease-in-out;
-        }
-        #lang-switcher a.active {
-            color: #0056b3;
-            background-color: #e7f1ff;
-        }
-
-        /* --- Header & Contact Info --- */
-        header {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 40px;
-        }
-        header img {
-            width: 120px;
-            height: auto;
-            border-radius: 8px;
-            margin-right: 30px;
-        }
-        .header-info h1 {
-            font-size: 2em;
-            font-weight: 700;
-            margin: 0 0 10px 0;
-        }
-        .contact-info p {
-            margin: 0;
-            line-height: 1.5;
-            font-size: 0.9em;
-            color: #444;
-        }
-        .contact-info a {
-            color: #0056b3;
-            text-decoration: none;
-        }
-        .contact-info a:hover {
-            text-decoration: underline;
-        }
-
-        /* --- Main Content Styling --- */
-        section {
-            margin-bottom: 30px;
-        }
-        h2 {
-            font-size: 1.6em;
-            font-weight: 500;
-            color: #1a1a1a;
-            border: none;
-            padding-bottom: 0;
-            margin: 0;
-        }
-        hr {
-            border: 0;
-            height: 1px;
-            background-color: #e5e5e5;
-            margin: 8px 0 25px 0;
-        }
-        h3 {
-            font-size: 1.1em;
-            font-weight: 500;
-            color: #333;
-            margin-top: 20px;
-            margin-bottom: 15px;
-        }
-        .main-content p, .main-content ul {
-            margin-bottom: 1em;
-            font-size: 0.95em;
-        }
-
-        /* --- Education Section --- */
-        .education-entry {
-            margin-bottom: 25px;
-        }
-        .entry-line-1 {
-            display: flex;
-            align-items: center;
-        }
-        .entry-line-2 {
-            text-align: right;
-            margin-top: 4px;
-        }
-        .entry-role {
-            font-weight: 500;
-            margin-right: 10px;
-            font-size: 1em;
-        }
-        .entry-logo {
-            width: 60px;
-            height: 60px;
-            margin-right: 15px;
-            object-fit: contain;
-        }
-        .entry-details {
-            font-size: 0.95em;
-        }
-        .entry-details a {
-            font-weight: 500;
-            color: #0056b3;
-            text-decoration: none;
-        }
-        .entry-details a:hover {
-            text-decoration: underline;
-        }
-        .entry-date {
-            color: #666;
-            font-size: 0.9em;
-        }
-        .education-entry ul {
-            margin-top: 8px;
-            padding-left: 25px;
-            font-size: 0.95em;
-        }
-        .education-entry ul li a {
-            color: #0056b3;
-            text-decoration: none;
-        }
-        .education-entry ul li a:hover {
-            text-decoration: underline;
-        }
-
-
-        /* --- Publications List --- */
-        .publication-list {
-            list-style: none;
-            padding: 0;
-        }
-        .publication-item {
-            margin-bottom: 25px;
-            display: flex;
-        }
-        .pub-index {
-            flex-shrink: 0;
-            width: 40px;
-            font-weight: 500;
-            color: #333;
-        }
-        .pub-details {
-            flex-grow: 1;
-        }
-        .pub-title {
-            font-weight: 500;
-            font-size: 1em;
-            margin-bottom: 4px;
-        }
-        .pub-authors {
-            font-size: 0.9em;
-            color: #555;
-            margin-bottom: 4px;
-        }
-        .pub-authors b {
-            color: #333;
-        }
-        .pub-venue {
-            font-size: 0.9em;
-            color: #555;
-            font-style: normal;
-        }
-        .pub-links {
-            margin-top: 6px;
-        }
-        .pub-links a, .pub-links span {
-            display: inline-block;
-            margin-right: 8px;
-            margin-bottom: 5px;
-            text-decoration: none;
-            font-weight: 500;
-            vertical-align: middle;
-        }
-        .pub-links a {
-             color: #0056b3;
-             font-size: 0.85em;
-        }
-        .pub-links a:hover {
-            text-decoration: underline;
-        }
-        .pub-status {
-            background-color: #f0f0f0;
-            color: #555;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.75em;
-        }
-        .author-tag {
-            display: inline-block;      /* 更可靠的布局方式 */
-            text-align: center;         /* 强制内部文字居中 */
-            background-color: #e7f1ff;
-            color: #0056b3;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.75em;
-            font-weight: 500;
-        }
-
-
-        /* --- Awards List --- */
-        .awards-list { list-style: none; padding: 0; }
-        .award-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 12px;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 0.9em;
-            transition: background-color 0.2s;
-        }
-        .award-highlight {
-            background-color: #fffbe6;
-            border-left: 3px solid #ffd700;
-            border-radius: 4px;
-            padding-left: 9px;
-        }
-        .award-item:last-child { border-bottom: none; }
-        .award-name { flex-grow: 1; padding-right: 20px; }
-        .award-year { flex-shrink: 0; font-weight: 500; color: #555; }
-
-        /* --- Responsive Design --- */
-        @media(max-width: 768px){
-            header { flex-direction: column; text-align: center; align-items: center; }
-            header img { margin-right: 0; margin-bottom: 20px; }
-            .entry-line-1 { flex-direction: column; align-items: flex-start; }
-            .entry-line-2 { text-align: left; margin-left: 0; }
-            .publication-item { flex-direction: column; }
-            .pub-index { width: auto; margin-bottom: 5px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Haokai Ding - Academic Homepage</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #fff; color: #000; }
+    .container { width: 85%; margin: auto; overflow: hidden; padding: 20px; }
+    header { display: flex; align-items: center; margin-bottom: 20px; }
+    header img { width: 160px; height: auto; margin-right: 20px; border-radius: 0; }
+    header h1 { margin: 0; font-size: 2em; }
+    header p { margin: 5px 0; }
+    .lang-switch { margin-top: 10px; }
+    .lang-switch button { margin-right: 5px; padding: 4px 10px; border-radius: 6px; border: 1px solid #aaa; cursor: pointer; }
+    section { margin-bottom: 30px; }
+    h2 { border-bottom: 2px solid #333; padding-bottom: 5px; margin-bottom: 10px; }
+    .entry { margin-bottom: 15px; }
+    .entry-line-1 { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    .entry-logo { width: 40px; height: auto; margin-right: 8px; }
+    .entry-details { flex: 1; }
+    .publication-list { list-style: none; padding-left: 0; }
+    .publication-item { margin-bottom: 12px; }
+    .pub-title { font-weight: bold; }
+    .pub-authors { font-size: 0.95em; }
+    .pub-venue { font-style: italic; font-size: 0.9em; }
+    .pub-links { margin-top: 3px; font-size: 0.9em; }
+    .pub-status { color: green; }
+    footer { text-align: center; padding: 15px; border-top: 1px solid #ccc; font-size: 0.9em; }
+  </style>
 </head>
 <body>
-
-<div class="container">
-    <div id="lang-switcher">
-        <a href="#" onclick="setLanguage('en')" class="lang-link active">English</a> / 
-        <a href="#" onclick="setLanguage('zh')" class="lang-link">中文</a>
-    </div>
-
+  <div class="container">
     <header>
-        <img src="my-academic-site/images/profile.jpg" alt="Profile photo of Haokai Ding">
-        <div class="header-info">
-            <h1>Haokai Ding (丁浩剀)</h1>
-            <div class="contact-info">
-                <p>
-                    <span class="lang-en">Future Technology School, Shenzhen Technology University (Shenzhen, Guangdong)</span>
-                    <span class="lang-zh">深圳技术大学, 未来技术学院 (中国, 深圳)</span>
-                    <br>
-                    <span class="lang-en">Tsinghua University Tsien Excellence in Engineering Program - Shenzhen X-Institute (Shenzhen, Guangdong)</span>
-                    <span class="lang-zh">清华大学钱学森班 - 深圳零一学院 (中国, 深圳)</span>
-                    <br>
-                    E-mail: <a href="mailto:dinghaokai@x-institute.edu.cn">dinghaokai@x-institute.edu.cn</a> | <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a><br>
-                    <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank">Google Scholar</a> | <a href="https://orcid.org/0009-0001-6158-9897" target="_blank">ORCID</a> | <a href="[Your GitHub URL]" target="_blank">GitHub</a>
-                </p>
-            </div>
+      <img src="images/profile.jpg" alt="Profile photo of Haokai Ding">
+      <div>
+        <h1>Haokai Ding</h1>
+        <p>Email: <a href="mailto:hk_ding@outlook.com">hk_ding@outlook.com</a></p>
+        <p>
+          <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ" target="_blank">Google Scholar</a> |
+          <a href="https://github.com/你的GitHub用户名" target="_blank">GitHub</a>
+        </p>
+        <div class="lang-switch">
+          <button onclick="setLanguage('en')">English 🇬🇧</button>
+          <button onclick="setLanguage('zh')">中文 🇨🇳</button>
         </div>
+      </div>
     </header>
 
-    <main class="main-content">
-        <section id="education">
-            <h2>
-                <span class="lang-en">Education</span>
-                <span class="lang-zh">教育背景</span>
-            </h2>
-            <hr>
-            <div class="education-entry">
-                <div class="entry-line-1">
-                    <strong class="entry-role">
-                        <span class="lang-en">Undergraduate:</span>
-                        <span class="lang-zh">本科:</span>
-                    </strong>
-                    <img class="entry-logo" src="my-academic-site/images/深圳技术大学校徽_00.jpg" alt="SZTU Logo">
-                    <div class="entry-details">
-                        <a href="https://www.sztu.edu.cn/" target="_blank">
-                            <span class="lang-en">Shenzhen Technology University</span>
-                            <span class="lang-zh">深圳技术大学</span>
-                        </a>
-                        <span class="lang-en">, Future Technology School--Bachelor of Engineering</span>
-                        <span class="lang-zh">, 未来技术学院 -- 工学学士</span>
-                    </div>
-                </div>
-                <div class="entry-line-2">
-                    <div class="entry-date">2022.09–2026.07</div>
-                </div>
-                <ul>
-                    <li><span class="lang-en">Main Courses: C++, Python, Digital Circuits, Sensors and Actuators, Engineering Project Design</span><span class="lang-zh">主修课程: C++, Python, 数字电路, 传感器与执行器, 工程项目设计</span></li>
-                    <li><span class="lang-en">Main Research: Laser-Induced Breakdown Spectroscopy (LIBS)</span><span class="lang-zh">主要研究: 激光诱导击穿光谱 (LIBS)</span></li>
-                </ul>
+    <section>
+      <h2>Education 🎓</h2>
+      <div class="entry">
+        <div class="entry-line-1">
+          <img class="entry-logo" src="images/Tsinghua_University_Logo.svg" alt="Tsinghua University Logo">
+          <div class="entry-details">
+            <span class="lang-en"><b>Tsinghua University</b> - Ph.D. in Mechanical Engineering (2021 - Present)</span>
+            <span class="lang-zh"><b>清华大学</b> - 机械工程博士在读 (2021年至今)</span>
+          </div>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-line-1">
+          <img class="entry-logo" src="images/HIT_Logo.svg" alt="HIT Logo">
+          <div class="entry-details">
+            <span class="lang-en"><b>Harbin Institute of Technology (Shenzhen)</b> - B.Eng. in Mechanical Engineering (2017 - 2021)</span>
+            <span class="lang-zh"><b>哈尔滨工业大学（深圳）</b> - 机械工程学士 (2017-2021)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Publications 📄</h2>
+      <ul class="publication-list">
+        <li class="publication-item">
+          <div class="pub-index">[C4]</div>
+          <div class="pub-details">
+            <div class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
+            <div class="pub-authors"><b>Haokai Ding</b>, W.Zhang<abbr title="Corresponding Author">*</abbr></div>
+            <div class="pub-venue">Proceedings of the 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</div>
+            <div class="pub-links">
+              <span class="pub-status">[Accepted]</span>
+              <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
             </div>
-            <div class="education-entry">
-                <div class="entry-line-1">
-                    <strong class="entry-role">
-                        <span class="lang-en">Joint Training:</span>
-                        <span class="lang-zh">联合培养:</span>
-                    </strong>
-                    <img class="entry-logo" src="my-academic-site/images/Tsinghua_University_Logo.svg" alt="Tsinghua University Logo">
-                    <img class="entry-logo" src="my-academic-site/images/x-institue_logo.jpg" alt="X-Institute Logo">
-                    <div class="entry-details">
-                        <a href="https://www.x-institute.edu.cn/" target="_blank">
-                            <span class="lang-en">Tsinghua University Tsien Excellence in Engineering Program - Shenzhen X-Institute</span>
-                            <span class="lang-zh">清华大学钱学森班 - 深圳零一学院</span>
-                        </a>--
-                        <span class="lang-en">X Scholar</span>
-                        <span class="lang-zh">零一学者</span>
-                    </div>
-                </div>
-                <div class="entry-line-2">
-                    <div class="entry-date">2023.09–Present</div>
-                </div>
-                <ul>
-                    <li><span class="lang-en">Main Research: Underactuated Robotic Grippers, Peaucellier Linkages, <a href="https://www.x-institute.edu.cn/accompany/xidea" target="_blank">See Qian Class Step-by-Step Training Program</a></span><span class="lang-zh">主要研究: 欠驱动机器人抓手, 佩索利耶连杆, <a href="https://www.x-institute.edu.cn/accompany/xidea" target="_blank">见钱班进阶式培养计划</a></span></li>
-                </ul>
+          </div>
+        </li>
+
+        <li class="publication-item">
+          <div class="pub-index">[C3]</div>
+          <div class="pub-details">
+            <div class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
+            <div class="pub-authors"><b>Haokai Ding</b>, Z.Chen, T.Yang<abbr title="Corresponding Author">*</abbr>, W.Zhang<abbr title="Corresponding Author">*</abbr></div>
+            <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Automation Science and Engineering (CASE)</div>
+            <div class="pub-links">
+              <span class="pub-status">[Published]</span>
+              <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
             </div>
-        </section>
+          </div>
+        </li>
 
-        <section id="publications">
-            <h2>
-                <span class="lang-en">Publications</span>
-                <span class="lang-zh">学术出版</span>
-            </h2>
-            <hr>
-            <h3>
-                <span class="lang-en">Conference Papers</span>
-                <span class="lang-zh">会议论文</span>
-            </h3>
-            <ul class="publication-list">
-                <li class="publication-item">
-                    <div class="pub-index">[C4]</div>
-                    <div class="pub-details">
-                        <div class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
-                        <div class="pub-authors"><b>Haokai Ding</b>, W.Zhang*</div>
-                        <div class="pub-venue">Proceedings of the 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</div>
-                        <div class="pub-links">
-                            <span class="pub-status">[Accepted]</span>
-                            <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
-                        </div>
-                    </div>
-                </li>
-                <li class="publication-item">
-                    <div class="pub-index">[C3]</div>
-                    <div class="pub-details">
-                        <div class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
-                        <div class="pub-authors"><b>Haokai Ding</b>, Z.Chen, T.Yang*, W.Zhang*</div>
-                        <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Automation Science and Engineering (CASE)</div>
-                        <div class="pub-links">
-                            <span class="pub-status">[Published]</span>
-                            <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
-                        </div>
-                    </div>
-                </li>
-                <li class="publication-item">
-                    <div class="pub-index">[C2]</div>
-                    <div class="pub-details">
-                        <div class="pub-title">Peaucellier Gripper: A Novel Underactuated Gripper for Linear Pinching and Self-Adaptive Grasp with the Peaucellier Linkage</div>
-                        <div class="pub-authors"><b>Haokai Ding</b>, J.Fan, Z.Zhu, Y.Zhao, K.Chen*, W.Zhang*</div>
-                        <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Advanced Robotics and Mechatronics (ARM)</div>
-                        <div class="pub-links">
-                            <span class="pub-status">[Published]</span>
-                            <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
-                        </div>
-                    </div>
-                </li>
-                <li class="publication-item">
-                    <div class="pub-index">[C1]</div>
-                    <div class="pub-details">
-                        <div class="pub-title">Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</div>
-                        <div class="pub-authors">Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, <b>Haokai Ding</b>, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang</div>
-                        <div class="pub-venue">E3S Web Conf., 615 (2025) 02010</div>
-                        <div class="pub-links">
-                            <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank">[DOI]</a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-
-            <h3>
-                <span class="lang-en">Journal Articles</span>
-                <span class="lang-zh">期刊论文</span>
-            </h3>
-            <ul class="publication-list">
-                 <li class="publication-item">
-                    <div class="pub-index">[J1]</div>
-                    <div class="pub-details">
-                        <div class="pub-title">Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</div>
-                        <div class="pub-authors">Yating Liu, <b>Haokai Ding</b>, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang</div>
-                        <div class="pub-venue">Polymers 17, no. 15: 2136</div>
-                        <div class="pub-links">
-                            <a href="https://doi.org/10.3390/polym17152136" target="_blank">[DOI]</a>
-                            <span class="author-tag"><span class="lang-en">Co-first Author</span><span class="lang-zh">共同第一作者</span></span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </section>
-
-        <section id="awards">
-            <h2>
-                <span class="lang-en">Honors & Awards</span>
-                <span class="lang-zh">荣誉奖项</span>
-            </h2>
-            <hr>
-            <h3>
-                <span class="lang-en">Provincial-Level & Above</span>
-                <span class="lang-zh">省级及以上</span>
-            </h3>
-            <div class="awards-list">
-                <div class="award-item award-highlight">
-                    <span class="award-name">
-                        <span class="lang-en">🏆 Gold Prize, The 9th China "Internet+" Innovation Competition (Guangdong Division)</span>
-                        <span class="lang-zh">🏆 第九届中国国际“互联网+”大学生创新创业大赛 (广东省分赛金奖)</span>
-                    </span>
-                    <span class="award-year">2023</span>
-                </div>
-                <div class="award-item">
-                    <span class="award-name">
-                        <span class="lang-en">Second Prize, The 17th "Challenge Cup" Extracurricular Science Competition (Guangdong Division)</span>
-                        <span class="lang-zh">第十七届“挑战杯”全国大学生课外学术科技作品竞赛 (广东省分赛二等奖)</span>
-                    </span>
-                    <span class="award-year">2023</span>
-                </div>
+        <li class="publication-item">
+          <div class="pub-index">[C2]</div>
+          <div class="pub-details">
+            <div class="pub-title">Peaucellier Gripper: A Novel Underactuated Gripper for Linear Pinching and Self-Adaptive Grasp with the Peaucellier Linkage</div>
+            <div class="pub-authors"><b>Haokai Ding</b>, J.Fan, Z.Zhu, Y.Zhao, K.Chen<abbr title="Corresponding Author">*</abbr>, W.Zhang<abbr title="Corresponding Author">*</abbr></div>
+            <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Advanced Robotics and Mechatronics (ARM)</div>
+            <div class="pub-links">
+              <span class="pub-status">[Published]</span>
+              <span class="author-tag"><span class="lang-en">First Author</span><span class="lang-zh">第一作者</span></span>
             </div>
+          </div>
+        </li>
+      </ul>
+    </section>
 
-            <h3>
-                <span class="lang-en">University-Level</span>
-                <span class="lang-zh">校级</span>
-            </h3>
-            <div class="awards-list">
-                 <div class="award-item award-highlight">
-                    <span class="award-name">
-                        <span class="lang-en">🏆 President's Award (Highest Student Honor), Shenzhen Technology University</span>
-                        <span class="lang-zh">🏆 深圳技术大学“校长奖” (学生最高荣誉)</span>
-                    </span>
-                    <span class="award-year">2024</span>
-                </div>
-                <div class="award-item">
-                    <span class="award-name">
-                        <span class="lang-en">Research and Innovation Award (First Prize)</span>
-                        <span class="lang-zh">深圳技术大学“科研创新奖” (一等奖)</span>
-                    </span>
-                    <span class="award-year">2024</span>
-                </div>
-                 <div class="award-item">
-                    <span class="award-name">
-                        <span class="lang-en">Research and Innovation Award (First Prize)</span>
-                        <span class="lang-zh">深圳技术大学“科研创新奖” (一等奖)</span>
-                    </span>
-                    <span class="award-year">2023</span>
-                </div>
-                <div class="award-item">
-                    <span class="award-name">
-                        <span class="lang-en">CHENHSONG Scholarship (Dean's Award & Academic Excellence)</span>
-                        <span class="lang-zh">震雄奖学金 (院长奖学金, 学业卓越奖)</span>
-                    </span>
-                    <span class="award-year">2023</span>
-                </div>
-                 <div class="award-item">
-                    <span class="award-name">
-                        <span class="lang-en">Outstanding Student Cadre Award</span>
-                        <span class="lang-zh">深圳技术大学“优秀学生干部”</span>
-                    </span>
-                    <span class="award-year">2024</span>
-                </div>
-            </div>
-        </section>
-    </main>
-</div>
+    <section>
+      <h2>Awards 🏅</h2>
+      <ul>
+        <li>🏆 <span class="lang-en">National Scholarship, China</span><span class="lang-zh">国家奖学金</span></li>
+        <li>🏆 <span class="lang-en">Outstanding Graduate of HIT (Shenzhen)</span><span class="lang-zh">哈尔滨工业大学（深圳）优秀毕业生</span></li>
+      </ul>
+    </section>
 
-<script>
-    // --- Language Switching Logic ---
+    <footer>
+      <p>&copy; 2025 Haokai Ding. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
     function setLanguage(lang) {
-        // Hide all language elements first
-        document.querySelectorAll('.lang-en, .lang-zh').forEach(el => {
-            el.style.display = 'none';
-        });
-
-        // Show the selected language elements
-        document.querySelectorAll(`.lang-${lang}`).forEach(el => {
-            el.style.display = ''; 
-        });
-
-        // Update active class on switcher links
-        document.querySelectorAll('.lang-link').forEach(link => {
-            link.classList.remove('active');
-        });
-        document.querySelector(`.lang-link[onclick="setLanguage('${lang}')"]`).classList.add('active');
-
-        // Save the user's preference in local storage
-        try {
-            localStorage.setItem('preferredLanguage', lang);
-        } catch (e) {
-            console.error('LocalStorage is not available.');
-        }
+      const en = document.querySelectorAll('.lang-en');
+      const zh = document.querySelectorAll('.lang-zh');
+      if (lang === 'en') {
+        en.forEach(e => e.style.display = 'inline');
+        zh.forEach(e => e.style.display = 'none');
+      } else {
+        en.forEach(e => e.style.display = 'none');
+        zh.forEach(e => e.style.display = 'inline');
+      }
     }
-
-    // On page load, check for saved language preference
-    document.addEventListener('DOMContentLoaded', () => {
-        let preferredLanguage = 'en'; // Default to English
-        try {
-            const savedLang = localStorage.getItem('preferredLanguage');
-            if (savedLang) {
-                preferredLanguage = savedLang;
-            }
-        } catch (e) {
-             console.error('LocalStorage is not available.');
-        }
-        setLanguage(preferredLanguage);
-    });
-</script>
-
+    setLanguage('en');
+  </script>
 </body>
 </html>
