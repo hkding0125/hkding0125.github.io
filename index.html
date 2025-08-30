@@ -359,6 +359,18 @@
         .award-item:last-child { border-bottom: none; }
         .award-name { flex-grow: 1; padding-right: 20px; }
         .award-year { flex-shrink: 0; font-weight: 700; color: #555; font-family: 'Lato', sans-serif;}
+        
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e5e5;
+            font-size: 0.9em;
+            color: #888;
+            font-family: 'Lato', sans-serif;
+            transition: border-color 0.3s, color 0.3s;
+        }
 
         /* --- Responsive Design --- */
         @media(max-width: 768px){
@@ -382,7 +394,7 @@
             color: #aaa;
         }
         .dark-mode .contact-info a, .dark-mode .entry-details a, .dark-mode .education-entry ul li a, .dark-mode .pub-links a, .dark-mode .pub-links .pdf-link, .dark-mode .author-note {
-            color: #8ab4f8; /* A lighter blue for dark backgrounds */
+            color: #8ab4f8;
         }
         .dark-mode hr {
             background-color: #444;
@@ -402,8 +414,12 @@
             border-bottom-color: #444;
         }
         .dark-mode .entry-logo {
-            background-color: #fff; /* Keep logos on a white background for visibility */
+            background-color: #fff;
             border-radius: 4px;
+        }
+        .dark-mode footer {
+            border-top-color: #444;
+            color: #aaa;
         }
 
     </style>
@@ -698,6 +714,11 @@
             </div>
         </section>
     </main>
+    
+    <footer>
+        <p>&copy; 2025 Haokai Ding &middot; Last updated 2025-08-30</p>
+    </footer>
+
 </div>
 
 <div id="pdfModal" class="pdf-modal">
