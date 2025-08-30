@@ -19,6 +19,7 @@
             padding: 0;
             display: flex;
             justify-content: center;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .container {
@@ -27,12 +28,24 @@
             margin: 40px 20px;
         }
 
-        /* --- Language Switcher --- */
-        #lang-switcher {
+        /* --- Theme & Language Switcher Container --- */
+        .top-controls {
             text-align: right;
             margin-bottom: 20px;
             font-size: 0.9em;
             font-family: 'Lato', sans-serif;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        #theme-switcher {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em; /* Larger icon */
+            margin-right: 15px;
+            padding: 0 5px;
+            line-height: 1;
         }
         #lang-switcher a {
             color: #888;
@@ -51,7 +64,7 @@
         header {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 25px; /* UPDATED: Reduced bottom margin */
+            margin-bottom: 25px;
         }
         .header-info h1 {
             font-family: 'Lato', sans-serif;
@@ -81,6 +94,7 @@
             margin-right: 30px;
             border-radius: 8px;
             overflow: hidden;
+            flex-shrink: 0;
         }
         .profile-image {
             position: absolute;
@@ -126,6 +140,7 @@
             height: 1px;
             background-color: #e5e5e5;
             margin: 8px 0 25px 0;
+            transition: background-color 0.3s;
         }
         h3 {
             font-size: 1.2em;
@@ -339,7 +354,7 @@
             padding: 8px 0;
             border-bottom: 1px solid #f0f0f0;
             font-size: 1em;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, border-color 0.3s;
         }
         .award-item:last-child { border-bottom: none; }
         .award-name { flex-grow: 1; padding-right: 20px; }
@@ -354,14 +369,54 @@
             .publication-item { flex-direction: column; }
             .pub-index { width: auto; margin-bottom: 5px; }
         }
+
+        /* --- Dark Mode Styles --- */
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+        }
+        .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode .pub-index, .dark-mode .pub-authors b {
+            color: #f5f5f5;
+        }
+        .dark-mode .contact-info p, .dark-mode .entry-date, .dark-mode .pub-authors, .dark-mode .pub-venue, .dark-mode .award-year {
+            color: #aaa;
+        }
+        .dark-mode .contact-info a, .dark-mode .entry-details a, .dark-mode .education-entry ul li a, .dark-mode .pub-links a, .dark-mode .pub-links .pdf-link, .dark-mode .author-note {
+            color: #8ab4f8; /* A lighter blue for dark backgrounds */
+        }
+        .dark-mode hr {
+            background-color: #444;
+        }
+        .dark-mode #lang-switcher a {
+            color: #aaa;
+        }
+        .dark-mode #lang-switcher a.active {
+            color: #8ab4f8;
+            background-color: #333;
+        }
+        .dark-mode .publication-state {
+            background-color: #444;
+            color: #ddd;
+        }
+        .dark-mode .award-item {
+            border-bottom-color: #444;
+        }
+        .dark-mode .entry-logo {
+            background-color: #fff; /* Keep logos on a white background for visibility */
+            border-radius: 4px;
+        }
+
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div id="lang-switcher">
-        <a href="#" onclick="setLanguage('en')" class="lang-link active">English</a> / 
-        <a href="#" onclick="setLanguage('zh')" class="lang-link">中文</a>
+    <div class="top-controls">
+        <button id="theme-switcher">🌙</button>
+        <div id="lang-switcher">
+            <a href="#" onclick="setLanguage('en')" class="lang-link active">English</a> / 
+            <a href="#" onclick="setLanguage('zh')" class="lang-link">中文</a>
+        </div>
     </div>
 
     <header>
@@ -653,6 +708,34 @@
 </div>
 
 <script>
+    // --- Theme Switcher Logic ---
+    const themeSwitcher = document.getElementById('theme-switcher');
+    const body = document.body;
+
+    // Function to apply the theme
+    const applyTheme = (theme) => {
+        if (theme === 'dark') {
+            body.classList.add('dark-mode');
+            themeSwitcher.textContent = '☀️';
+        } else {
+            body.classList.remove('dark-mode');
+            themeSwitcher.textContent = '🌙';
+        }
+    };
+
+    // Apply saved theme on initial load
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
+
+    // Event listener for the switcher button
+    themeSwitcher.addEventListener('click', () => {
+        const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+    });
+
+
     // --- Language Switching Logic ---
     function setLanguage(lang) {
         document.querySelectorAll('.lang-en, .lang-zh').forEach(el => {
@@ -673,16 +756,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        let preferredLanguage = 'en';
-        try {
-            const savedLang = localStorage.getItem('preferredLanguage');
-            if (savedLang) {
-                preferredLanguage = savedLang;
-            }
-        } catch (e) {
-             console.error('LocalStorage is not available.');
-        }
-        setLanguage(preferredLanguage);
+        const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+        setLanguage(savedLang);
     });
 
     // --- PDF Modal Logic ---
@@ -696,10 +771,10 @@
 
     function closePdfModal() {
         modal.style.display = "none";
-        pdfViewer.src = ""; // 清空 src 停止加载，节省资源
+        pdfViewer.src = ""; // Clear src to stop loading and save resources
     }
 
-    // 点击弹窗外部区域关闭
+    // Close modal if user clicks outside of the content
     window.onclick = function(event) {
         if (event.target == modal) {
             closePdfModal();
