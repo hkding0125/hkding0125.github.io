@@ -241,18 +241,17 @@
             flex-wrap: wrap;
             align-items: center;
         }
-        .pub-links a, .pub-links span {
+        .pub-links a, .pub-links span, .pub-links .pdf-link {
             margin-right: 8px;
             margin-bottom: 5px;
             text-decoration: none;
             font-weight: 700;
             font-family: 'Lato', sans-serif;
+            font-size: 0.9em;
+            color: #0056b3;
+            cursor: pointer;
         }
-        .pub-links a {
-             color: #0056b3;
-             font-size: 0.9em;
-        }
-        .pub-links a:hover {
+        .pub-links a:hover, .pub-links .pdf-link:hover {
             text-decoration: underline;
         }
         .pub-status {
@@ -274,31 +273,59 @@
             color: #0056b3;
         }
 
-        /* --- PDF Preview Styling --- */
-        .pdf-link-container {
+        /* --- PDF Modal (Popup) Styling --- */
+        .pdf-modal {
+            display: none; /* 默认隐藏 */
+            position: fixed; /* 固定定位，覆盖整个页面 */
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7); /* 半透明黑色背景 */
+            animation: fadeIn 0.3s;
+        }
+        .pdf-modal-content {
             position: relative;
-            display: inline-block;
-        }
-        .pdf-preview {
-            visibility: hidden;
-            opacity: 0;
-            width: 200px; /* 预览图宽度 */
+            margin: 5% auto;
+            width: 80%;
+            max-width: 900px;
+            height: 85%;
             background-color: #fff;
-            border: 1px solid #ccc;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 5px;
-            border-radius: 6px;
-            position: absolute;
-            z-index: 10;
-            bottom: 125%; /* 定位在链接上方 */
-            left: 50%;
-            margin-left: -100px; /* 居中 */
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            pointer-events: none; /* 防止图片干扰鼠标事件 */
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        .pdf-link-container:hover .pdf-preview {
-            visibility: visible;
-            opacity: 1;
+        .pdf-modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+        .close-button {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            color: #fff;
+            background-color: #333;
+            font-size: 30px;
+            font-weight: bold;
+            width: 40px;
+            height: 40px;
+            line-height: 35px;
+            text-align: center;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            transform: scale(1.1);
+            background-color: #d9534f;
+        }
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
         }
 
 
@@ -324,7 +351,6 @@
             .entry-line-2 { text-align: left; margin-left: 0; }
             .publication-item { flex-direction: column; }
             .pub-index { width: auto; margin-bottom: 5px; }
-            .pdf-preview { display: none; } /* 在移动端禁用预览 */
         }
     </style>
 </head>
@@ -453,10 +479,7 @@
                         <div class="pub-authors"><b>Haokai Ding</b>, Yizhe Chen, Dongjun Jia, Wenzeng Zhang</div>
                         <div class="pub-venue">Proceedings of the 2025 International Conference on Information and Automation (ICIA)</div>
                         <div class="pub-links">
-                            <div class="pdf-link-container">
-                                <a href="pdfs/icia_v4.pdf" target="_blank">[PDF]</a>
-                                <img src="pdf_previews/icia_v4.jpg" alt="PDF preview for ICIA 2025" class="pdf-preview">
-                            </div>
+                            <span class="pdf-link" onclick="openPdfModal('pdfs/icia v4.pdf')">[PDF]</span>
                             <span class="publication-state">[Accepted]</span>
                             <span class="pub-status">[EI]</span>
                             <span class="author-note"><span class="lang-en">† First Author</span><span class="lang-zh">† 第一作者</span></span>
@@ -470,10 +493,7 @@
                         <div class="pub-authors"><b>Haokai Ding</b>, W.Zhang*</div>
                         <div class="pub-venue">Proceedings of the 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</div>
                         <div class="pub-links">
-                            <div class="pdf-link-container">
-                                <a href="pdfs/IROS25_3633_FI.pdf" target="_blank">[PDF]</a>
-                                <img src="pdf_previews/IROS25_3633_FI.jpg" alt="PDF preview for IROS 2025" class="pdf-preview">
-                            </div>
+                            <span class="pdf-link" onclick="openPdfModal('pdfs/IROS25_3633_FI.pdf')">[PDF]</span>
                             <span class="publication-state">[Accepted]</span>
                             <span class="pub-status">[EI]</span>
                             <span class="author-note"><span class="lang-en">† First Author</span><span class="lang-zh">† 第一作者</span></span>
@@ -487,10 +507,7 @@
                         <div class="pub-authors"><b>Haokai Ding</b>, Z.Chen, T.Yang*, W.Zhang*</div>
                         <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Automation Science and Engineering (CASE)</div>
                         <div class="pub-links">
-                            <div class="pdf-link-container">
-                                <a href="pdfs/CASE25_0693_FI.pdf" target="_blank">[PDF]</a>
-                                <img src="pdf_previews/CASE25_0693_FI.jpg" alt="PDF preview for CASE 2025" class="pdf-preview">
-                            </div>
+                            <span class="pdf-link" onclick="openPdfModal('pdfs/CASE25_0693_FI.pdf')">[PDF]</span>
                             <span class="publication-state">[Published]</span>
                             <span class="pub-status">[EI]</span>
                             <span class="author-note"><span class="lang-en">† First Author</span><span class="lang-zh">† 第一作者</span></span>
@@ -504,10 +521,7 @@
                         <div class="pub-authors"><b>Haokai Ding</b>, J.Fan, Z.Zhu, Y.Zhao, K.Chen*, W.Zhang*</div>
                         <div class="pub-venue">Proceedings of the 2025 IEEE International Conference on Advanced Robotics and Mechatronics (ARM)</div>
                         <div class="pub-links">
-                            <div class="pdf-link-container">
-                                <a href="pdfs/ICARM25_0037_FI.pdf" target="_blank">[PDF]</a>
-                                <img src="pdf_previews/ICARM25_0037_FI.jpg" alt="PDF preview for ARM 2025" class="pdf-preview">
-                            </div>
+                            <span class="pdf-link" onclick="openPdfModal('pdfs/ICARM25_0037_FI.pdf')">[PDF]</span>
                             <span class="publication-state">[Published]</span>
                             <span class="pub-status">[EI]</span>
                             <span class="author-note"><span class="lang-en">† First Author</span><span class="lang-zh">† 第一作者</span></span>
@@ -521,10 +535,7 @@
                         <div class="pub-authors">Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, <b>Haokai Ding</b>, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang</div>
                         <div class="pub-venue">E3S Web Conf., 615 (2025) 02010</div>
                         <div class="pub-links">
-                            <div class="pdf-link-container">
-                                <a href="pdfs/e3sconf_eppc2025_02010.pdf" target="_blank">[PDF]</a>
-                                <img src="pdf_previews/e3sconf_eppc2025_02010.jpg" alt="PDF preview for E3S Web Conf." class="pdf-preview">
-                            </div>
+                            <span class="pdf-link" onclick="openPdfModal('pdfs/e3sconf_eppc2025_02010.pdf')">[PDF]</span>
                             <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank">[DOI]</a>
                             <span class="pub-status">[EI]</span>
                         </div>
@@ -543,10 +554,7 @@
                         <div class="pub-authors">Yating Liu, <b>Haokai Ding</b>, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang</div>
                         <div class="pub-venue">Polymers 17, no. 15: 2136</div>
                         <div class="pub-links">
-                            <div class="pdf-link-container">
-                                <a href="pdfs/polymers-17-02136.pdf" target="_blank">[PDF]</a>
-                                <img src="pdf_previews/polymers-17-02136.jpg" alt="PDF preview for Polymers" class="pdf-preview">
-                            </div>
+                            <span class="pdf-link" onclick="openPdfModal('pdfs/polymers-17-02136.pdf')">[PDF]</span>
                             <a href="https://doi.org/10.3390/polym17152136" target="_blank">[DOI]</a>
                             <span class="pub-status">[SCI, JCR Q1]</span>
                             <span class="author-note"><span class="lang-en">† Co-first Author</span><span class="lang-zh">† 共同第一作者</span></span>
@@ -635,26 +643,26 @@
     </main>
 </div>
 
+<div id="pdfModal" class="pdf-modal">
+    <div class="pdf-modal-content">
+        <span class="close-button" onclick="closePdfModal()">&times;</span>
+        <iframe id="pdf-viewer" src="" frameborder="0"></iframe>
+    </div>
+</div>
+
 <script>
     // --- Language Switching Logic ---
     function setLanguage(lang) {
-        // Hide all language elements first
         document.querySelectorAll('.lang-en, .lang-zh').forEach(el => {
             el.style.display = 'none';
         });
-
-        // Show the selected language elements
         document.querySelectorAll(`.lang-${lang}`).forEach(el => {
             el.style.display = ''; 
         });
-
-        // Update active class on switcher links
         document.querySelectorAll('.lang-link').forEach(link => {
             link.classList.remove('active');
         });
         document.querySelector(`.lang-link[onclick="setLanguage('${lang}')"]`).classList.add('active');
-
-        // Save the user's preference in local storage
         try {
             localStorage.setItem('preferredLanguage', lang);
         } catch (e) {
@@ -662,9 +670,8 @@
         }
     }
 
-    // On page load, check for saved language preference
     document.addEventListener('DOMContentLoaded', () => {
-        let preferredLanguage = 'en'; // Default to English
+        let preferredLanguage = 'en';
         try {
             const savedLang = localStorage.getItem('preferredLanguage');
             if (savedLang) {
@@ -675,8 +682,28 @@
         }
         setLanguage(preferredLanguage);
     });
+
+    // --- PDF Modal Logic ---
+    const modal = document.getElementById('pdfModal');
+    const pdfViewer = document.getElementById('pdf-viewer');
+
+    function openPdfModal(pdfPath) {
+        pdfViewer.src = pdfPath;
+        modal.style.display = "block";
+    }
+
+    function closePdfModal() {
+        modal.style.display = "none";
+        pdfViewer.src = ""; // 清空 src 停止加载，节省资源
+    }
+
+    // 点击弹窗外部区域关闭
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closePdfModal();
+        }
+    }
 </script>
 
 </body>
 </html>
-
