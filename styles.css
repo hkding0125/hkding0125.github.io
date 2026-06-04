@@ -67,7 +67,8 @@ a {
 }
 
 a:hover {
-  text-decoration: none;
+  background-color: var(--accent);
+  color: var(--bg);
 }
 
 :focus-visible {
@@ -121,6 +122,8 @@ a:hover {
 
 .site-mark-link:hover {
   text-decoration: none;
+  background: transparent;
+  color: var(--text);
 }
 
 .site-mark-prompt {
@@ -162,6 +165,7 @@ a:hover {
 .nav-links a:hover {
   color: var(--text);
   text-decoration: none;
+  background: transparent;
 }
 
 .nav-links a.nav-active {
@@ -667,7 +671,8 @@ p {
 
 .inline-link:hover,
 .pub-links a:hover {
-  text-decoration: none;
+  background-color: var(--accent);
+  color: var(--bg);
 }
 
 .contact-lead {
@@ -696,10 +701,12 @@ p {
 
 .contact-block a:hover {
   color: var(--text);
+  background: transparent;
 }
 
 .contact-block .inline-link:hover {
   color: var(--text);
+  background: transparent;
 }
 
 .contact-block li::before {
@@ -875,6 +882,7 @@ p {
 
 .footer-credit a:hover {
   color: var(--text-soft);
+  background: transparent;
 }
 
 .visitor-map {
