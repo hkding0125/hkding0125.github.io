@@ -67,7 +67,7 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 :focus-visible {
@@ -667,7 +667,7 @@ p {
 
 .inline-link:hover,
 .pub-links a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .contact-lead {
