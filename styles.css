@@ -299,7 +299,7 @@ h1 {
   color: transparent;
   background-image: repeating-linear-gradient(
     to right,
-    var(--text) 0 6px,
+    var(--line) 0 6px,
     transparent 6px 11px
   );
   background-position: 0 2px;
