@@ -478,19 +478,6 @@ h1 {
   hyphens: none;
 }
 
-.section-heading {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.section-link {
-  white-space: nowrap;
-  font-size: 0.92rem;
-  color: var(--text-faint);
-}
-
 h2 {
   margin: 0 0 14px;
   font-size: 1.08rem;
@@ -970,8 +957,7 @@ body.dark-mode .visitor-map iframe {
   justify-content: center;
 }
 
-.video-panel video,
-.pdf-panel iframe {
+.video-panel video {
   display: block;
   width: 100%;
 }
@@ -1002,6 +988,8 @@ body.dark-mode .visitor-map iframe {
 }
 
 .pdf-panel iframe {
+  display: block;
+  width: 100%;
   height: 100%;
   border: 0;
 }

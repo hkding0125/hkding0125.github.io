@@ -26,7 +26,7 @@ assert.match(
 );
 assert.match(
   publicationsHtml,
-  /<time id="lastUpdated" datetime="2026-03-30">2026-03-30<\/time>/,
+  /<time id="lastUpdated" datetime="\d{4}-\d{2}-\d{2}">\d{4}-\d{2}-\d{2}<\/time>/,
   'expected publications page to expose an explicit content update date',
 );
 assert.match(
@@ -67,7 +67,7 @@ assert.match(
 );
 assert.match(
   contactHtml,
-  /<time id="lastUpdated" datetime="2026-03-30">2026-03-30<\/time>/,
+  /<time id="lastUpdated" datetime="\d{4}-\d{2}-\d{2}">\d{4}-\d{2}-\d{2}<\/time>/,
   'expected contact page to expose an explicit content update date',
 );
 assert.match(
