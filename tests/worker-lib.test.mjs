@@ -44,3 +44,20 @@ test('buildPointsPayload handles empty input', () => {
   assert.equal(p.since, null);
   assert.deepEqual(p.points, []);
 });
+
+import { corsHeaders, checkBasicAuth } from '../worker/src/lib.js';
+
+test('corsHeaders echoes allowed origins, falls back otherwise', () => {
+  assert.equal(corsHeaders('https://haokaiding.qzz.io')['Access-Control-Allow-Origin'], 'https://haokaiding.qzz.io');
+  assert.equal(corsHeaders('http://localhost:4567')['Access-Control-Allow-Origin'], 'http://localhost:4567');
+  assert.equal(corsHeaders('https://evil.example')['Access-Control-Allow-Origin'], 'https://haokaiding.qzz.io');
+  assert.equal(corsHeaders(null)['Access-Control-Allow-Origin'], 'https://haokaiding.qzz.io');
+});
+
+test('checkBasicAuth validates the Basic header', () => {
+  const header = 'Basic ' + Buffer.from('admin:s3cret').toString('base64');
+  assert.equal(checkBasicAuth(header, 'admin', 's3cret'), true);
+  assert.equal(checkBasicAuth(header, 'admin', 'wrong'), false);
+  assert.equal(checkBasicAuth('Basic not-base64!!', 'admin', 's3cret'), false);
+  assert.equal(checkBasicAuth(null, 'admin', 's3cret'), false);
+});

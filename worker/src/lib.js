@@ -29,3 +29,24 @@ export function buildPointsPayload(rows, firstTsSeconds) {
     points: rows.map(r => ({ lat: r.lat, lon: r.lon, city: r.city, country: r.country, n: r.n })),
   };
 }
+
+const ALLOWED_ORIGINS = ['https://haokaiding.qzz.io', 'https://haokaiding.github.io'];
+
+export function corsHeaders(origin) {
+  const ok = origin && (ALLOWED_ORIGINS.includes(origin) || /^http:\/\/localhost(:\d+)?$/.test(origin));
+  return {
+    'Access-Control-Allow-Origin': ok ? origin : ALLOWED_ORIGINS[0],
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Vary': 'Origin',
+  };
+}
+
+export function checkBasicAuth(header, user, pass) {
+  if (!header || !header.startsWith('Basic ')) return false;
+  let decoded;
+  try { decoded = atob(header.slice(6)); } catch { return false; }
+  const i = decoded.indexOf(':');
+  if (i < 0) return false;
+  return decoded.slice(0, i) === user && decoded.slice(i + 1) === pass;
+}
