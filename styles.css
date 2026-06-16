@@ -872,8 +872,7 @@ body.dark-mode { --vm-land: #1b2433; --vm-dot: #2dd4bf; --vm-panel: #0e1117; }
 .vm-headline { font-size: 0.78rem; color: var(--text-faint); margin: 0 0 6px; font-family: var(--font-mono); }
 #visitorMap { position: relative; background: var(--vm-panel); border-radius: 6px; padding: 8px; }
 #vmWorld { width: 100%; height: auto; display: block; line-height: 0; }
-.vm-link { display: block; line-height: 0; cursor: pointer; }
-.vm-link:hover { opacity: 0.9; }
+.vm-link { display: block; line-height: 0; cursor: pointer; -webkit-user-select: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; }
 .vm-land { fill: var(--vm-land); stroke: none; }
 .vm-dot { fill: var(--vm-dot); fill-opacity: 0.9; }
 .visitor-map-fallback { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; text-align: center; padding: 12px; font-size: 0.95rem; }
