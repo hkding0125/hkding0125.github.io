@@ -29,8 +29,9 @@ test('buildPointsPayload sums views, counts cities/countries, shapes points', ()
     { country: 'US', city: 'Boston', lat: 42.4, lon: -71.1, n: 140 },
     { country: 'CN', city: 'Shanghai', lat: 31.2, lon: 121.5, n: 120 },
   ];
-  const p = buildPointsPayload(rows, Date.UTC(2026, 5, 1) / 1000);
+  const p = buildPointsPayload(rows, Date.UTC(2026, 5, 1) / 1000, 7);
   assert.equal(p.totalViews, 560);
+  assert.equal(p.last30, 7);
   assert.equal(p.cities, 3);
   assert.equal(p.countries, 2);
   assert.equal(p.since, '2026-06');

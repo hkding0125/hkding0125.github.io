@@ -34,7 +34,8 @@ export default {
           'SELECT country, city, lat, lon, COUNT(*) AS n FROM hits WHERE lat IS NOT NULL AND lon IS NOT NULL GROUP BY lat, lon ORDER BY n DESC'
         ).all();
         const first = await env.DB.prepare('SELECT MIN(ts) AS first FROM hits').first();
-        json = JSON.stringify(buildPointsPayload(grouped.results || [], first ? first.first : null));
+        const last30row = await env.DB.prepare('SELECT COUNT(*) AS n FROM hits WHERE ts >= ?').bind(Math.floor(Date.now() / 1000) - 30 * 86400).first();
+        json = JSON.stringify(buildPointsPayload(grouped.results || [], first ? first.first : null, last30row ? last30row.n : 0));
         await cache.put(cacheKey, new Response(json, {
           headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300' },
         }));

@@ -31,7 +31,12 @@ export function renderDots(doc, points) {
 
 function setHeadline(doc, data) {
   const el = doc.getElementById('vmHeadline');
-  if (el) el.textContent = `${data.totalViews} pageviews · ${data.cities} cities · since ${data.since || '—'}`;
+  if (!el) return;
+  const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const now = new Date();
+  const start = new Date(now.getTime() - 30 * 864e5);
+  const n = data.last30 != null ? data.last30 : 0;
+  el.textContent = `${n} pageviews · ${fmt(start)} – ${fmt(now)}`;
 }
 
 async function loadPoints(doc) {

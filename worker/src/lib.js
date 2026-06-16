@@ -16,7 +16,7 @@ export function isoMonth(tsSeconds) {
   return d.getUTCFullYear() + '-' + String(d.getUTCMonth() + 1).padStart(2, '0');
 }
 
-export function buildPointsPayload(rows, firstTsSeconds) {
+export function buildPointsPayload(rows, firstTsSeconds, last30 = 0) {
   let total = 0;
   const countries = new Set();
   for (const r of rows) {
@@ -26,6 +26,7 @@ export function buildPointsPayload(rows, firstTsSeconds) {
   return {
     since: firstTsSeconds ? isoMonth(firstTsSeconds) : null,
     totalViews: total,
+    last30,
     cities: rows.length,
     countries: countries.size,
     points: rows.map(r => ({ lat: r.lat, lon: r.lon, city: r.city, country: r.country, n: r.n })),
