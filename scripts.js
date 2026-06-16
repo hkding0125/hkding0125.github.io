@@ -277,11 +277,11 @@ document.addEventListener('keydown', event => {
 const setupVisitorMapFallback = () => {
   const container = $('#visitorMap');
   const fallback = $('#visitorMapFallback');
-  const slot = $('#clustrmaps-slot');
+  const slot = $('#mapmyvisitors-slot');
   if (!container || !fallback || !slot) return;
 
   fallback.dataset.state = 'loading';
-  const widgetSelector = 'img, iframe, .clustrmaps-map, .clustrmaps-widget, .clustrmaps-globe';
+  const widgetSelector = 'img, iframe, .mapmyvisitors-map, .mapmyvisitors-widget, .mapmyvisitors-map-container';
   const hasWidget = () => Boolean(container.querySelector(widgetSelector));
 
   const markLoaded = () => {
@@ -305,7 +305,7 @@ const setupVisitorMapFallback = () => {
     const src = isDark ? slot.dataset.srcDark : slot.dataset.srcLight;
     if (!src) return;
     const scriptEl = document.createElement('script');
-    scriptEl.id = 'clustrmaps';
+    scriptEl.id = 'mapmyvisitors';
     scriptEl.async = true;
     scriptEl.src = src;
     scriptEl.referrerPolicy = 'no-referrer-when-downgrade';

@@ -40,13 +40,18 @@ assert.match(
 );
 assert.doesNotMatch(
   indexHtml,
-  /site\/1bh9v/,
-  'expected old ClustrMaps fallback links to be removed',
+  /clustrmaps\.com/,
+  'expected the dead clustrmaps.com domain (decommissioned after the MapMyVisitors rebrand) to be removed',
 );
 assert.match(
   indexHtml,
-  /site\/1c87l/,
-  'expected ClustrMaps fallback links to use the live visitor page id',
+  /mapmyvisitors\.com\/web\/1c5ic/,
+  'expected the visitor-map fallback links to use the live MapMyVisitors visitor page id',
+);
+assert.match(
+  indexHtml,
+  /mapmyvisitors\.com\/map\.js\?d=CbPTCAOvVF31la7ertDJVIWjKW2tqsGo851ka03BlU0/,
+  'expected the visitor-map slot to load the MapMyVisitors widget script',
 );
 assert.match(
   scriptsJs,
