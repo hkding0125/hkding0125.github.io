@@ -1,4 +1,4 @@
-import { isBot, roundCoord, buildPointsPayload, corsHeaders, isAllowedOrigin, checkBasicAuth, statsHtml } from './lib.js';
+import { isBot, roundCoord, buildPointsPayload, corsHeaders, isAllowedOrigin, statsHtml } from './lib.js';
 
 export default {
   async fetch(request, env) {
@@ -45,9 +45,10 @@ export default {
     }
 
     if (url.pathname === '/stats' && request.method === 'GET') {
-      if (!checkBasicAuth(request.headers.get('Authorization'), env.ADMIN_USER || 'admin', env.ADMIN_PASS)) {
-        return new Response('Auth required', { status: 401, headers: { 'WWW-Authenticate': 'Basic realm="visitors"' } });
-      }
+      const cache = caches.default;
+      const cacheKey = new Request(url.toString());
+      const cached = await cache.match(cacheKey);
+      if (cached) return cached;
       const totals = await env.DB.prepare('SELECT COUNT(*) AS total, COUNT(DISTINCT country) AS countries, MIN(ts) AS first FROM hits').first();
       const cityRow = await env.DB.prepare('SELECT COUNT(*) AS c FROM (SELECT 1 FROM hits GROUP BY lat, lon)').first();
       const topCountries = (await env.DB.prepare('SELECT country, COUNT(*) AS n FROM hits GROUP BY country ORDER BY n DESC LIMIT 20').all()).results || [];
@@ -60,7 +61,9 @@ export default {
         last30: last30 ? last30.n : 0,
         topCountries, topCities, daily: daily.slice().reverse(), recent,
       };
-      return new Response(statsHtml(data), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
+      const resp = new Response(statsHtml(data), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=60' } });
+      await cache.put(cacheKey, resp.clone());
+      return resp;
     }
 
     return new Response('Not found', { status: 404 });
