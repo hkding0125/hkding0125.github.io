@@ -54,8 +54,10 @@ export default {
       const topCities = (await env.DB.prepare('SELECT city, country, COUNT(*) AS n FROM hits GROUP BY city, country ORDER BY n DESC LIMIT 20').all()).results || [];
       const daily = (await env.DB.prepare("SELECT date(ts,'unixepoch') AS day, COUNT(*) AS n FROM hits GROUP BY day ORDER BY day DESC LIMIT 90").all()).results || [];
       const recent = (await env.DB.prepare('SELECT ts, city, country FROM hits ORDER BY ts DESC LIMIT 50').all()).results || [];
+      const last30 = await env.DB.prepare('SELECT COUNT(*) AS n FROM hits WHERE ts >= ?').bind(Math.floor(Date.now() / 1000) - 30 * 86400).first();
       const data = {
         totalViews: totals.total, countries: totals.countries, cities: cityRow.c, since: totals.first,
+        last30: last30 ? last30.n : 0,
         topCountries, topCities, daily: daily.slice().reverse(), recent,
       };
       return new Response(statsHtml(data), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });

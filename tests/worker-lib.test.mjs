@@ -82,6 +82,10 @@ test('statsHtml renders totals, country/city rows, and escapes values', () => {
   assert.match(html, /Boston/);
   assert.match(html, /&lt;x&gt;/);
   assert.doesNotMatch(html, /<x>/);
+  assert.match(html, /top countries/);
+  assert.match(html, /top cities/);
+  assert.match(html, /recent visits/);
+  assert.match(html, /last 30 days/);
 });
 
 import { isAllowedOrigin } from '../worker/src/lib.js';
@@ -92,7 +96,8 @@ test('statsHtml renders an em dash (not 1970) for an empty database', () => {
     topCountries: [], topCities: [], daily: [], recent: [],
   });
   assert.doesNotMatch(html, /1970/);
-  assert.match(html, /visitor log — — →/);
+  assert.match(html, /visitor log/);
+  assert.match(html, /since —/);
 });
 
 test('isAllowedOrigin accepts allowlisted + localhost, rejects others', () => {
