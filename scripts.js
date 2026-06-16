@@ -274,76 +274,6 @@ document.addEventListener('keydown', event => {
   }
 });
 
-const setupVisitorMapFallback = () => {
-  const container = $('#visitorMap');
-  const fallback = $('#visitorMapFallback');
-  const slot = $('#mapmyvisitors-slot');
-  if (!container || !fallback || !slot) return;
-
-  fallback.dataset.state = 'loading';
-  const widgetSelector = 'img, iframe, .mapmyvisitors-map, .mapmyvisitors-widget, .mapmyvisitors-map-container';
-  const hasWidget = () => Boolean(container.querySelector(widgetSelector));
-
-  const markLoaded = () => {
-    fallback.dataset.state = 'loaded';
-    fallback.classList.remove('show-help');
-  };
-
-  const showFallback = () => {
-    fallback.classList.add('show-help');
-  };
-
-  if (hasWidget()) {
-    markLoaded();
-    return;
-  }
-
-  const inject = () => {
-    if (slot.dataset.injected) return;
-    slot.dataset.injected = '1';
-    const isDark = document.body.classList.contains('dark-mode');
-    const src = isDark ? slot.dataset.srcDark : slot.dataset.srcLight;
-    if (!src) return;
-    const scriptEl = document.createElement('script');
-    scriptEl.id = 'mapmyvisitors';
-    scriptEl.async = true;
-    scriptEl.src = src;
-    scriptEl.referrerPolicy = 'no-referrer-when-downgrade';
-    scriptEl.addEventListener('error', showFallback);
-    scriptEl.addEventListener('load', () => {
-      window.setTimeout(() => {
-        if (hasWidget()) markLoaded();
-        else showFallback();
-      }, 200);
-    });
-    slot.appendChild(scriptEl);
-
-    const observer = new MutationObserver(() => {
-      if (!hasWidget()) return;
-      markLoaded();
-      observer.disconnect();
-    });
-    observer.observe(container, { childList: true, subtree: true });
-
-    window.setTimeout(() => {
-      if (fallback.dataset.state !== 'loaded' && !hasWidget()) showFallback();
-    }, 6000);
-  };
-
-  if (!('IntersectionObserver' in window)) {
-    inject();
-    return;
-  }
-
-  const io = new IntersectionObserver(entries => {
-    if (entries.some(e => e.isIntersecting)) {
-      inject();
-      io.disconnect();
-    }
-  }, { rootMargin: '300px 0px' });
-  io.observe(slot);
-};
-
 const updateCopyrightYear = () => {
   const footer = document.querySelector('.footer-meta');
   if (!footer) return;
@@ -360,5 +290,4 @@ const updateCopyrightYear = () => {
 document.addEventListener('DOMContentLoaded', () => {
   updateLastUpdated();
   updateCopyrightYear();
-  setupVisitorMapFallback();
 });
