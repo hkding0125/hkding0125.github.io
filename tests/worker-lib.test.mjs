@@ -83,3 +83,21 @@ test('statsHtml renders totals, country/city rows, and escapes values', () => {
   assert.match(html, /&lt;x&gt;/);
   assert.doesNotMatch(html, /<x>/);
 });
+
+import { isAllowedOrigin } from '../worker/src/lib.js';
+
+test('statsHtml renders an em dash (not 1970) for an empty database', () => {
+  const html = statsHtml({
+    totalViews: 0, countries: 0, cities: 0, since: null,
+    topCountries: [], topCities: [], daily: [], recent: [],
+  });
+  assert.doesNotMatch(html, /1970/);
+  assert.match(html, /visitor log — — →/);
+});
+
+test('isAllowedOrigin accepts allowlisted + localhost, rejects others', () => {
+  assert.equal(isAllowedOrigin('https://haokaiding.qzz.io'), true);
+  assert.equal(isAllowedOrigin('http://localhost:4567'), true);
+  assert.equal(isAllowedOrigin('https://evil.example'), false);
+  assert.equal(isAllowedOrigin(null), false);
+});

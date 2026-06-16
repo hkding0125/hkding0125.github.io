@@ -1,4 +1,4 @@
-import { isBot, roundCoord, buildPointsPayload, corsHeaders, checkBasicAuth, statsHtml } from './lib.js';
+import { isBot, roundCoord, buildPointsPayload, corsHeaders, isAllowedOrigin, checkBasicAuth, statsHtml } from './lib.js';
 
 export default {
   async fetch(request, env) {
@@ -11,7 +11,7 @@ export default {
 
     if (url.pathname === '/hit' && request.method === 'POST') {
       const ua = request.headers.get('User-Agent');
-      if (!isBot(ua)) {
+      if (isAllowedOrigin(origin) && !isBot(ua)) {
         const cf = request.cf || {};
         const lat = roundCoord(cf.latitude != null ? parseFloat(cf.latitude) : NaN);
         const lon = roundCoord(cf.longitude != null ? parseFloat(cf.longitude) : NaN);
@@ -25,18 +25,23 @@ export default {
     if (url.pathname === '/points' && request.method === 'GET') {
       const cache = caches.default;
       const cacheKey = new Request(url.toString());
-      const hit = await cache.match(cacheKey);
-      if (hit) return hit;
-      const grouped = await env.DB.prepare(
-        'SELECT country, city, lat, lon, COUNT(*) AS n FROM hits WHERE lat IS NOT NULL AND lon IS NOT NULL GROUP BY lat, lon ORDER BY n DESC'
-      ).all();
-      const first = await env.DB.prepare('SELECT MIN(ts) AS first FROM hits').first();
-      const payload = buildPointsPayload(grouped.results || [], first ? first.first : null);
-      const resp = new Response(JSON.stringify(payload), {
+      let json;
+      const cached = await cache.match(cacheKey);
+      if (cached) {
+        json = await cached.text();
+      } else {
+        const grouped = await env.DB.prepare(
+          'SELECT country, city, lat, lon, COUNT(*) AS n FROM hits WHERE lat IS NOT NULL AND lon IS NOT NULL GROUP BY lat, lon ORDER BY n DESC'
+        ).all();
+        const first = await env.DB.prepare('SELECT MIN(ts) AS first FROM hits').first();
+        json = JSON.stringify(buildPointsPayload(grouped.results || [], first ? first.first : null));
+        await cache.put(cacheKey, new Response(json, {
+          headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300' },
+        }));
+      }
+      return new Response(json, {
         headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=300', ...corsHeaders(origin) },
       });
-      await cache.put(cacheKey, resp.clone());
-      return resp;
     }
 
     if (url.pathname === '/stats' && request.method === 'GET') {

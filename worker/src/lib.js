@@ -32,10 +32,13 @@ export function buildPointsPayload(rows, firstTsSeconds) {
 
 const ALLOWED_ORIGINS = ['https://haokaiding.qzz.io', 'https://haokaiding.github.io'];
 
+export function isAllowedOrigin(origin) {
+  return Boolean(origin && (ALLOWED_ORIGINS.includes(origin) || /^http:\/\/localhost(:\d+)?$/.test(origin)));
+}
+
 export function corsHeaders(origin) {
-  const ok = origin && (ALLOWED_ORIGINS.includes(origin) || /^http:\/\/localhost(:\d+)?$/.test(origin));
   return {
-    'Access-Control-Allow-Origin': ok ? origin : ALLOWED_ORIGINS[0],
+    'Access-Control-Allow-Origin': isAllowedOrigin(origin) ? origin : ALLOWED_ORIGINS[0],
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Vary': 'Origin',
@@ -62,6 +65,7 @@ function rows(items, cells) {
 }
 
 export function statsHtml(data) {
+  const since = data.since ? isoMonth(data.since) : '—';
   const maxDay = Math.max(1, ...data.daily.map(d => d.n));
   const bars = data.daily.map(d =>
     `<span title="${esc(d.day)}: ${d.n}" style="height:${Math.round(d.n / maxDay * 40)}px"></span>`
@@ -78,7 +82,7 @@ td{padding:3px 10px 3px 0;border-bottom:0.5px solid #1d2530;}
 .spark{display:flex;align-items:flex-end;gap:2px;height:42px;}
 .spark span{width:3px;background:#2dd4bf;opacity:.8;display:inline-block;}
 </style></head><body>
-<h1>visitor log — ${esc(isoMonth(data.since))} →</h1>
+<h1>visitor log — ${esc(since)} →</h1>
 <div class="totals">
   <span><b>${data.totalViews}</b>pageviews</span>
   <span><b>${data.cities}</b>cities</span>
