@@ -1,3 +1,9 @@
 # Local oh-my-claudecode orchestration state (never commit to this public repo)
 .omc/
 **/.omc/
+
+# Tooling build artifacts (Worker dev runtime, npm installs)
+node_modules/
+**/node_modules/
+.wrangler/
+**/.wrangler/
