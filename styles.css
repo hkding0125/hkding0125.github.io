@@ -874,8 +874,10 @@ body.dark-mode { --vm-land: #1b2433; --vm-dot: #2dd4bf; --vm-panel: #0e1117; }
 #vmWorld { width: 100%; height: auto; display: block; line-height: 0; }
 .vm-land { fill: var(--vm-land); stroke: none; }
 .vm-dot { fill: var(--vm-dot); fill-opacity: 0.9; }
-.visitor-map-fallback { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; text-align: center; padding: 12px; }
+.visitor-map-fallback { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; text-align: center; padding: 12px; font-size: 0.95rem; }
 .visitor-map-fallback.show-help { display: flex; }
+.visitor-map-fallback .fallback-help { display: none; margin-top: 8px; }
+.visitor-map-fallback.show-help .fallback-help { display: block; }
 
 .footer-credit a:hover {
   color: var(--text-soft);
@@ -906,22 +908,6 @@ body.dark-mode .visitor-map iframe {
   filter: brightness(0.55) saturate(0.55);
 }
 
-.visitor-map-fallback {
-  font-size: 0.95rem;
-}
-
-.visitor-map-fallback .fallback-help {
-  display: none;
-  margin-top: 8px;
-}
-
-.visitor-map-fallback.show-help .fallback-help {
-  display: block;
-}
-
-.visitor-map-fallback[data-state="loaded"] {
-  display: none;
-}
 
 .modal {
   position: fixed;

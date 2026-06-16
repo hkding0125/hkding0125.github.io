@@ -15,6 +15,7 @@ export function renderDots(doc, points) {
   while (g.firstChild) g.removeChild(g.firstChild);
   const NS = 'http://www.w3.org/2000/svg';
   for (const p of points) {
+    if (!Number.isFinite(p.lon) || !Number.isFinite(p.lat)) continue;
     const [x, y] = project(p.lon, p.lat, VIEW_W, VIEW_H);
     const c = doc.createElementNS(NS, 'circle');
     c.setAttribute('cx', x.toFixed(1));
@@ -35,14 +36,14 @@ function setHeadline(doc, data) {
 
 async function loadPoints(doc) {
   try {
-    const res = await fetch(ENDPOINT + '/points', { mode: 'cors' });
+    const res = await fetch(ENDPOINT + '/points', { mode: 'cors', signal: AbortSignal.timeout(8000) });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     renderDots(doc, data.points || []);
     setHeadline(doc, data);
-    const fb = doc.getElementById('visitorMapFallback');
-    if (fb) fb.dataset.state = 'loaded';
   } catch {
+    const el = doc.getElementById('vmHeadline');
+    if (el) el.textContent = 'visitor map unavailable';
     const fb = doc.getElementById('visitorMapFallback');
     if (fb) fb.classList.add('show-help');
   }
@@ -52,7 +53,7 @@ function sendBeacon() {
   try {
     if (sessionStorage.getItem('vm_hit')) return;
     sessionStorage.setItem('vm_hit', '1');
-  } catch { /* private mode: still beacon once */ }
+  } catch { /* storage blocked: skip the once-per-session guard, beacon anyway */ }
   fetch(ENDPOINT + '/hit', { method: 'POST', keepalive: true, mode: 'cors' }).catch(() => {});
 }
 
