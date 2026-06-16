@@ -61,3 +61,25 @@ test('checkBasicAuth validates the Basic header', () => {
   assert.equal(checkBasicAuth('Basic not-base64!!', 'admin', 's3cret'), false);
   assert.equal(checkBasicAuth(null, 'admin', 's3cret'), false);
 });
+
+import { esc, statsHtml } from '../worker/src/lib.js';
+
+test('esc escapes HTML metacharacters', () => {
+  assert.equal(esc('<b>&"\''), '&lt;b&gt;&amp;&quot;&#39;');
+  assert.equal(esc(null), '');
+});
+
+test('statsHtml renders totals, country/city rows, and escapes values', () => {
+  const html = statsHtml({
+    totalViews: 560, countries: 2, cities: 3, since: 1748736000,
+    topCountries: [{ country: 'CN', n: 420 }, { country: 'US', n: 140 }],
+    topCities: [{ city: '<x>', country: 'CN', n: 300 }],
+    daily: [{ day: '2026-06-16', n: 12 }],
+    recent: [{ ts: 1750000000, city: 'Boston', country: 'US' }],
+  });
+  assert.match(html, /560/);
+  assert.match(html, /CN/);
+  assert.match(html, /Boston/);
+  assert.match(html, /&lt;x&gt;/);
+  assert.doesNotMatch(html, /<x>/);
+});
