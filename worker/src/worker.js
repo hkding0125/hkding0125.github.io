@@ -58,7 +58,7 @@ export default {
         totalViews: totals.total, countries: totals.countries, cities: cityRow.c, since: totals.first,
         topCountries, topCities, daily: daily.slice().reverse(), recent,
       };
-      return new Response(statsHtml(data), { headers: { 'Content-Type': 'text/html; charset=utf-8' } });
+      return new Response(statsHtml(data), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
     }
 
     return new Response('Not found', { status: 404 });
