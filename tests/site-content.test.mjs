@@ -54,6 +54,11 @@ assert.match(
   'expected the self-hosted visitor-map module to be loaded',
 );
 assert.match(
+  indexHtml,
+  /href="https:\/\/visitors\.haokaiding\.qzz\.io\/stats"/,
+  'expected the footer map to link through to the public stats page',
+);
+assert.match(
   scriptsJs,
   /const explicitDate = target\.getAttribute\('datetime'\)\?\.trim\(\);/,
   'expected updateLastUpdated to respect an explicit content date before any fallback',
