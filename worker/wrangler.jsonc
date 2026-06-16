@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/wrangler.json",
+  "name": "haokaiding-visitors",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-06-01",
+  "d1_databases": [
+    { "binding": "DB", "database_name": "visitor-map", "database_id": "" }
+  ],
+  "routes": [
+    { "pattern": "visitors.haokaiding.qzz.io", "custom_domain": true }
+  ]
+}
