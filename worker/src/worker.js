@@ -83,7 +83,7 @@ export default {
       }
 
       const topCountries = (await env.DB.prepare('SELECT country, COUNT(*) AS n FROM hits GROUP BY country ORDER BY n DESC LIMIT 12').all()).results || [];
-      const topRegions = (await env.DB.prepare('SELECT region, country, COUNT(*) AS n FROM hits WHERE region IS NOT NULL GROUP BY region ORDER BY n DESC LIMIT 12').all()).results || [];
+      const topRegions = (await env.DB.prepare('SELECT region, country, COUNT(*) AS n FROM hits WHERE region IS NOT NULL GROUP BY region, country ORDER BY n DESC LIMIT 12').all()).results || [];
       const topCities = (await env.DB.prepare('SELECT city, country, COUNT(*) AS n FROM hits GROUP BY city, country ORDER BY n DESC LIMIT 12').all()).results || [];
       const topBrowsers = (await env.DB.prepare('SELECT browser, COUNT(*) AS n FROM hits WHERE browser IS NOT NULL GROUP BY browser ORDER BY n DESC LIMIT 8').all()).results || [];
       const topOS = (await env.DB.prepare('SELECT os, COUNT(*) AS n FROM hits WHERE os IS NOT NULL GROUP BY os ORDER BY n DESC LIMIT 8').all()).results || [];
