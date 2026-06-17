@@ -1,4 +1,4 @@
-import { isBot, roundCoord, buildPointsPayload, corsHeaders, isAllowedOrigin, statsHtml } from './lib.js';
+import { isBot, roundCoord, buildPointsPayload, corsHeaders, isAllowedOrigin, statsHtml, parseUA, refDomain } from './lib.js';
 
 export default {
   async fetch(request, env) {
@@ -15,8 +15,12 @@ export default {
         const cf = request.cf || {};
         const lat = roundCoord(cf.latitude != null ? parseFloat(cf.latitude) : NaN);
         const lon = roundCoord(cf.longitude != null ? parseFloat(cf.longitude) : NaN);
-        await env.DB.prepare('INSERT INTO hits (ts, country, city, lat, lon) VALUES (?, ?, ?, ?, ?)')
-          .bind(Math.floor(Date.now() / 1000), cf.country || null, cf.city || null, lat, lon)
+        const ip = request.headers.get('CF-Connecting-IP') || null;
+        const region = cf.region || null;
+        const { browser, os } = parseUA(ua);
+        const referrer = refDomain(request.headers.get('Referer'));
+        await env.DB.prepare('INSERT INTO hits (ts, country, city, lat, lon, ip, region, browser, os, referrer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
+          .bind(Math.floor(Date.now() / 1000), cf.country || null, cf.city || null, lat, lon, ip, region, browser, os, referrer)
           .run();
       }
       return new Response(null, { status: 204, headers: corsHeaders(origin) });
@@ -50,17 +54,52 @@ export default {
       const cacheKey = new Request(url.toString());
       const cached = await cache.match(cacheKey);
       if (cached) return cached;
-      const totals = await env.DB.prepare('SELECT COUNT(*) AS total, COUNT(DISTINCT country) AS countries, MIN(ts) AS first FROM hits').first();
+
+      const totals = await env.DB.prepare('SELECT COUNT(*) AS total, COUNT(DISTINCT ip) AS uniques, COUNT(DISTINCT country) AS countries, MIN(ts) AS first FROM hits').first();
       const cityRow = await env.DB.prepare('SELECT COUNT(*) AS c FROM (SELECT 1 FROM hits GROUP BY lat, lon)').first();
-      const topCountries = (await env.DB.prepare('SELECT country, COUNT(*) AS n FROM hits GROUP BY country ORDER BY n DESC LIMIT 20').all()).results || [];
-      const topCities = (await env.DB.prepare('SELECT city, country, COUNT(*) AS n FROM hits GROUP BY city, country ORDER BY n DESC LIMIT 20').all()).results || [];
+
+      // Period cutoffs (unix seconds) computed from current UTC time.
+      const nowMs = Date.now();
+      const d = new Date(nowMs);
+      const sec = (ms) => Math.floor(ms / 1000);
+      const startOfToday = sec(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+      const startOfMonth = sec(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1));
+      const startOfYear = sec(Date.UTC(d.getUTCFullYear(), 0, 1));
+      const nowSec = sec(nowMs);
+      const periodDefs = [
+        ['Today', startOfToday],
+        ['Last 7 days', nowSec - 7 * 86400],
+        ['Last 30 days', nowSec - 30 * 86400],
+        ['This month', startOfMonth],
+        ['This year', startOfYear],
+        ['All time', null],
+      ];
+      const periods = [];
+      for (const [label, cutoff] of periodDefs) {
+        const row = cutoff == null
+          ? await env.DB.prepare('SELECT COUNT(*) AS views, COUNT(DISTINCT ip) AS uniques FROM hits').first()
+          : await env.DB.prepare('SELECT COUNT(*) AS views, COUNT(DISTINCT ip) AS uniques FROM hits WHERE ts >= ?').bind(cutoff).first();
+        periods.push({ label, views: row ? row.views : 0, uniques: row ? row.uniques : 0 });
+      }
+
+      const topCountries = (await env.DB.prepare('SELECT country, COUNT(*) AS n FROM hits GROUP BY country ORDER BY n DESC LIMIT 12').all()).results || [];
+      const topRegions = (await env.DB.prepare('SELECT region, country, COUNT(*) AS n FROM hits WHERE region IS NOT NULL GROUP BY region ORDER BY n DESC LIMIT 12').all()).results || [];
+      const topCities = (await env.DB.prepare('SELECT city, country, COUNT(*) AS n FROM hits GROUP BY city, country ORDER BY n DESC LIMIT 12').all()).results || [];
+      const topBrowsers = (await env.DB.prepare('SELECT browser, COUNT(*) AS n FROM hits WHERE browser IS NOT NULL GROUP BY browser ORDER BY n DESC LIMIT 8').all()).results || [];
+      const topOS = (await env.DB.prepare('SELECT os, COUNT(*) AS n FROM hits WHERE os IS NOT NULL GROUP BY os ORDER BY n DESC LIMIT 8').all()).results || [];
+      const topReferrers = (await env.DB.prepare("SELECT referrer, COUNT(*) AS n FROM hits WHERE referrer IS NOT NULL AND referrer != 'haokaiding.qzz.io' GROUP BY referrer ORDER BY n DESC LIMIT 10").all()).results || [];
       const daily = (await env.DB.prepare("SELECT date(ts,'unixepoch') AS day, COUNT(*) AS n FROM hits GROUP BY day ORDER BY day DESC LIMIT 90").all()).results || [];
-      const recent = (await env.DB.prepare('SELECT ts, city, country FROM hits ORDER BY ts DESC LIMIT 50').all()).results || [];
-      const last30 = await env.DB.prepare('SELECT COUNT(*) AS n FROM hits WHERE ts >= ?').bind(Math.floor(Date.now() / 1000) - 30 * 86400).first();
+      const recent = (await env.DB.prepare('SELECT ts, city, region, country, browser, os FROM hits ORDER BY ts DESC LIMIT 50').all()).results || [];
+
       const data = {
-        totalViews: totals.total, countries: totals.countries, cities: cityRow.c, since: totals.first,
-        last30: last30 ? last30.n : 0,
-        topCountries, topCities, daily: daily.slice().reverse(), recent,
+        since: totals ? totals.first : null,
+        totalViews: totals ? totals.total : 0,
+        uniqueTotal: totals ? totals.uniques : 0,
+        countries: totals ? totals.countries : 0,
+        cities: cityRow ? cityRow.c : 0,
+        periods,
+        topCountries, topRegions, topCities, topBrowsers, topOS, topReferrers,
+        daily: daily.slice().reverse(), recent,
       };
       const resp = new Response(statsHtml(data), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=60' } });
       await cache.put(cacheKey, resp.clone());

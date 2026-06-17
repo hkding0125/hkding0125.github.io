@@ -78,6 +78,30 @@ export function regionName(cc) {
   }
 }
 
+export function parseUA(ua) {
+  if (!ua) return { browser: 'Unknown', os: 'Unknown' };
+  let browser = 'Other';
+  if (/edg\//i.test(ua)) browser = 'Edge';
+  else if (/opr\/|opera/i.test(ua)) browser = 'Opera';
+  else if (/samsungbrowser/i.test(ua)) browser = 'Samsung Internet';
+  else if (/firefox|fxios/i.test(ua)) browser = 'Firefox';
+  else if (/chrome|crios/i.test(ua)) browser = 'Chrome';
+  else if (/safari/i.test(ua)) browser = 'Safari';
+  let os = 'Other';
+  if (/windows/i.test(ua)) os = 'Windows';
+  else if (/iphone|ipad|ipod/i.test(ua)) os = 'iOS';
+  else if (/mac os x|macintosh/i.test(ua)) os = 'macOS';
+  else if (/android/i.test(ua)) os = 'Android';
+  else if (/cros/i.test(ua)) os = 'ChromeOS';
+  else if (/linux/i.test(ua)) os = 'Linux';
+  return { browser, os };
+}
+
+export function refDomain(referer) {
+  if (!referer) return null;
+  try { return new URL(referer).hostname || null; } catch { return null; }
+}
+
 export function relTime(tsSeconds, nowMs = Date.now()) {
   const s = Math.max(0, Math.floor(nowMs / 1000) - tsSeconds);
   if (s < 60) return s + 's';
@@ -88,24 +112,52 @@ export function relTime(tsSeconds, nowMs = Date.now()) {
 
 export function statsHtml(data) {
   const since = data.since ? isoMonth(data.since) : '—';
-  const last30 = data.last30 != null ? data.last30 : 0;
   const now = Date.now();
+  const periods = data.periods || [];
+  const topRegions = data.topRegions || [];
+  const topBrowsers = data.topBrowsers || [];
+  const topOS = data.topOS || [];
+  const topReferrers = data.topReferrers || [];
 
-  const cards = [['pageviews', data.totalViews], ['cities', data.cities], ['countries', data.countries], ['last 30 days', last30]]
-    .map(([label, val]) => `<div class="card"><label>${label}</label><b>${val}</b></div>`).join('');
+  const cards = [['pageviews', data.totalViews], ['unique visitors', data.uniqueTotal], ['countries', data.countries], ['cities', data.cities]]
+    .map(([label, val]) => `<div class="card"><label>${label}</label><b>${val != null ? val : 0}</b></div>`).join('');
+
+  const summary = periods.map(p =>
+    `<tr><th scope="row">${esc(p.label)}</th><td>${p.views}</td><td>${p.uniques}</td></tr>`
+  ).join('') || '<tr><td colspan="3" class="empty">no data yet</td></tr>';
 
   const cMax = Math.max(1, ...data.topCountries.map(c => c.n));
   const topCountries = data.topCountries.map(c =>
     `<div class="row"><span class="flag">${flag(c.country)}</span><span class="name">${esc(regionName(c.country) || c.country)}</span><span class="bar"><i style="width:${Math.round(c.n / cMax * 100)}%"></i></span><span class="n">${c.n}</span></div>`
   ).join('') || '<p class="empty">no data yet</p>';
 
+  const topRegionsHtml = topRegions.map(r =>
+    `<div class="row"><span class="flag">${flag(r.country)}</span><span class="name">${esc(r.region || '?')}<span class="cc">${esc(r.country || '')}</span></span><span class="n">${r.n}</span></div>`
+  ).join('') || '<p class="empty">no data yet</p>';
+
   const topCities = data.topCities.map(c =>
     `<div class="row"><span class="flag">${flag(c.country)}</span><span class="name">${esc(c.city || '?')}<span class="cc">${esc(c.country || '')}</span></span><span class="n">${c.n}</span></div>`
   ).join('') || '<p class="empty">no data yet</p>';
 
-  const recent = data.recent.map(r =>
-    `<div class="row"><span class="flag">${flag(r.country)}</span><span class="name">${esc(r.city || '?')}<span class="cc">${esc(r.country || '')}</span></span><span class="when">${relTime(r.ts, now)} ago</span></div>`
-  ).join('') || '<p class="empty">no visits yet</p>';
+  const bMax = Math.max(1, ...topBrowsers.map(b => b.n));
+  const topBrowsersHtml = topBrowsers.map(b =>
+    `<div class="row"><span class="name">${esc(b.browser || '?')}</span><span class="bar"><i style="width:${Math.round(b.n / bMax * 100)}%"></i></span><span class="n">${b.n}</span></div>`
+  ).join('') || '<p class="empty">no data yet</p>';
+
+  const oMax = Math.max(1, ...topOS.map(o => o.n));
+  const topOSHtml = topOS.map(o =>
+    `<div class="row"><span class="name">${esc(o.os || '?')}</span><span class="bar"><i style="width:${Math.round(o.n / oMax * 100)}%"></i></span><span class="n">${o.n}</span></div>`
+  ).join('') || '<p class="empty">no data yet</p>';
+
+  const topReferrersHtml = topReferrers.map(r =>
+    `<div class="row"><span class="name">${esc(r.referrer || '?')}</span><span class="n">${r.n}</span></div>`
+  ).join('') || '<p class="empty">no data yet</p>';
+
+  const recent = data.recent.map(r => {
+    const place = [r.city, r.region].filter(Boolean).map(esc).join(', ') || '?';
+    const ua = [r.browser, r.os].filter(Boolean).map(esc).join(' · ');
+    return `<div class="row"><span class="flag">${flag(r.country)}</span><span class="name">${place}<span class="cc">${esc(r.country || '')}</span></span>${ua ? `<span class="ua">${ua}</span>` : ''}<span class="when">${relTime(r.ts, now)} ago</span></div>`;
+  }).join('') || '<p class="empty">no visits yet</p>';
 
   const maxDay = Math.max(1, ...data.daily.map(d => d.n));
   const bars = data.daily.map(d =>
@@ -127,6 +179,14 @@ body{background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMac
 .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
 .card label{display:block;font-size:12px;color:var(--muted);margin-bottom:3px}
 .card b{font-size:26px;font-weight:600;color:var(--accent)}
+.summary{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:18px}
+.summary h2{font-size:13px;font-weight:600;color:var(--muted);margin:0 0 10px}
+.summary table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+.summary th,.summary td{text-align:right;padding:7px 0;border-bottom:1px solid var(--line)}
+.summary tr:last-child th,.summary tr:last-child td{border-bottom:none}
+.summary thead th{color:var(--muted);font-size:12px;font-weight:600}
+.summary th[scope=row]{text-align:left;font-weight:500;color:var(--ink)}
+.summary td.empty{text-align:center;color:var(--faint)}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px;margin-bottom:18px;line-height:0}
 .panel svg{width:100%;height:auto;display:block}
 .vm-land{fill:var(--land)}
@@ -139,6 +199,7 @@ body{background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMac
 .flag{font-size:18px;width:22px;flex:none;text-align:center}
 .name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cc{color:var(--faint);font-size:12px;margin-left:6px}
+.ua{flex:none;color:var(--faint);font-size:12px}
 .bar{flex:1;height:7px;border-radius:4px;background:var(--bg)}
 .bar i{display:block;height:100%;border-radius:4px;background:var(--accent)}
 .n{flex:none;min-width:42px;text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
@@ -151,14 +212,19 @@ body{background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMac
 </style></head><body><div class="wrap">
 <div class="head"><b>visitor log</b><span class="sub">haokaiding.qzz.io · since ${esc(since)}</span><span class="live"><i></i>self-hosted</span></div>
 <div class="cards">${cards}</div>
+<div class="summary"><h2>visits summary</h2><table><thead><tr><th scope="col"></th><th scope="col">Pageviews</th><th scope="col">Unique visitors</th></tr></thead><tbody>${summary}</tbody></table></div>
 <div class="panel">${WORLD_SVG}</div>
 <div class="grid">
   <div class="sec"><h2>top countries</h2>${topCountries}</div>
+  <div class="sec"><h2>top regions</h2>${topRegionsHtml}</div>
   <div class="sec"><h2>top cities</h2>${topCities}</div>
+  <div class="sec"><h2>top browsers</h2>${topBrowsersHtml}</div>
+  <div class="sec"><h2>top OS</h2>${topOSHtml}</div>
+  <div class="sec"><h2>top referrers</h2>${topReferrersHtml}</div>
 </div>
 <div class="sec" style="margin-bottom:18px"><h2>recent visits</h2>${recent}</div>
 <div class="sec"><h2>daily · last 90 days</h2><div class="daily">${bars}</div></div>
-<p class="foot">self-hosted on Cloudflare · no cookies, no IP stored</p>
+<p class="foot">self-hosted on Cloudflare</p>
 </div>
 <script>
 (function(){

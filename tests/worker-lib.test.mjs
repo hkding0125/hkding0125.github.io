@@ -63,38 +63,102 @@ test('checkBasicAuth validates the Basic header', () => {
   assert.equal(checkBasicAuth(null, 'admin', 's3cret'), false);
 });
 
-import { esc, statsHtml } from '../worker/src/lib.js';
+import { esc, statsHtml, parseUA, refDomain } from '../worker/src/lib.js';
 
 test('esc escapes HTML metacharacters', () => {
   assert.equal(esc('<b>&"\''), '&lt;b&gt;&amp;&quot;&#39;');
   assert.equal(esc(null), '');
 });
 
-test('statsHtml renders totals, country/city rows, and escapes values', () => {
-  const html = statsHtml({
-    totalViews: 560, countries: 2, cities: 3, since: 1748736000,
+test('parseUA detects browser + os from common user agents', () => {
+  const chromeMac = parseUA('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36');
+  assert.deepEqual(chromeMac, { browser: 'Chrome', os: 'macOS' });
+
+  const safariIos = parseUA('Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1');
+  assert.deepEqual(safariIos, { browser: 'Safari', os: 'iOS' });
+
+  const edgeWin = parseUA('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36 Edg/124.0.0.0');
+  assert.deepEqual(edgeWin, { browser: 'Edge', os: 'Windows' });
+
+  assert.deepEqual(parseUA(''), { browser: 'Unknown', os: 'Unknown' });
+  assert.deepEqual(parseUA(null), { browser: 'Unknown', os: 'Unknown' });
+});
+
+test('refDomain extracts hostname, tolerates null + garbage', () => {
+  assert.equal(refDomain('https://news.ycombinator.com/item?id=42'), 'news.ycombinator.com');
+  assert.equal(refDomain(null), null);
+  assert.equal(refDomain(''), null);
+  assert.equal(refDomain('not a url'), null);
+});
+
+function fullStatsData(overrides = {}) {
+  return {
+    since: 1748736000,
+    totalViews: 560,
+    uniqueTotal: 47,
+    countries: 2,
+    cities: 3,
+    periods: [
+      { label: 'Today', views: 5, uniques: 3 },
+      { label: 'Last 7 days', views: 40, uniques: 21 },
+      { label: 'Last 30 days', views: 120, uniques: 60 },
+      { label: 'This month', views: 90, uniques: 44 },
+      { label: 'This year', views: 400, uniques: 120 },
+      { label: 'All time', views: 560, uniques: 47 },
+    ],
     topCountries: [{ country: 'CN', n: 420 }, { country: 'US', n: 140 }],
+    topRegions: [{ region: 'Guangdong', country: 'CN', n: 300 }],
     topCities: [{ city: '<x>', country: 'CN', n: 300 }],
+    topBrowsers: [{ browser: 'Chrome', n: 400 }, { browser: 'Safari', n: 160 }],
+    topOS: [{ os: 'macOS', n: 350 }, { os: 'iOS', n: 210 }],
+    topReferrers: [{ referrer: 'news.ycombinator.com', n: 12 }],
     daily: [{ day: '2026-06-16', n: 12 }],
-    recent: [{ ts: 1750000000, city: 'Boston', country: 'US' }],
-  });
+    recent: [{ ts: 1750000000, city: 'Boston', region: 'Massachusetts', country: 'US', browser: 'Firefox', os: 'Linux' }],
+    ...overrides,
+  };
+}
+
+test('statsHtml renders totals, country/city rows, and escapes values', () => {
+  const html = statsHtml(fullStatsData());
   assert.match(html, /560/);
   assert.match(html, /CN/);
   assert.match(html, /Boston/);
   assert.match(html, /&lt;x&gt;/);
   assert.doesNotMatch(html, /<x>/);
-  assert.match(html, /top countries/);
-  assert.match(html, /top cities/);
-  assert.match(html, /recent visits/);
-  assert.match(html, /last 30 days/);
+  assert.match(html, /top countries/i);
+  assert.match(html, /top cities/i);
+  assert.match(html, /recent visits/i);
+});
+
+test('statsHtml renders the new MMV-parity sections', () => {
+  const html = statsHtml(fullStatsData());
+  assert.match(html, /unique/i);
+  assert.match(html, /47/);                 // uniqueTotal metric
+  assert.match(html, /All time/);           // visits summary period row
+  assert.match(html, /This year/i);
+  assert.match(html, /top regions/i);
+  assert.match(html, /browsers/i);
+  assert.match(html, /Guangdong/);
+  assert.match(html, /Chrome/);
+  assert.match(html, /news\.ycombinator\.com/);
+  assert.match(html, /Firefox/);
 });
 
 import { isAllowedOrigin } from '../worker/src/lib.js';
 
 test('statsHtml renders an em dash (not 1970) for an empty database', () => {
   const html = statsHtml({
-    totalViews: 0, countries: 0, cities: 0, since: null,
-    topCountries: [], topCities: [], daily: [], recent: [],
+    since: null, totalViews: 0, uniqueTotal: 0, countries: 0, cities: 0,
+    periods: [
+      { label: 'Today', views: 0, uniques: 0 },
+      { label: 'Last 7 days', views: 0, uniques: 0 },
+      { label: 'Last 30 days', views: 0, uniques: 0 },
+      { label: 'This month', views: 0, uniques: 0 },
+      { label: 'This year', views: 0, uniques: 0 },
+      { label: 'All time', views: 0, uniques: 0 },
+    ],
+    topCountries: [], topRegions: [], topCities: [], topBrowsers: [], topOS: [], topReferrers: [],
+    daily: [], recent: [],
   });
   assert.doesNotMatch(html, /1970/);
   assert.match(html, /visitor log/);
