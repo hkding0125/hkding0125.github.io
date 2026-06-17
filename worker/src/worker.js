@@ -1,4 +1,4 @@
-import { isBot, roundCoord, buildPointsPayload, corsHeaders, isAllowedOrigin, statsHtml, parseUA, refDomain } from './lib.js';
+import { isBot, roundCoord, buildPointsPayload, corsHeaders, isAllowedOrigin, statsHtml, parseUA, refDomain, pctChange } from './lib.js';
 
 export default {
   async fetch(request, env) {
@@ -88,8 +88,29 @@ export default {
       const topBrowsers = (await env.DB.prepare('SELECT browser, COUNT(*) AS n FROM hits WHERE browser IS NOT NULL GROUP BY browser ORDER BY n DESC LIMIT 8').all()).results || [];
       const topOS = (await env.DB.prepare('SELECT os, COUNT(*) AS n FROM hits WHERE os IS NOT NULL GROUP BY os ORDER BY n DESC LIMIT 8').all()).results || [];
       const topReferrers = (await env.DB.prepare("SELECT referrer, COUNT(*) AS n FROM hits WHERE referrer IS NOT NULL AND referrer != 'haokaiding.qzz.io' GROUP BY referrer ORDER BY n DESC LIMIT 10").all()).results || [];
-      const daily = (await env.DB.prepare("SELECT date(ts,'unixepoch') AS day, COUNT(*) AS n FROM hits GROUP BY day ORDER BY day DESC LIMIT 90").all()).results || [];
       const recent = (await env.DB.prepare('SELECT ts, city, region, country, browser, os FROM hits ORDER BY ts DESC LIMIT 50').all()).results || [];
+
+      // Trend series at three granularities (chronological order).
+      const dayCut = nowSec - 90 * 86400;
+      const weekCut = nowSec - 52 * 7 * 86400;
+      const trendDay = (await env.DB.prepare("SELECT date(ts,'unixepoch') AS b, COUNT(*) AS v, COUNT(DISTINCT ip) AS u FROM hits WHERE ts >= ? GROUP BY b ORDER BY b").bind(dayCut).all()).results || [];
+      const trendWeek = (await env.DB.prepare("SELECT strftime('%Y-W%W', ts,'unixepoch') AS b, COUNT(*) AS v, COUNT(DISTINCT ip) AS u FROM hits WHERE ts >= ? GROUP BY b ORDER BY b").bind(weekCut).all()).results || [];
+      const trendMonth = (await env.DB.prepare("SELECT strftime('%Y-%m', ts,'unixepoch') AS b, COUNT(*) AS v, COUNT(DISTINCT ip) AS u FROM hits GROUP BY b ORDER BY b").all()).results || [];
+
+      // Rolling-window growth: current vs prior period.
+      async function win(fromSec, toSec) { // toSec optional upper bound
+        const q = toSec
+          ? 'SELECT COUNT(*) AS v, COUNT(DISTINCT ip) AS u FROM hits WHERE ts >= ? AND ts < ?'
+          : 'SELECT COUNT(*) AS v, COUNT(DISTINCT ip) AS u FROM hits WHERE ts >= ?';
+        const r = toSec ? await env.DB.prepare(q).bind(fromSec, toSec).first() : await env.DB.prepare(q).bind(fromSec).first();
+        return { v: r ? r.v : 0, u: r ? r.u : 0 };
+      }
+      const w0 = nowSec - 7 * 86400, w1 = nowSec - 14 * 86400, m0 = nowSec - 30 * 86400, m1 = nowSec - 60 * 86400;
+      const curW = await win(w0), prevW = await win(w1, w0), curM = await win(m0), prevM = await win(m1, m0);
+      const growth = {
+        week: { v: pctChange(curW.v, prevW.v), u: pctChange(curW.u, prevW.u), cur: curW, prev: prevW },
+        month: { v: pctChange(curM.v, prevM.v), u: pctChange(curM.u, prevM.u), cur: curM, prev: prevM },
+      };
 
       const data = {
         since: totals ? totals.first : null,
@@ -99,7 +120,8 @@ export default {
         cities: cityRow ? cityRow.c : 0,
         periods,
         topCountries, topRegions, topCities, topBrowsers, topOS, topReferrers,
-        daily: daily.slice().reverse(), recent,
+        trend: { day: trendDay, week: trendWeek, month: trendMonth }, growth,
+        recent,
       };
       const resp = new Response(statsHtml(data), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=60' } });
       await cache.put(cacheKey, resp.clone());

@@ -17,10 +17,17 @@ test('roundCoord rounds to 0.1 and rejects non-finite', () => {
   assert.equal(roundCoord(NaN), null);
 });
 
-import { buildPointsPayload, isoMonth } from '../worker/src/lib.js';
+import { buildPointsPayload, isoMonth, pctChange } from '../worker/src/lib.js';
 
 test('isoMonth formats a unix-seconds timestamp as YYYY-MM (UTC)', () => {
   assert.equal(isoMonth(Date.UTC(2026, 5, 16) / 1000), '2026-06');
+});
+
+test('pctChange computes rounded percent change, null when prev is falsy', () => {
+  assert.equal(pctChange(120, 100), 20);
+  assert.equal(pctChange(80, 100), -20);
+  assert.equal(pctChange(5, 0), null);
+  assert.equal(pctChange(0, 0), null);
 });
 
 test('buildPointsPayload sums views, counts cities/countries, shapes points', () => {
@@ -112,7 +119,15 @@ function fullStatsData(overrides = {}) {
     topBrowsers: [{ browser: 'Chrome', n: 400 }, { browser: 'Safari', n: 160 }],
     topOS: [{ os: 'macOS', n: 350 }, { os: 'iOS', n: 210 }],
     topReferrers: [{ referrer: 'news.ycombinator.com', n: 12 }],
-    daily: [{ day: '2026-06-16', n: 12 }],
+    trend: {
+      day: [{ b: '2026-06-15', v: 8, u: 5 }, { b: '2026-06-16', v: 12, u: 7 }],
+      week: [{ b: '2026-W23', v: 40, u: 21 }, { b: '2026-W24', v: 55, u: 28 }],
+      month: [{ b: '2026-05', v: 90, u: 44 }, { b: '2026-06', v: 120, u: 60 }],
+    },
+    growth: {
+      week: { v: 20, u: 8, cur: { v: 55, u: 28 }, prev: { v: 46, u: 26 } },
+      month: { v: -5, u: 2, cur: { v: 120, u: 60 }, prev: { v: 126, u: 59 } },
+    },
     recent: [{ ts: 1750000000, city: 'Boston', region: 'Massachusetts', country: 'US', browser: 'Firefox', os: 'Linux' }],
     ...overrides,
   };
@@ -144,6 +159,20 @@ test('statsHtml renders the new MMV-parity sections', () => {
   assert.match(html, /Firefox/);
 });
 
+test('statsHtml renders the trends chart, legend, toggle, and growth deltas', () => {
+  const html = statsHtml(fullStatsData());
+  assert.match(html, /trends/i);                 // trends section heading
+  assert.match(html, /pageviews/i);              // legend label
+  assert.match(html, /unique/i);                 // legend label
+  assert.match(html, /data-g="day"/);            // toggle buttons
+  assert.match(html, /data-g="week"/);
+  assert.match(html, /data-g="month"/);
+  assert.match(html, /2026-W24/);                // embedded trend data
+  assert.match(html, /2026-06-16/);              // embedded day bucket
+  assert.match(html, /%|new/);                   // a growth indicator (pct or "new")
+  assert.doesNotMatch(html, /last 90 days/i);    // old daily section is gone
+});
+
 import { isAllowedOrigin } from '../worker/src/lib.js';
 
 test('statsHtml renders an em dash (not 1970) for an empty database', () => {
@@ -158,11 +187,17 @@ test('statsHtml renders an em dash (not 1970) for an empty database', () => {
       { label: 'All time', views: 0, uniques: 0 },
     ],
     topCountries: [], topRegions: [], topCities: [], topBrowsers: [], topOS: [], topReferrers: [],
-    daily: [], recent: [],
+    trend: { day: [], week: [], month: [] },
+    growth: {
+      week: { v: null, u: null, cur: { v: 0, u: 0 }, prev: { v: 0, u: 0 } },
+      month: { v: null, u: null, cur: { v: 0, u: 0 }, prev: { v: 0, u: 0 } },
+    },
+    recent: [],
   });
   assert.doesNotMatch(html, /1970/);
   assert.match(html, /visitor log/);
   assert.match(html, /since —/);
+  assert.match(html, /no data yet/);             // empty trend chart empty-state
 });
 
 test('isAllowedOrigin accepts allowlisted + localhost, rejects others', () => {

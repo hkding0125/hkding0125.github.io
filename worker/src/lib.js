@@ -16,6 +16,11 @@ export function isoMonth(tsSeconds) {
   return d.getUTCFullYear() + '-' + String(d.getUTCMonth() + 1).padStart(2, '0');
 }
 
+export function pctChange(cur, prev) {
+  if (!prev) return null;            // prev 0/undefined → null (caller renders "new"/"—")
+  return Math.round(((cur - prev) / prev) * 100);
+}
+
 export function buildPointsPayload(rows, firstTsSeconds, last30 = 0) {
   let total = 0;
   const countries = new Set();
@@ -118,9 +123,22 @@ export function statsHtml(data) {
   const topBrowsers = data.topBrowsers || [];
   const topOS = data.topOS || [];
   const topReferrers = data.topReferrers || [];
+  const trend = data.trend || { day: [], week: [], month: [] };
+  const growth = data.growth || {};
 
   const cards = [['pageviews', data.totalViews], ['unique visitors', data.uniqueTotal], ['countries', data.countries], ['cities', data.cities]]
     .map(([label, val]) => `<div class="card"><label>${label}</label><b>${val != null ? val : 0}</b></div>`).join('');
+
+  // Growth pill for a percent value (null → "new", >0 → up, <0 → down, 0 → flat).
+  const gPill = (n) => n == null
+    ? '<span class="g-flat">new</span>'
+    : n > 0 ? `<span class="g-up">▲${n}%</span>`
+    : n < 0 ? `<span class="g-down">▼${Math.abs(n)}%</span>`
+    : '<span class="g-flat">0%</span>';
+  const gRow = (label, g) => g
+    ? `<span class="g-line"><span class="g-lbl">${label}:</span> views ${gPill(g.v)} · unique ${gPill(g.u)}</span>`
+    : '';
+  const growthHtml = `${gRow('last 7 days vs prior', growth.week)}${gRow('last 30 days vs prior', growth.month)}`;
 
   const summary = periods.map(p =>
     `<tr><th scope="row">${esc(p.label)}</th><td>${p.views}</td><td>${p.uniques}</td></tr>`
@@ -159,10 +177,7 @@ export function statsHtml(data) {
     return `<div class="row"><span class="flag">${flag(r.country)}</span><span class="name">${place}<span class="cc">${esc(r.country || '')}</span></span>${ua ? `<span class="ua">${ua}</span>` : ''}<span class="when">${relTime(r.ts, now)} ago</span></div>`;
   }).join('') || '<p class="empty">no visits yet</p>';
 
-  const maxDay = Math.max(1, ...data.daily.map(d => d.n));
-  const bars = data.daily.map(d =>
-    `<span class="dbar" title="${esc(d.day)}: ${d.n}"><i style="height:${Math.round(d.n / maxDay * 100)}%"></i></span>`
-  ).join('') || '<p class="empty">no visits yet</p>';
+  const trendJson = JSON.stringify(trend);
 
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>visitor log · haokaiding.qzz.io</title><style>
@@ -205,13 +220,27 @@ body{background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMac
 .n{flex:none;min-width:42px;text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
 .when{flex:none;color:var(--faint);font-size:12px;font-variant-numeric:tabular-nums}
 .empty{color:var(--faint);font-size:13px;margin:4px 0}
-.daily{display:flex;align-items:flex-end;gap:3px;height:90px}
-.dbar{flex:1;display:flex;align-items:flex-end;height:100%}
-.dbar i{width:100%;background:var(--accent);border-radius:2px 2px 0 0;min-height:2px}
+.growth{display:flex;flex-wrap:wrap;gap:8px 18px;margin:-6px 0 18px;font-size:12px;color:var(--muted)}
+.g-line{display:inline-flex;align-items:center;gap:5px}
+.g-lbl{color:var(--faint)}
+.g-up{color:var(--accent);font-weight:600}
+.g-down{color:#c0392b;font-weight:600}
+.g-flat{color:var(--faint)}
+.trend-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.trend-head h2{margin:0}
+.trend-toggle{display:flex;gap:6px}
+.trend-toggle button{font:12px/1 inherit;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:7px;padding:5px 10px;cursor:pointer}
+.trend-toggle button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+#trend-chart svg{width:100%;height:auto;display:block}
+.trend-legend{display:flex;gap:16px;margin-top:8px;font-size:12px;color:var(--muted)}
+.trend-legend i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.trend-legend .lg-v{background:#cfe8df}
+.trend-legend .lg-u{background:var(--accent)}
 .foot{color:var(--faint);font-size:12px;margin-top:18px;text-align:center}
 </style></head><body><div class="wrap">
 <div class="head"><b>visitor log</b><span class="sub">haokaiding.qzz.io · since ${esc(since)}</span><span class="live"><i></i>self-hosted</span></div>
 <div class="cards">${cards}</div>
+<div class="growth">${growthHtml}</div>
 <div class="summary"><h2>visits summary</h2><table><thead><tr><th scope="col"></th><th scope="col">Pageviews</th><th scope="col">Unique visitors</th></tr></thead><tbody>${summary}</tbody></table></div>
 <div class="panel">${WORLD_SVG}</div>
 <div class="grid">
@@ -223,7 +252,11 @@ body{background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMac
   <div class="sec"><h2>top referrers</h2>${topReferrersHtml}</div>
 </div>
 <div class="sec" style="margin-bottom:18px"><h2>recent visits</h2>${recent}</div>
-<div class="sec"><h2>daily · last 90 days</h2><div class="daily">${bars}</div></div>
+<div class="sec"><div class="trend-head"><h2>trends</h2>
+  <div class="trend-toggle"><button data-g="day" class="on">day</button><button data-g="week">week</button><button data-g="month">month</button></div></div>
+  <div id="trend-chart"></div>
+  <div class="trend-legend"><span><i class="lg-v"></i>pageviews</span><span><i class="lg-u"></i>unique visitors</span></div>
+</div>
 <p class="foot">self-hosted on Cloudflare</p>
 </div>
 <script>
@@ -243,6 +276,30 @@ body{background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMac
       var t=document.createElementNS(NS,'title');t.textContent=(p.city||'?')+', '+(p.country||'?')+' — '+p.n;c.appendChild(t);g.appendChild(c);
     });
   }).catch(function(){});
+
+  var TREND=${trendJson};
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function drawTrend(series){
+    var el=document.getElementById('trend-chart');
+    if(!el)return;
+    if(!series.length){el.innerHTML='<p class="empty">no data yet</p>';return;}
+    var W=840,H=200,padL=6,padR=6,padT=12,padB=20,n=series.length;
+    var maxV=Math.max(1,...series.map(function(d){return d.v;})),iw=W-padL-padR,ih=H-padT-padB,bw=iw/n;
+    var s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="visits trend">';
+    series.forEach(function(d,i){var bh=d.v/maxV*ih,x=padL+i*bw,y=padT+ih-bh;
+      s+='<rect x="'+(x+bw*0.15).toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+Math.max(0.5,bw*0.7).toFixed(1)+'" height="'+bh.toFixed(1)+'" rx="1" fill="#cfe8df"><title>'+esc(d.b)+': '+d.v+' views, '+d.u+' unique</title></rect>';});
+    var pts=series.map(function(d,i){return (padL+i*bw+bw/2).toFixed(1)+','+(padT+ih-d.u/maxV*ih).toFixed(1);}).join(' ');
+    s+='<polyline fill="none" stroke="#1d9e75" stroke-width="2" points="'+pts+'"/>';
+    var labels=[0,Math.floor((n-1)/2),n-1].filter(function(v,i,a){return a.indexOf(v)===i;});
+    labels.forEach(function(i){var anchor=i===0?'start':i===n-1?'end':'middle';var x=padL+i*bw+bw/2;
+      s+='<text x="'+x.toFixed(1)+'" y="'+(H-6)+'" font-size="10" fill="#9aa4b2" text-anchor="'+anchor+'">'+esc(series[i].b)+'</text>';});
+    s+='</svg>';
+    el.innerHTML=s;
+  }
+  var btns=document.querySelectorAll('.trend-toggle button');
+  function select(g){btns.forEach(function(b){b.classList.toggle('on',b.getAttribute('data-g')===g);});drawTrend(TREND[g]||[]);}
+  btns.forEach(function(b){b.addEventListener('click',function(){select(b.getAttribute('data-g'));});});
+  select('day');
 })();
 </script>
 </body></html>`;
