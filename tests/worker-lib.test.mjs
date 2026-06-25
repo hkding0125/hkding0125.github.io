@@ -70,7 +70,7 @@ test('checkBasicAuth validates the Basic header', () => {
   assert.equal(checkBasicAuth(null, 'admin', 's3cret'), false);
 });
 
-import { esc, statsHtml, parseUA, refDomain } from '../worker/src/lib.js';
+import { esc, statsHtml, parseUA, refDomain, isLocalHost } from '../worker/src/lib.js';
 
 test('esc escapes HTML metacharacters', () => {
   assert.equal(esc('<b>&"\''), '&lt;b&gt;&amp;&quot;&#39;');
@@ -96,6 +96,24 @@ test('refDomain extracts hostname, tolerates null + garbage', () => {
   assert.equal(refDomain(null), null);
   assert.equal(refDomain(''), null);
   assert.equal(refDomain('not a url'), null);
+});
+
+test('refDomain drops local-development hosts (own testing, not a real referrer)', () => {
+  assert.equal(refDomain('http://localhost:8080/index.html'), null);
+  assert.equal(refDomain('http://127.0.0.1:5500/'), null);
+  assert.equal(refDomain('http://0.0.0.0:3000/'), null);
+  assert.equal(refDomain('http://mymac.local:1313/'), null);
+  // Real external referrers still pass through.
+  assert.equal(refDomain('https://news.ycombinator.com/item?id=42'), 'news.ycombinator.com');
+});
+
+test('isLocalHost recognizes loopback + mDNS, rejects real hosts', () => {
+  assert.equal(isLocalHost('localhost'), true);
+  assert.equal(isLocalHost('127.0.0.1'), true);
+  assert.equal(isLocalHost('LOCALHOST'), true);
+  assert.equal(isLocalHost('foo.local'), true);
+  assert.equal(isLocalHost(null), false);
+  assert.equal(isLocalHost('news.ycombinator.com'), false);
 });
 
 function fullStatsData(overrides = {}) {

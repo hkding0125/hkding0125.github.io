@@ -102,9 +102,21 @@ export function parseUA(ua) {
   return { browser, os };
 }
 
+// Local-development hosts: never counted as real referrers (own dev testing).
+export const LOCAL_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '[::1]', '::1'];
+
+export function isLocalHost(host) {
+  if (!host) return false;
+  const h = host.toLowerCase();
+  return LOCAL_HOSTS.includes(h) || h.endsWith('.local') || h.endsWith('.localhost');
+}
+
 export function refDomain(referer) {
   if (!referer) return null;
-  try { return new URL(referer).hostname || null; } catch { return null; }
+  try {
+    const host = new URL(referer).hostname || null;
+    return isLocalHost(host) ? null : host;
+  } catch { return null; }
 }
 
 export function relTime(tsSeconds, nowMs = Date.now()) {
