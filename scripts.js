@@ -101,15 +101,38 @@ profileBox?.addEventListener('click', () => {
   if (touchCapable) profileBox.classList.toggle('toggled');
 });
 
-const pdfModal = $('#pdfModal');
-const pdfViewer = $('#pdf-viewer');
-const pdfClose = $('#pdfClose');
-const imageModal = $('#imageModal');
-const imageViewer = $('#imageViewer');
-const imageClose = $('#imageClose');
-const videoModal = $('#videoModal');
-const videoPlayer = $('#videoPlayer');
-const videoClose = $('#videoClose');
+const modalRegistry = [
+  {
+    trigger: '.pdf-link',
+    dataAttr: 'data-pdf',
+    modal: $('#pdfModal'),
+    viewer: $('#pdf-viewer'),
+    closeButton: $('#pdfClose'),
+  },
+  {
+    trigger: '.image-link',
+    dataAttr: 'data-image',
+    modal: $('#imageModal'),
+    viewer: $('#imageViewer'),
+    closeButton: $('#imageClose'),
+  },
+  {
+    trigger: '.video-link',
+    dataAttr: 'data-video',
+    modal: $('#videoModal'),
+    viewer: $('#videoPlayer'),
+    closeButton: $('#videoClose'),
+    onOpen: viewer => {
+      viewer.muted = true;
+      viewer.play().catch(() => {});
+    },
+    onClose: viewer => {
+      viewer.pause();
+      viewer.removeAttribute('src');
+      viewer.load();
+    },
+  },
+];
 const pageShell = $('.container');
 const modalFocusableSelector = [
   'a[href]',
@@ -126,12 +149,8 @@ const setPageInert = isInert => {
   else pageShell.removeAttribute('inert');
 };
 
-const getOpenModal = () => {
-  if (pdfModal?.classList.contains('open')) return pdfModal;
-  if (imageModal?.classList.contains('open')) return imageModal;
-  if (videoModal?.classList.contains('open')) return videoModal;
-  return null;
-};
+const getOpenModal = () =>
+  modalRegistry.find(entry => entry.modal?.classList.contains('open'))?.modal ?? null;
 
 const getFocusableModalElements = modal => {
   if (!modal) return [];
@@ -143,104 +162,53 @@ const getFocusableModalElements = modal => {
   });
 };
 
-const openPdfModal = path => {
-  if (!pdfModal || !pdfViewer || !path) return;
+const openModal = (entry, path) => {
+  const { modal, viewer } = entry;
+  if (!modal || !viewer || !path) return;
   lastFocused = document.activeElement;
   setPageInert(true);
-  pdfViewer.src = path;
-  pdfModal.classList.add('open');
-  pdfModal.setAttribute('aria-hidden', 'false');
-  pdfClose?.focus();
+  viewer.src = path;
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden', 'false');
+  entry.onOpen?.(viewer);
+  entry.closeButton?.focus();
 };
 
-const closePdfModal = () => {
-  if (!pdfModal || !pdfViewer) return;
-  pdfModal.classList.remove('open');
-  pdfModal.setAttribute('aria-hidden', 'true');
-  pdfViewer.src = '';
-  setPageInert(false);
-  if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
-};
-
-const openVideoModal = path => {
-  if (!videoModal || !videoPlayer || !path) return;
-  lastFocused = document.activeElement;
-  setPageInert(true);
-  videoPlayer.src = path;
-  videoPlayer.muted = true;
-  videoModal.classList.add('open');
-  videoModal.setAttribute('aria-hidden', 'false');
-  videoPlayer.play().catch(() => {});
-  videoClose?.focus();
-};
-
-const openImageModal = path => {
-  if (!imageModal || !imageViewer || !path) return;
-  lastFocused = document.activeElement;
-  setPageInert(true);
-  imageViewer.src = path;
-  imageModal.classList.add('open');
-  imageModal.setAttribute('aria-hidden', 'false');
-  imageClose?.focus();
-};
-
-const closeImageModal = () => {
-  if (!imageModal || !imageViewer) return;
-  imageModal.classList.remove('open');
-  imageModal.setAttribute('aria-hidden', 'true');
-  imageViewer.src = '';
-  setPageInert(false);
-  if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
-};
-
-const closeVideoModal = () => {
-  if (!videoModal || !videoPlayer) return;
-  videoModal.classList.remove('open');
-  videoModal.setAttribute('aria-hidden', 'true');
-  videoPlayer.pause();
-  videoPlayer.removeAttribute('src');
-  videoPlayer.load();
+const closeModal = entry => {
+  const { modal, viewer } = entry;
+  if (!modal || !viewer) return;
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden', 'true');
+  if (entry.onClose) entry.onClose(viewer);
+  else viewer.src = '';
   setPageInert(false);
   if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
 };
 
 document.addEventListener('click', event => {
-  const pdfTrigger = event.target.closest('.pdf-link');
-  if (pdfTrigger) {
-    event.preventDefault();
-    openPdfModal(pdfTrigger.getAttribute('data-pdf'));
-    return;
-  }
-
-  const videoTrigger = event.target.closest('.video-link');
-  if (videoTrigger) {
-    event.preventDefault();
-    openVideoModal(videoTrigger.getAttribute('data-video'));
-    return;
-  }
-
-  const imageTrigger = event.target.closest('.image-link');
-  if (imageTrigger) {
-    event.preventDefault();
-    openImageModal(imageTrigger.getAttribute('data-image'));
+  for (const entry of modalRegistry) {
+    const trigger = event.target.closest(entry.trigger);
+    if (trigger) {
+      event.preventDefault();
+      openModal(entry, trigger.getAttribute(entry.dataAttr));
+      return;
+    }
   }
 });
 
-pdfClose?.addEventListener('click', closePdfModal);
-imageClose?.addEventListener('click', closeImageModal);
-videoClose?.addEventListener('click', closeVideoModal);
+modalRegistry.forEach(entry => {
+  entry.closeButton?.addEventListener('click', () => closeModal(entry));
+});
 
 window.addEventListener('click', event => {
-  if (event.target === pdfModal) closePdfModal();
-  if (event.target === imageModal) closeImageModal();
-  if (event.target === videoModal) closeVideoModal();
+  for (const entry of modalRegistry) {
+    if (event.target === entry.modal) closeModal(entry);
+  }
 });
 
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
-    closePdfModal();
-    closeImageModal();
-    closeVideoModal();
+    modalRegistry.forEach(closeModal);
     return;
   }
 

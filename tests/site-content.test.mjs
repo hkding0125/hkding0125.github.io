@@ -65,8 +65,13 @@ assert.match(
 );
 assert.match(
   scriptsJs,
-  /event\.target\.closest\('\.image-link'\)/,
-  'expected scripts.js to handle image-link clicks via a single delegated handler (no double binding)',
+  /trigger:\s*'\.image-link'/,
+  'expected scripts.js to register image-link clicks in the shared modal registry',
+);
+assert.match(
+  scriptsJs,
+  /event\.target\.closest\(entry\.trigger\)/,
+  'expected scripts.js to handle modal triggers via a single delegated handler (no double binding)',
 );
 assert.match(
   stylesCss,
