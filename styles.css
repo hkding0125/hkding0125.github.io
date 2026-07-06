@@ -6,8 +6,8 @@
   --text-soft: #3f4756;
   --text-faint: #5b6577;
   --line: #dbe1e8;
-  --accent: #2f6fcf;
-  --accent-soft: rgba(47, 111, 207, 0.08);
+  --accent: #2a63bd;
+  --accent-soft: rgba(42, 99, 189, 0.08);
   --shadow: none;
   --font-mono: "JetBrains Mono", "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
   --content-width: 1180px;
@@ -342,6 +342,7 @@ h1 {
 
 .hero-intro p {
   margin: 0 0 20px;
+  max-width: 80ch;
   color: var(--text-soft);
   line-height: 1.78;
   text-align: left;
@@ -373,7 +374,7 @@ h1 {
 
 .page-note,
 .page-summary {
-  max-width: none;
+  max-width: 80ch;
 }
 
 .intro-kicker {
@@ -461,7 +462,7 @@ h1 {
 .main-content {
   display: flex;
   flex-direction: column;
-  gap: 42px;
+  gap: 56px;
 }
 
 .content-section {
@@ -471,15 +472,21 @@ h1 {
 
 .content-section > p,
 .content-section > .section-intro {
-  max-width: none;
+  max-width: 80ch;
   text-align: left;
   text-justify: auto;
   hyphens: none;
 }
 
+.stack-item p,
+.detail-item p,
+.news-text {
+  max-width: 80ch;
+}
+
 h2 {
   margin: 0 0 14px;
-  font-size: 1.08rem;
+  font-size: 1.15rem;
   font-weight: 700;
   text-transform: lowercase;
 }
@@ -525,19 +532,12 @@ p {
   animation-delay: 0.14s;
 }
 
-.latest-publications h2::before {
-  content: none;
-}
-
 .latest-heading {
   margin-bottom: 14px;
 }
 
 .latest-heading h2 {
   margin-bottom: 0;
-  font-size: 1rem;
-  font-weight: 700;
-  text-transform: none;
 }
 
 .latest-heading-rule {
@@ -586,13 +586,14 @@ p {
 
 .pub-authors-line {
   margin-top: 3px;
-  color: var(--text);
+  color: var(--text-soft);
   line-height: 1.5;
 }
 
 .pub-venue-line {
   margin-top: 2px;
-  color: var(--text-soft);
+  font-size: 0.875rem;
+  color: var(--text-faint);
   line-height: 1.35;
 }
 
@@ -1010,10 +1011,8 @@ body.dark-mode {
 
 body.dark-mode .entry-logo,
 body.dark-mode .entry-logo-sjtu {
-  background: #dde3ec;
-  padding: 4px;
-  border-radius: 3px;
-  box-sizing: border-box;
+  /* luminance-invert dark ink for dark backgrounds while roughly preserving hue */
+  filter: invert(0.88) hue-rotate(180deg);
 }
 
 @media (max-width: 760px) {
@@ -1156,15 +1155,11 @@ body.dark-mode .entry-logo-sjtu {
 
   h2 {
     margin-bottom: 10px;
-    font-size: 1rem;
+    font-size: 1.08rem;
   }
 
   .latest-heading {
     margin-bottom: 10px;
-  }
-
-  .latest-heading h2 {
-    font-size: 1rem;
   }
 
   .latest-heading-rule {
