@@ -24,6 +24,7 @@ const expectedPaths = [
   'assets/images/x-institute-logo.png',
   'assets/images/shanghai-jiao-tong-university-logo.svg',
   'assets/images/ditang-wechat-qr.jpg',
+  'assets/images/ditang-rednote-qr.jpg',
   'assets/pdfs/haokai-ding-cv.pdf',
   'assets/pdfs/iros-2025-semi-peaucellier-gripper.pdf',
   'assets/pdfs/case-2025-semi-peaucellier-linkage.pdf',
@@ -37,8 +38,6 @@ const expectedPaths = [
   'assets/videos/semi-peaucellier-gripper-demo-compressed.mp4',
   'assets/images/pubs/fig-iros-grasps.webp',
   'assets/images/pubs/fig-case-grasps.webp',
-  'assets/images/pubs/fig-icarm-grasps.webp',
-  'assets/images/pubs/fig-glint-grasps.webp',
 ];
 
 const oldReferencedPaths = [
