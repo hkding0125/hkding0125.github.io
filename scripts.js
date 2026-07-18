@@ -183,6 +183,7 @@ const closeModal = entry => {
   else viewer.src = '';
   setPageInert(false);
   if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  lastFocused = null;
 };
 
 document.addEventListener('click', event => {
@@ -208,7 +209,8 @@ window.addEventListener('click', event => {
 
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
-    modalRegistry.forEach(closeModal);
+    const openEntry = modalRegistry.find(entry => entry.modal?.classList.contains('open'));
+    if (openEntry) closeModal(openEntry);
     return;
   }
 
@@ -259,3 +261,44 @@ document.addEventListener('DOMContentLoaded', () => {
   updateLastUpdated();
   updateCopyrightYear();
 });
+
+const pubToggleButtons = Array.from(document.querySelectorAll('.pub-toggle-btn'));
+pubToggleButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const view = button.getAttribute('data-pub-view');
+    pubToggleButtons.forEach(other => {
+      const isActive = other === button;
+      other.classList.toggle('active', isActive);
+      other.setAttribute('aria-pressed', String(isActive));
+    });
+    document.querySelectorAll('[data-pub-panel]').forEach(panel => {
+      panel.hidden = panel.getAttribute('data-pub-panel') !== view;
+    });
+  });
+});
+
+const sidebarConnect = document.querySelector('.sidebar-connect');
+const sidebarLinksToggle = document.querySelector('.sidebar-links-toggle');
+if (sidebarConnect && sidebarLinksToggle) {
+  const closeSidebarLinks = () => {
+    sidebarConnect.classList.remove('is-open');
+    sidebarLinksToggle.setAttribute('aria-expanded', 'false');
+  };
+  sidebarLinksToggle.addEventListener('click', event => {
+    event.stopPropagation();
+    const open = sidebarConnect.classList.toggle('is-open');
+    sidebarLinksToggle.setAttribute('aria-expanded', String(open));
+  });
+  document.addEventListener('click', event => {
+    if (event.target.closest('.modal')) return;
+    if (!sidebarConnect.contains(event.target)) closeSidebarLinks();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    if (getOpenModal()) return;
+    if (sidebarConnect.classList.contains('is-open')) {
+      closeSidebarLinks();
+      sidebarLinksToggle.focus();
+    }
+  }, true);
+}

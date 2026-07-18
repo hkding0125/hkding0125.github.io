@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Haokai Ding · Undergraduate Researcher in Robotics</title>
+  <title>Haokai Ding · Robotics Researcher</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#11141b" media="(prefers-color-scheme: dark)">
@@ -18,18 +18,25 @@
   <link rel="canonical" href="https://haokaiding.github.io/" />
   <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
   <link rel="stylesheet" href="styles.css" />
+  <noscript>
+    <style>
+      .sidebar-links-toggle { display: none !important; }
+      .sidebar-links { display: flex !important; position: static !important; min-width: 0 !important; box-shadow: none !important; border: 0 !important; padding: 0 !important; background: transparent !important; }
+      .pub-toggle { display: none !important; }
+      [data-pub-panel][hidden] { display: block !important; }
+    </style>
+  </noscript>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Haokai Ding",
-    "jobTitle": "Incoming M.S. Student in Robotics",
+    "jobTitle": "Robotics Researcher",
     "affiliation": [
       {"@type": "EducationalOrganization", "name": "Shenzhen Technology University"},
       {"@type": "EducationalOrganization", "name": "Tsinghua University"},
       {"@type": "EducationalOrganization", "name": "Shenzhen X-Institute"},
-      {"@type": "EducationalOrganization", "name": "Shanghai Jiao Tong University"},
-      {"@type": "EducationalOrganization", "name": "Mohamed bin Zayed University of Artificial Intelligence"}
+      {"@type": "EducationalOrganization", "name": "Shanghai Jiao Tong University"}
     ],
     "url": "https://haokaiding.github.io/",
     "image": "https://haokaiding.github.io/assets/images/haokai-ding-photo.png",
@@ -47,16 +54,19 @@
     <nav class="site-nav" aria-label="Primary">
       <div class="site-brand" aria-label="site mark"><span class="site-mark"><a class="site-mark-link" href="index.html">Haokai Ding</a><span class="site-mark-prompt">:~#</span></span></div>
       <div class="nav-links">
-        <a href="publications.html">Publications/</a>
-        <a href="contact.html">Contact/</a>
-        <a href="https://github.com/HaokaiDing" target="_blank" rel="noopener noreferrer">GitHub/</a>
-        <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Scholar/</a>
+        <a href="#news">news/</a>
+        <a href="#research">research/</a>
+        <a href="#publications">publications/</a>
+        <a href="#projects">projects/</a>
+        <a href="#education">education/</a>
+        <a href="#awards">awards/</a>
+        <a href="contact.html">contact/</a>
       </div>
       <button id="theme-switcher" type="button" aria-label="Toggle dark mode">☾</button>
     </nav>
 
-    <header class="hero" id="top">
-      <div class="hero-media">
+    <div class="page-layout" id="top">
+      <aside class="sidebar" aria-label="Profile">
         <div class="profile-container" id="profileBox">
           <picture>
             <source srcset="assets/images/haokai-ding-cartoon-compressed.webp" type="image/webp">
@@ -85,66 +95,44 @@
             >
           </picture>
         </div>
-      </div>
-
-      <div class="hero-copy hero-intro">
-        <p class="intro-title">Hi!</p>
-        <h1 class="hero-title">Haokai Ding</h1>
-        <p class="intro-rule" aria-hidden="true"></p>
-        <p class="intro-kicker">Robotics</p>
-        <p>
-          I earned my B.Eng. with honors from <a href="https://english.sztu.edu.cn/" target="_blank" rel="noopener noreferrer">Shenzhen Technology University</a> in 2026 as an X Scholar of <a href="https://www.teep.cnmm.tsinghua.edu.cn/teepen/" target="_blank" rel="noopener noreferrer">Tsinghua University</a> and <a href="https://www.x-institute.edu.cn/" target="_blank" rel="noopener noreferrer">Shenzhen X-Institute</a>, advised by <a href="https://scholar.google.com/citations?user=n-3doEMAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer">Prof. Wenzeng Zhang</a>.
-        </p>
-        <p>
-          I am currently a visiting student at <a href="https://en.sjtu.edu.cn/" target="_blank" rel="noopener noreferrer">SJTU</a>, working with <a href="https://me.sjtu.edu.cn/en/FullTimeTeacher/dongwei1.html" target="_blank" rel="noopener noreferrer">Prof. Wei Dong</a> on aerial manipulation.
-        </p>
-        <p class="hero-links">
-          <a href="assets/pdfs/haokai-ding-cv.pdf" target="_blank" rel="noopener noreferrer">CV</a>
-          <span>/</span>
-          <a href="mailto:ditang0125@gmail.com">Email</a>
-          <span>/</span>
-          <a href="https://orcid.org/0009-0001-6158-9897" target="_blank" rel="noopener noreferrer">ORCID</a>
-        </p>
-      </div>
-    </header>
-
-    <main class="main-content" id="main">
-      <section class="content-section latest-publications" id="publications">
-        <div class="latest-heading">
-          <h2>Selected publications</h2>
-          <p class="latest-heading-rule" aria-hidden="true"></p>
+        <div class="sidebar-id">
+          <h1 class="hero-title">Haokai Ding</h1>
+          <p class="sidebar-tagline">robotics researcher</p>
         </div>
-        <ol class="publication-list selected-list">
-          <li class="publication-item">
-            <div class="pub-body">
-              <div class="pub-title-line">
-                <span class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping</span>
-                <span class="pub-links inline-links">
-                  <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/iros-2025-semi-peaucellier-gripper.pdf">[pdf]</button>
-                  <a href="https://doi.org/10.1109/IROS60139.2025.11246057" target="_blank" rel="noopener noreferrer">[doi]</a>
-                  <button type="button" class="inline-link video-link" data-video="assets/videos/semi-peaucellier-gripper-demo-compressed.mp4">[demo]</button>
-                </span>
-              </div>
-              <div class="pub-authors-line"><strong>H. Ding</strong><sup>†</sup>, W. Zhang*</div>
-              <div class="pub-venue-line">IROS 2025</div>
-            </div>
-          </li>
-          <li class="publication-item">
-            <div class="pub-body">
-              <div class="pub-title-line">
-                <span class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping</span>
-                <span class="pub-links inline-links">
-                  <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/case-2025-semi-peaucellier-linkage.pdf">[pdf]</button>
-                  <a href="https://doi.org/10.1109/CASE58245.2025.11163785" target="_blank" rel="noopener noreferrer">[doi]</a>
-                </span>
-              </div>
-              <div class="pub-authors-line"><strong>H. Ding</strong><sup>†</sup>, Z. Chen, T. Yang*, W. Zhang*</div>
-              <div class="pub-venue-line">CASE 2025</div>
-            </div>
-          </li>
-        </ol>
-        <p class="latest-publications-more"><a href="publications.html">See full publications list →</a></p>
-      </section>
+        <div class="sidebar-connect">
+          <button type="button" class="sidebar-links-toggle" aria-expanded="false" aria-controls="sidebarLinks">follow &#9662;</button>
+          <ul class="sidebar-links" id="sidebarLinks">
+          <li>Shanghai, China</li>
+          <li><a href="mailto:ditang0125@gmail.com">Email</a></li>
+          <li><a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a></li>
+          <li><a href="https://orcid.org/0009-0001-6158-9897" target="_blank" rel="noopener noreferrer">ORCID</a></li>
+          <li><a href="https://github.com/HaokaiDing" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="assets/pdfs/haokai-ding-cv.pdf" target="_blank" rel="noopener noreferrer">CV</a></li>
+          <li><button type="button" class="inline-link image-link" data-image="assets/images/ditang-wechat-qr.jpg">WeChat</button></li>
+          </ul>
+        </div>
+      </aside>
+
+      <main class="main-content" id="main">
+        <header class="hero-statement">
+          <p class="intro-kicker">Hi, I am Haokai Ding.</p>
+          <p class="statement">Underactuated hands that grasp by mechanism design, and flying robots that take manipulation into the air.</p>
+          <div class="hero-chips" aria-label="Research themes">
+            <span>underactuated grippers</span>
+            <span>mechanism design</span>
+            <span>aerial manipulation</span>
+          </div>
+        </header>
+
+        <section class="content-section" id="about">
+          <h2>about</h2>
+          <p class="section-intro">
+            I earned my B.Eng. with honors from <a href="https://english.sztu.edu.cn/" target="_blank" rel="noopener noreferrer">Shenzhen Technology University</a> in 2026 as an X Scholar of <a href="https://www.teep.cnmm.tsinghua.edu.cn/teepen/" target="_blank" rel="noopener noreferrer">Tsinghua University</a> and <a href="https://www.x-institute.edu.cn/" target="_blank" rel="noopener noreferrer">Shenzhen X-Institute</a>, advised by <a href="https://scholar.google.com/citations?user=n-3doEMAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer">Prof. Wenzeng Zhang</a>.
+          </p>
+          <p class="section-intro">
+            I am currently a visiting student at <a href="https://en.sjtu.edu.cn/" target="_blank" rel="noopener noreferrer">SJTU</a>, working with <a href="https://me.sjtu.edu.cn/en/FullTimeTeacher/dongwei1.html" target="_blank" rel="noopener noreferrer">Prof. Wei Dong</a> on aerial manipulation.
+          </p>
+        </section>
 
       <section class="content-section" id="news">
         <h2>news</h2>
@@ -176,17 +164,171 @@
         </div>
       </section>
 
+        <section class="content-section" id="publications">
+          <h2>publications</h2>
+          <div class="pub-toggle" role="group" aria-label="Publication views">
+            <button type="button" class="pub-toggle-btn active" data-pub-view="selected" aria-pressed="true" aria-controls="pubPanelSelected">selected</button>
+            <button type="button" class="pub-toggle-btn" data-pub-view="full" aria-pressed="false" aria-controls="pubPanelFull">full list (9)</button>
+          </div>
+          <p class="page-note">Notation: <strong>&dagger;</strong> co-first author, <strong>*</strong> advisor.</p>
+          <div data-pub-panel="selected" id="pubPanelSelected">
+            <ol class="publication-list selected-list">
+          <li class="publication-item pub-with-media">
+            <img class="pub-thumb" src="assets/images/pubs/fig-iros-grasps.webp" alt="SPD gripper grasping a pressure gauge, pens, boxes, an apple, and an orange" width="640" height="410" loading="lazy" decoding="async">
+            <div class="pub-body">
+              <div class="pub-title-line">
+                <span class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping</span>
+                <span class="pub-links inline-links">
+                  <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/iros-2025-semi-peaucellier-gripper.pdf">[pdf]</button>
+                  <a href="https://doi.org/10.1109/IROS60139.2025.11246057" target="_blank" rel="noopener noreferrer">[doi]</a>
+                  <button type="button" class="inline-link video-link" data-video="assets/videos/semi-peaucellier-gripper-demo-compressed.mp4">[demo]</button>
+                </span>
+              </div>
+              <div class="pub-authors-line"><strong>H. Ding</strong><sup>†</sup>, W. Zhang*</div>
+              <div class="pub-venue-line">IROS 2025</div>
+            </div>
+          </li>
+          <li class="publication-item pub-with-media">
+            <img class="pub-thumb" src="assets/images/pubs/fig-case-grasps.webp" alt="SP-Diff gripper grasping oranges, a roll, a motor, and other objects" width="640" height="346" loading="lazy" decoding="async">
+            <div class="pub-body">
+              <div class="pub-title-line">
+                <span class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping</span>
+                <span class="pub-links inline-links">
+                  <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/case-2025-semi-peaucellier-linkage.pdf">[pdf]</button>
+                  <a href="https://doi.org/10.1109/CASE58245.2025.11163785" target="_blank" rel="noopener noreferrer">[doi]</a>
+                </span>
+              </div>
+              <div class="pub-authors-line"><strong>H. Ding</strong><sup>†</sup>, Z. Chen, T. Yang*, W. Zhang*</div>
+              <div class="pub-venue-line">CASE 2025</div>
+            </div>
+          </li>
+        </ol>
+          </div>
+          <div data-pub-panel="full" id="pubPanelFull" hidden>
+        <h3 class="group-title">conference papers</h3>
+                <ol class="publication-list full-list">
+                  <li class="publication-item">
+                    <div class="pub-body">
+                      <div class="pub-title">An Idle-Stroke Underactuated Gripper with Independent Double-Parallelogram Linkages for Pinching and Adaptive Grasping</div>
+                      <div class="pub-meta">Y. Chen, H. Luan, <strong>H. Ding</strong>, W. Zhang*</div>
+                      <div class="pub-venue">RAAI 2025</div>
+                      <div class="pub-links">
+                        <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/raai-2025-double-parallelogram-gripper.pdf">pdf</button>
+                        <a href="https://doi.org/10.1109/RAAI67517.2025.11423397" target="_blank" rel="noopener noreferrer">doi</a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="publication-item">
+                    <div class="pub-body">
+                      <div class="pub-title">GLINT: An Idle-Stroke Grasp-and-Lift Hand for In-Hand Manipulation</div>
+                      <div class="pub-meta"><strong>H. Ding</strong>, H. Luan, T. Yang*, W. Zhang*</div>
+                      <div class="pub-venue">ICCMA 2025</div>
+                      <div class="pub-links">
+                        <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/iccma-2025-glint.pdf">pdf</button>
+                        <a href="https://doi.org/10.1109/ICCMA67641.2025.11369602" target="_blank" rel="noopener noreferrer">doi</a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="publication-item">
+                    <div class="pub-body">
+                      <div class="pub-title">BioCrest - A Flexible Adaptive Robotic Hand Based on Idle-Stroke Mechanism</div>
+                      <div class="pub-meta"><strong>H. Ding</strong>, X. Zhong, W. Huang, T. Yang*, W. Zhang*</div>
+                      <div class="pub-venue">ROBIO 2025</div>
+                      <div class="pub-links">
+                        <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/robio-2025-biocrest.pdf">pdf</button>
+                        <a href="https://doi.org/10.1109/ROBIO66223.2025.11376343" target="_blank" rel="noopener noreferrer">doi</a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="publication-item">
+                    <div class="pub-body">
+                      <div class="pub-title">An Underactuated Gripper with Grasshopper-Inspired Linkages and Delay Triggering for Pinching and Adaptive Grasping</div>
+                      <div class="pub-meta"><strong>H. Ding</strong><sup>†</sup>, Y. Chen<sup>†</sup>, D. Jia, W. Zhang*</div>
+                      <div class="pub-venue">ICIA 2025</div>
+                      <div class="pub-links">
+                        <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/icia-2025-grasshopper-gripper.pdf">pdf</button>
+                        <a href="https://doi.org/10.1109/ICIA64617.2025.11277434" target="_blank" rel="noopener noreferrer">doi</a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="publication-item">
+                    <div class="pub-body">
+                      <div class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
+                      <div class="pub-meta"><strong>H. Ding</strong><sup>†</sup>, W. Zhang*</div>
+                      <div class="pub-venue">IROS 2025</div>
+                      <div class="pub-links">
+                        <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/iros-2025-semi-peaucellier-gripper.pdf">pdf</button>
+                        <a href="https://doi.org/10.1109/IROS60139.2025.11246057" target="_blank" rel="noopener noreferrer">doi</a>
+                        <button type="button" class="inline-link video-link" data-video="assets/videos/semi-peaucellier-gripper-demo-compressed.mp4">demo</button>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="publication-item">
+                    <div class="pub-body">
+                      <div class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
+                      <div class="pub-meta"><strong>H. Ding</strong><sup>†</sup>, Z. Chen, T. Yang*, W. Zhang*</div>
+                      <div class="pub-venue">CASE 2025</div>
+                      <div class="pub-links">
+                        <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/case-2025-semi-peaucellier-linkage.pdf">pdf</button>
+                        <a href="https://doi.org/10.1109/CASE58245.2025.11163785" target="_blank" rel="noopener noreferrer">doi</a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="publication-item">
+                    <div class="pub-body">
+                      <div class="pub-title">Peaucellier Gripper: A Novel Underactuated Gripper for Linear Pinching and Self-Adaptive Grasp with the Peaucellier Linkage</div>
+                      <div class="pub-meta"><strong>H. Ding</strong><sup>†</sup>, J. Fan, Z. Zhu, Y. Zhao, K. Chen*, W. Zhang*</div>
+                      <div class="pub-venue">ICARM 2025</div>
+                      <div class="pub-links">
+                        <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/icarm-2025-peaucellier-gripper.pdf">pdf</button>
+                        <a href="https://doi.org/10.1109/ICARM65671.2025.11293470" target="_blank" rel="noopener noreferrer">doi</a>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="publication-item">
+                    <div class="pub-body">
+                      <div class="pub-title">Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</div>
+                      <div class="pub-meta">H. Xie, L. You, X. Fang, L. Li, <strong>H. Ding</strong>, Z. Zhou, G. Zhang, D. Zhang</div>
+                      <div class="pub-venue">E3S Web Conf. 2025</div>
+                      <div class="pub-links">
+                        <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/e3s-2025-heavy-metal-libs.pdf">pdf</button>
+                        <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank" rel="noopener noreferrer">doi</a>
+                      </div>
+                    </div>
+                  </li>
+                </ol>
+
+                <h3 class="group-title">journal article</h3>
+                <ol class="publication-list full-list">
+                  <li class="publication-item">
+                    <div class="pub-body">
+                      <div class="pub-title">Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</div>
+                      <div class="pub-meta">Y. Liu<sup>†</sup>, <strong>H. Ding</strong><sup>†</sup>, H. Chen, H. Gao, J. Yu, F. Mo, N. Wang*</div>
+                      <div class="pub-venue"><em>Polymers</em> 17, no. 15: 2136 <span class="meta-badge">SCI</span> <span class="meta-badge">JCR Q1</span></div>
+                      <div class="pub-links">
+                        <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/polymers-2025-zinc-ion-batteries-review.pdf">pdf</button>
+                        <a href="https://doi.org/10.3390/polym17152136" target="_blank" rel="noopener noreferrer">doi</a>
+                      </div>
+                    </div>
+                  </li>
+                </ol>
+            <p class="latest-publications-more"><a href="publications.html">standalone page &rarr;</a></p>
+          </div>
+        </section>
+
       <section class="content-section" id="projects">
         <h2>projects</h2>
         <div class="stack-list">
-          <article class="stack-item">
+          <article class="stack-item stack-with-media">
+            <img class="pub-thumb" src="assets/images/pubs/fig-icarm-grasps.webp" alt="Peaucellier gripper grasping a card, kumquat, apple, banana, boxes, and a prism" width="640" height="554" loading="lazy" decoding="async">
             <div>
               <h3>01 · semi-peaucellier gripper</h3>
               <p>An underactuated gripper that integrates an optimized Peaucellier linkage with idle-stroke transmission, achieving linear parallel pinching and shape-adaptive enveloping under a single motor.</p>
             </div>
             <p class="stack-tags">Peaucellier linkage · idle-stroke · single-actuator · adaptive grasping</p>
           </article>
-          <article class="stack-item">
+          <article class="stack-item stack-with-media">
+            <img class="pub-thumb" src="assets/images/pubs/fig-glint-grasps.webp" alt="GLINT hand pinching and lifting cubes, sticks, and thin plates" width="640" height="652" loading="lazy" decoding="async">
             <div>
               <h3>02 · GLINT in-hand manipulation</h3>
               <p>A grasp-and-lift hand that embeds phase switching directly into a lost-motion transmission, separating force-free alignment from force-transmitting lifting and offloading control burden onto the mechanism.</p>
@@ -267,16 +409,17 @@
         <div class="award-group">
           <h3>selected honors</h3>
           <ul class="award-list">
-            <li><span class="award-name">Top 10 Outstanding Graduate, Shenzhen Technology University</span><span class="award-year">2026</span></li>
-            <li><span class="award-name"><a href="https://www.moe.gov.cn/srcsite/A05/s7505/202512/t20251225_1424488.html" target="_blank" rel="noopener noreferrer">National Scholarship</a></span><span class="award-year">2025</span></li>
-            <li><span class="award-name"><a href="https://sites.google.com/site/asmemrc/design-competition-showcase/2025-finalists#h.2oibi1g704mf" target="_blank" rel="noopener noreferrer">Undergraduate Champion, ASME Student Mechanism &amp; Robot Design Competition</a></span><span class="award-year">2025</span></li>
-            <li><span class="award-name"><a href="https://cy.ncss.cn/" target="_blank" rel="noopener noreferrer">Gold Prize, 9th China “Internet+” Innovation Competition (Guangdong Division)</a></span><span class="award-year">2023</span></li>
-            <li><span class="award-name"><a href="https://www.tiaozhanbei.net/" target="_blank" rel="noopener noreferrer">Second Prize, 17th “Challenge Cup” Extracurricular Science Competition (Guangdong Division)</a></span><span class="award-year">2023</span></li>
-            <li><span class="award-name">President's Award, Shenzhen Technology University</span><span class="award-year">2024</span></li>
+            <li><span class="award-name">Top 10 Outstanding Graduate, Shenzhen Technology University <span class="award-tag">university</span></span><span class="award-year">2026</span></li>
+            <li><span class="award-name"><a href="https://www.moe.gov.cn/srcsite/A05/s7505/202512/t20251225_1424488.html" target="_blank" rel="noopener noreferrer">National Scholarship</a> <span class="award-tag">national</span></span><span class="award-year">2025</span></li>
+            <li><span class="award-name"><a href="https://sites.google.com/site/asmemrc/design-competition-showcase/2025-finalists#h.2oibi1g704mf" target="_blank" rel="noopener noreferrer">Undergraduate Champion, ASME Student Mechanism &amp; Robot Design Competition</a> <span class="award-tag">international</span></span><span class="award-year">2025</span></li>
+            <li><span class="award-name">President's Award, Shenzhen Technology University <span class="award-tag">university</span></span><span class="award-year">2024</span></li>
+            <li><span class="award-name"><a href="https://cy.ncss.cn/" target="_blank" rel="noopener noreferrer">Gold Prize, 9th China “Internet+” Innovation Competition (Guangdong Division)</a> <span class="award-tag">provincial</span></span><span class="award-year">2023</span></li>
+            <li><span class="award-name"><a href="https://www.tiaozhanbei.net/" target="_blank" rel="noopener noreferrer">Second Prize, 17th “Challenge Cup” Extracurricular Science Competition (Guangdong Division)</a> <span class="award-tag">provincial</span></span><span class="award-year">2023</span></li>
           </ul>
         </div>
       </section>
-    </main>
+      </main>
+    </div>
 
     <footer class="site-footer">
       <section class="visitor-record" aria-labelledby="visitorLogLabel">
@@ -292,7 +435,7 @@
 </svg></a>
         </div>
       </section>
-      <p class="footer-meta">© 2025–2026 Haokai Ding · Last updated <time id="lastUpdated" datetime="2026-06-14">2026-06-14</time></p>
+      <p class="footer-meta">© 2025–2026 Haokai Ding · Last updated <time id="lastUpdated" datetime="2026-07-18">2026-07-18</time></p>
       <p class="footer-credit">Inspired by the visual style of <a href="https://github.com/mrmierzejewski/hugo-theme-console/" target="_blank" rel="noopener noreferrer">hugo-theme-console</a>.</p>
     </footer>
   </div>
@@ -308,6 +451,13 @@
     <div class="modal-panel pdf-panel">
       <button class="close-button" id="pdfClose" type="button" aria-label="Close PDF"><span aria-hidden="true">×</span></button>
       <iframe id="pdf-viewer" src="" title="PDF viewer" loading="lazy"></iframe>
+    </div>
+  </div>
+
+  <div id="imageModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Image viewer" tabindex="-1">
+    <div class="modal-panel image-panel">
+      <button class="close-button" id="imageClose" type="button" aria-label="Close image"><span aria-hidden="true">&times;</span></button>
+      <img id="imageViewer" src="" alt="Expanded image" loading="lazy">
     </div>
   </div>
 
