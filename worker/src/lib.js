@@ -208,7 +208,7 @@ export function statsHtml(data) {
   const trendJson = JSON.stringify(trend);
 
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>visitor log · haokaiding.qzz.io</title>
+<title>visitor log · haokaiding.github.io</title>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"><style>
 :root{--ink:#0f1c2e;--muted:#5a6b7b;--soft:#8595a4;--faint:#93a1b0;--accent:#12a07a;--up:#12a07a;--down:#e0564f;--surface:#fff;--line:#eef1f5;--hair:#f4f6f9;--land:#dde3ea}
 *{box-sizing:border-box}
@@ -273,7 +273,7 @@ body{font-family:'Hanken Grotesk',system-ui,-apple-system,BlinkMacSystemFont,"Se
 .trend-legend .lg-u{background:#0f8e6a}
 .foot{color:var(--faint);font-size:12px;margin-top:20px;text-align:center}
 </style></head><body><div class="wrap">
-<div class="head"><h1>visitor log</h1><span class="sub">haokaiding.qzz.io · since ${esc(since)}</span><span class="live"><i></i>self-hosted</span></div>
+<div class="head"><h1>visitor log</h1><span class="sub">haokaiding.github.io · since ${esc(since)}</span><span class="live"><i></i>self-hosted</span></div>
 <div class="cards">${cards}</div>
 <div class="growth">${growthHtml}</div>
 <div class="summary"><div class="h2">visits summary</div><table><thead><tr><th scope="col"></th><th scope="col">Pageviews</th><th scope="col">Unique visitors</th></tr></thead><tbody>${summary}</tbody></table></div>
