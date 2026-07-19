@@ -38,6 +38,7 @@ const expectedPaths = [
   'assets/videos/semi-peaucellier-gripper-demo-compressed.mp4',
   'assets/videos/semi-peaucellier-gripper-loop.mp4',
   'assets/videos/semi-peaucellier-gripper-loop.webm',
+  'assets/fonts/varela-round-latin-400-normal.woff2',
   'assets/images/pubs/fig-iros-grasps.webp',
   'assets/images/pubs/fig-case-grasps.webp',
 ];
