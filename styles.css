@@ -2157,3 +2157,25 @@ a:hover {
   width: 52px;
   height: 52px;
 }
+
+/* ---- mobile nav: wrap every link into view instead of hiding them behind
+   an invisible horizontal scroll, and stop the two-row bar from staying
+   sticky (it ate ~100px of small screens) ---- */
+@media (max-width: 760px) {
+  .site-nav {
+    position: static;
+    padding-top: 0;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    white-space: normal;
+    row-gap: 4px;
+    column-gap: 0.9rem;
+  }
+
+  .content-section {
+    scroll-margin-top: 16px;
+  }
+}

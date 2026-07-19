@@ -188,9 +188,28 @@ const updateCopyrightYear = () => {
   }
 };
 
+const respectReducedMotion = () => {
+  const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const loops = Array.from(document.querySelectorAll('video[autoplay][loop]'));
+  const apply = () => {
+    loops.forEach(video => {
+      if (query.matches) {
+        video.pause();
+        video.controls = true;
+      } else {
+        video.controls = false;
+        video.play().catch(() => {});
+      }
+    });
+  };
+  query.addEventListener?.('change', apply);
+  apply();
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   updateLastUpdated();
   updateCopyrightYear();
+  respectReducedMotion();
 });
 
 const pubToggleButtons = Array.from(document.querySelectorAll('.pub-toggle-btn'));
