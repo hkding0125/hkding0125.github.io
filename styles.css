@@ -1972,12 +1972,9 @@ a:hover {
   scroll-margin-top: 84px;
 }
 
-.sidebar {
-  top: 92px;
-}
-
 @media (min-width: 901px) {
   .sidebar {
+    top: 92px;
     max-height: calc(100vh - 108px);
   }
 }
@@ -2084,4 +2081,79 @@ a:hover {
   color: var(--text-faint);
   font-size: 0.9rem;
   font-style: italic;
+}
+
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.section-heading h2 {
+  margin-bottom: 0;
+}
+
+.pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--accent);
+  font-size: 0.92rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.pill-link::after {
+  content: "\2192";
+  transition: transform 0.2s ease;
+}
+
+.pill-link:hover {
+  text-decoration: none;
+  color: color-mix(in srgb, var(--accent) 72%, var(--text));
+}
+
+.pill-link:hover::after {
+  transform: translateX(3px);
+}
+
+/* guo-style fixed media box: equal-size, image centered via contain */
+.pub-with-media .pub-thumb {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  object-fit: contain;
+  background: var(--surface);
+  border-radius: 8px;
+}
+
+/* experience cards: one per row */
+.detail-list {
+  grid-template-columns: 1fr;
+}
+
+/* uniform logo column so every card's text starts at the same x */
+.detail-item > .entry-logo,
+.detail-item .logo-stack {
+  flex: 0 0 64px;
+  width: 64px;
+}
+
+.detail-item > .entry-logo {
+  height: 64px;
+  object-fit: contain;
+}
+
+.detail-item .logo-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.detail-item .logo-stack .entry-logo {
+  width: 52px;
+  height: 52px;
 }
