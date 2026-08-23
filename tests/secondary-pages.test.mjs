@@ -44,6 +44,21 @@ assert.match(
   /Google Scholar<\/a>[\s\S]*ORCID<\/a>[\s\S]*CV<\/a>/,
   'expected publications page to include quick links for scholar, ORCID, and CV',
 );
+assert.match(
+  publicationsHtml,
+  /<strong>Haokai Ding<\/strong>, Wenzeng Zhang\*[\s\S]*IROS 2025 Oral/,
+  'expected the corrected IROS authorship and oral designation',
+);
+assert.match(
+  publicationsHtml,
+  /<strong>Haokai Ding<\/strong>, Zhaohan Chen, Tao Yang\*, Wenzeng Zhang\*[\s\S]*CASE 2025 Oral/,
+  'expected the corrected CASE authorship and oral designation',
+);
+assert.match(
+  publicationsHtml,
+  /<strong>Haokai Ding<\/strong>, Jiaqi Fan, Zixuan Zhu, Yongzhu Zhao, Kai Chen\*, Wenzeng Zhang\*[\s\S]*ICARM 2025/,
+  'expected the corrected ICARM authorship without an obsolete co-first marker',
+);
 
 assert.match(
   contactHtml,
@@ -94,6 +109,11 @@ assert.match(
   contactHtml,
   /assets\/images\/ditang-wechat-qr\.jpg/,
   'expected contact page to include the WeChat QR image asset',
+);
+assert.match(
+  contactHtml,
+  /data-image="assets\/images\/ditang-rednote-qr\.jpg"[\s\S]*>RedNote<\/button>/,
+  'expected the contact page to preserve the RedNote QR link',
 );
 assert.match(
   contactHtml,

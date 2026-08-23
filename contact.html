@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <title>Contact · Haokai Ding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f6f7f9">
+  <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#11141b" media="(prefers-color-scheme: dark)">
   <meta name="description" content="Contact information for Haokai Ding." />
-  <meta name="color-scheme" content="light" />
+  <meta name="color-scheme" content="light dark" />
   <meta property="og:title" content="Contact · Haokai Ding" />
   <meta property="og:description" content="Contact information and academic links for Haokai Ding." />
   <meta property="og:image" content="https://haokaiding.github.io/assets/images/haokai-ding-photo.png" />
@@ -21,16 +22,14 @@
 <body>
   <div class="container">
     <nav class="site-nav" aria-label="Primary">
-      <div class="site-brand"><a class="site-mark-link" href="index.html">Haokai Ding</a></div>
+      <div class="site-brand" aria-label="site mark"><span class="site-mark"><a class="site-mark-link" href="index.html">Haokai Ding</a><span class="site-mark-prompt">:~#</span></span><span class="site-path">contact/</span></div>
       <div class="nav-links">
-        <a href="index.html#news">News</a>
-        <a href="index.html#research">Research</a>
-        <a href="index.html#publications">Publications</a>
-        <a href="index.html#projects">Projects</a>
-        <a href="index.html#experience">Experience</a>
-        <a href="index.html#awards">Awards</a>
-        <a class="nav-active" href="contact.html">Contact</a>
+        <a href="publications.html">Publications/</a>
+        <a class="nav-active" href="contact.html">Contact/</a>
+        <a href="https://github.com/HaokaiDing" target="_blank" rel="noopener noreferrer">GitHub/</a>
+        <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Scholar/</a>
       </div>
+      <button id="theme-switcher" type="button" aria-label="Toggle dark mode">☾</button>
     </nav>
 
     <header class="page-header">
@@ -56,7 +55,7 @@
     </main>
 
     <footer class="site-footer compact-footer">
-      <p class="footer-meta">← <a href="index.html">back to home</a> · Last updated <time id="lastUpdated" datetime="2026-07-18">2026-07-18</time></p>
+      <p class="footer-meta">← <a href="index.html">back to home</a> · Last updated <time id="lastUpdated" datetime="2026-08-23">2026-08-23</time></p>
     </footer>
   </div>
 

@@ -10,13 +10,57 @@ const indexHtml = read('index.html');
 const scriptsJs = read('scripts.js');
 const stylesCss = read('styles.css');
 
+const consoleHero = indexHtml.match(
+  /<header class="hero" id="top">[\s\S]*?<\/header>/,
+);
 const defaultProfileImage = indexHtml.match(/<img[\s\S]*?class="profile-image default"[\s\S]*?>/);
 
+assert.ok(consoleHero, 'expected the restored console hero on the homepage');
 assert.ok(defaultProfileImage, 'expected a default profile image in the homepage hero');
 assert.match(
-  indexHtml,
+  consoleHero[0],
   /<h1 class="hero-title">Haokai Ding<\/h1>/,
   'expected the homepage hero to expose a real h1 for document structure and SEO',
+);
+assert.match(
+  consoleHero[0],
+  /I am an M\.Sc\. student in Robotics at[\s\S]*Mohamed bin Zayed University of Artificial Intelligence \(MBZUAI\)/,
+  'expected the homepage to identify the MBZUAI affiliation',
+);
+assert.match(
+  consoleHero[0],
+  /href="assets\/pdfs\/haokai-ding-cv\.pdf"[^>]*>CV<\/a>/,
+  'expected the homepage to link to the current CV PDF',
+);
+assert.match(
+  indexHtml,
+  /<span class="site-mark-prompt">:~#<\/span>/,
+  'expected the restored console prompt in the site mark',
+);
+assert.match(
+  indexHtml,
+  /<button id="theme-switcher" type="button" aria-label="Toggle dark mode">/,
+  'expected the restored console theme switcher',
+);
+assert.doesNotMatch(
+  indexHtml,
+  /<aside class="sidebar"|class="page-layout"|class="hero-statement"/,
+  'expected the sidebar redesign to be absent from the restored homepage',
+);
+assert.match(
+  indexHtml,
+  /<link rel="canonical" href="https:\/\/haokaiding\.github\.io\/" \/>/,
+  'expected the GitHub Pages canonical host to remain unchanged',
+);
+assert.match(
+  indexHtml,
+  /<meta property="og:url" content="https:\/\/haokaiding\.github\.io\/" \/>/,
+  'expected Open Graph metadata to retain the GitHub Pages host',
+);
+assert.match(
+  indexHtml,
+  /"jobTitle": "M\.Sc\. Student in Robotics"/,
+  'expected structured data to preserve the current degree status',
 );
 assert.match(
   defaultProfileImage[0],
@@ -74,13 +118,18 @@ assert.match(
   'expected scripts.js to handle modal triggers via a single delegated handler (no double binding)',
 );
 assert.match(
+  scriptsJs,
+  /themeSwitcher\?\.addEventListener\('click'/,
+  'expected the restored dark-mode control to remain functional',
+);
+assert.match(
   stylesCss,
-  /\.image-panel\s*\{[\s\S]*width:\s*min\(92vw,\s*420px\)/,
+  /\.image-panel\s*\{[^}]*width:\s*min\(92vw,\s*420px\)/,
   'expected the QR image modal to use a smaller width cap',
 );
 assert.match(
   stylesCss,
-  /\.contact-block \.inline-link\s*\{[\s\S]*color:\s*inherit/,
+  /\.contact-block \.inline-link\s*\{[^}]*color:\s*inherit/,
   'expected the Wechat trigger in the contact list to inherit the same color as the other contact links',
 );
 

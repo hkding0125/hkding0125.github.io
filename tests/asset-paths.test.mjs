@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = process.cwd();
@@ -23,6 +23,7 @@ const expectedPaths = [
   'assets/images/tsinghua-university-logo.svg',
   'assets/images/x-institute-logo.png',
   'assets/images/shanghai-jiao-tong-university-logo.svg',
+  'assets/images/mbzuai-logo-mark.svg',
   'assets/images/ditang-wechat-qr.jpg',
   'assets/images/ditang-rednote-qr.jpg',
   'assets/pdfs/haokai-ding-cv.pdf',
@@ -36,8 +37,6 @@ const expectedPaths = [
   'assets/pdfs/e3s-2025-heavy-metal-libs.pdf',
   'assets/pdfs/polymers-2025-zinc-ion-batteries-review.pdf',
   'assets/videos/semi-peaucellier-gripper-demo-compressed.mp4',
-  'assets/images/pubs/fig-iros-grasps.webp',
-  'assets/images/pubs/fig-case-grasps.webp',
 ];
 
 const oldReferencedPaths = [
@@ -79,6 +78,10 @@ const oldReferencedPaths = [
 ];
 
 for (const assetPath of expectedPaths) {
+  assert.ok(
+    existsSync(join(root, assetPath)),
+    `expected referenced asset ${assetPath} to exist on disk`,
+  );
   assert.match(
     html,
     toTokenRegex(assetPath),

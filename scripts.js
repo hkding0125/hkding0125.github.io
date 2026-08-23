@@ -1,5 +1,74 @@
 const $ = (selector, root = document) => root.querySelector(selector);
 
+const safeStorage = (() => {
+  try {
+    const storage = window.localStorage;
+    const key = '__storage_test__';
+    storage.setItem(key, key);
+    storage.removeItem(key);
+    return {
+      get(name) {
+        try {
+          return storage.getItem(name);
+        } catch {
+          return null;
+        }
+      },
+      set(name, value) {
+        try {
+          storage.setItem(name, value);
+        } catch {}
+      },
+    };
+  } catch {
+    return {
+      get: () => null,
+      set: () => {},
+    };
+  }
+})();
+
+const themeSwitcher = $('#theme-switcher');
+let themeTransitionTimeout = null;
+
+const runThemeTransition = () => {
+  document.documentElement.classList.add('theme-transition');
+  if (themeTransitionTimeout) window.clearTimeout(themeTransitionTimeout);
+  themeTransitionTimeout = window.setTimeout(() => {
+    document.documentElement.classList.remove('theme-transition');
+  }, 300);
+};
+
+const applyTheme = (theme, { animate = true } = {}) => {
+  if (animate) runThemeTransition();
+  document.body.classList.toggle('dark-mode', theme === 'dark');
+  if (themeSwitcher) {
+    themeSwitcher.textContent = theme === 'dark' ? '☼' : '☾';
+    themeSwitcher.setAttribute('aria-pressed', String(theme === 'dark'));
+  }
+};
+
+const inferInitialTheme = () => {
+  const storedTheme = safeStorage.get('theme');
+  if (storedTheme === 'light' || storedTheme === 'dark') return storedTheme;
+
+  const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+  const prefersLight = window.matchMedia?.('(prefers-color-scheme: light)').matches;
+  if (prefersDark) return 'dark';
+  if (prefersLight) return 'light';
+
+  const hour = new Date().getHours();
+  return hour >= 19 || hour < 7 ? 'dark' : 'light';
+};
+
+applyTheme(inferInitialTheme(), { animate: false });
+
+themeSwitcher?.addEventListener('click', () => {
+  const next = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+  safeStorage.set('theme', next);
+  applyTheme(next);
+});
+
 const updateLastUpdated = () => {
   const target = $('#lastUpdated');
   if (!target) return;
@@ -98,11 +167,18 @@ const openModal = (entry, path) => {
   if (!modal || !viewer || !path) return;
   lastFocused = document.activeElement;
   setPageInert(true);
+  if (viewer instanceof HTMLIFrameElement) {
+    viewer.addEventListener('load', () => {
+      if (modal.classList.contains('open')) entry.closeButton?.focus();
+    }, { once: true });
+  }
   viewer.src = path;
   modal.classList.add('open');
   modal.setAttribute('aria-hidden', 'false');
   entry.onOpen?.(viewer);
-  entry.closeButton?.focus();
+  window.requestAnimationFrame(() => {
+    if (modal.classList.contains('open')) entry.closeButton?.focus();
+  });
 };
 
 const closeModal = entry => {
@@ -192,44 +268,3 @@ document.addEventListener('DOMContentLoaded', () => {
   updateLastUpdated();
   updateCopyrightYear();
 });
-
-const pubToggleButtons = Array.from(document.querySelectorAll('.pub-toggle-btn'));
-pubToggleButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const view = button.getAttribute('data-pub-view');
-    pubToggleButtons.forEach(other => {
-      const isActive = other === button;
-      other.classList.toggle('active', isActive);
-      other.setAttribute('aria-pressed', String(isActive));
-    });
-    document.querySelectorAll('[data-pub-panel]').forEach(panel => {
-      panel.hidden = panel.getAttribute('data-pub-panel') !== view;
-    });
-  });
-});
-
-const sidebarConnect = document.querySelector('.sidebar-connect');
-const sidebarLinksToggle = document.querySelector('.sidebar-links-toggle');
-if (sidebarConnect && sidebarLinksToggle) {
-  const closeSidebarLinks = () => {
-    sidebarConnect.classList.remove('is-open');
-    sidebarLinksToggle.setAttribute('aria-expanded', 'false');
-  };
-  sidebarLinksToggle.addEventListener('click', event => {
-    event.stopPropagation();
-    const open = sidebarConnect.classList.toggle('is-open');
-    sidebarLinksToggle.setAttribute('aria-expanded', String(open));
-  });
-  document.addEventListener('click', event => {
-    if (event.target.closest('.modal')) return;
-    if (!sidebarConnect.contains(event.target)) closeSidebarLinks();
-  });
-  document.addEventListener('keydown', event => {
-    if (event.key !== 'Escape') return;
-    if (getOpenModal()) return;
-    if (sidebarConnect.classList.contains('is-open')) {
-      closeSidebarLinks();
-      sidebarLinksToggle.focus();
-    }
-  }, true);
-}

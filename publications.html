@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <title>Publications · Haokai Ding</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f6f7f9">
+  <meta name="theme-color" content="#f6f7f9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#11141b" media="(prefers-color-scheme: dark)">
   <meta name="description" content="Publications by Haokai Ding in robotics, mechanism design, and adaptive grasping." />
-  <meta name="color-scheme" content="light" />
+  <meta name="color-scheme" content="light dark" />
   <meta property="og:title" content="Publications · Haokai Ding" />
   <meta property="og:description" content="All publications by Haokai Ding in robotics, mechanism design, and adaptive grasping." />
   <meta property="og:image" content="https://haokaiding.github.io/assets/images/haokai-ding-photo.png" />
@@ -21,16 +22,14 @@
 <body>
   <div class="container">
     <nav class="site-nav" aria-label="Primary">
-      <div class="site-brand"><a class="site-mark-link" href="index.html">Haokai Ding</a></div>
+      <div class="site-brand" aria-label="site mark"><span class="site-mark"><a class="site-mark-link" href="index.html">Haokai Ding</a><span class="site-mark-prompt">:~#</span></span><span class="site-path">publications/</span></div>
       <div class="nav-links">
-        <a href="index.html#news">News</a>
-        <a href="index.html#research">Research</a>
-        <a class="nav-active" href="publications.html">Publications</a>
-        <a href="index.html#projects">Projects</a>
-        <a href="index.html#experience">Experience</a>
-        <a href="index.html#awards">Awards</a>
-        <a href="contact.html">Contact</a>
+        <a class="nav-active" href="publications.html">Publications/</a>
+        <a href="contact.html">Contact/</a>
+        <a href="https://github.com/HaokaiDing" target="_blank" rel="noopener noreferrer">GitHub/</a>
+        <a href="https://scholar.google.com/citations?user=ikir1CUAAAAJ&hl=en" target="_blank" rel="noopener noreferrer">Scholar/</a>
       </div>
+      <button id="theme-switcher" type="button" aria-label="Toggle dark mode">☾</button>
     </nav>
 
     <header class="page-header">
@@ -75,97 +74,97 @@
           <li class="publication-item">
             <div class="pub-body">
               <div class="pub-title">An Idle-Stroke Underactuated Gripper with Independent Double-Parallelogram Linkages for Pinching and Adaptive Grasping</div>
-              <div class="pub-meta">Yizhe Chen, Haotong Luan, <span class="self-author">Haokai Ding</span>, Wenzeng Zhang*</div>
-              <p class="pub-desc">An idle-stroke gripper whose two independent double-parallelogram linkages combine pinching with adaptive grasping.</p>
+              <div class="pub-meta">Yizhe Chen, Haotong Luan, <strong>Haokai Ding</strong>, Wenzeng Zhang*</div>
+              <div class="pub-meta">An idle-stroke gripper whose two independent double-parallelogram linkages combine pinching with adaptive grasping.</div>
+              <div class="pub-venue">RAAI 2025</div>
               <div class="pub-links">
-                <span class="venue-pill">RAAI 2025</span>
-                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/raai-2025-double-parallelogram-gripper.pdf">PDF</button>
-                <a href="https://doi.org/10.1109/RAAI67517.2025.11423397" target="_blank" rel="noopener noreferrer">DOI</a>
+                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/raai-2025-double-parallelogram-gripper.pdf">pdf</button>
+                <a href="https://doi.org/10.1109/RAAI67517.2025.11423397" target="_blank" rel="noopener noreferrer">doi</a>
               </div>
             </div>
           </li>
           <li class="publication-item">
             <div class="pub-body">
               <div class="pub-title">GLINT: An Idle-Stroke Grasp-and-Lift Hand for In-Hand Manipulation</div>
-              <div class="pub-meta"><span class="self-author">Haokai Ding</span>, Haotong Luan, Tao Yang*, Wenzeng Zhang*</div>
-              <p class="pub-desc">A grasp-and-lift hand that embeds phase switching into an idle-stroke transmission for low-burden in-hand manipulation.</p>
+              <div class="pub-meta"><strong>Haokai Ding</strong>, Haotong Luan, Tao Yang*, Wenzeng Zhang*</div>
+              <div class="pub-meta">A grasp-and-lift hand that embeds phase switching into an idle-stroke transmission for low-burden in-hand manipulation.</div>
+              <div class="pub-venue">ICCMA 2025</div>
               <div class="pub-links">
-                <span class="venue-pill">ICCMA 2025</span>
-                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/iccma-2025-glint.pdf">PDF</button>
-                <a href="https://doi.org/10.1109/ICCMA67641.2025.11369602" target="_blank" rel="noopener noreferrer">DOI</a>
+                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/iccma-2025-glint.pdf">pdf</button>
+                <a href="https://doi.org/10.1109/ICCMA67641.2025.11369602" target="_blank" rel="noopener noreferrer">doi</a>
               </div>
             </div>
           </li>
           <li class="publication-item">
             <div class="pub-body">
               <div class="pub-title">BioCrest - A Flexible Adaptive Robotic Hand Based on Idle-Stroke Mechanism</div>
-              <div class="pub-meta"><span class="self-author">Haokai Ding</span>, Xianjie Zhong, Wenke Huang, Tao Yang*, Wenzeng Zhang*</div>
-              <p class="pub-desc">A two-finger, three-DOF adaptive hand that actively reconfigures between precision pinching and compliant grasping.</p>
+              <div class="pub-meta"><strong>Haokai Ding</strong>, Xianjie Zhong, Wenke Huang, Tao Yang*, Wenzeng Zhang*</div>
+              <div class="pub-meta">A two-finger, three-DOF adaptive hand that actively reconfigures between precision pinching and compliant grasping.</div>
+              <div class="pub-venue">ROBIO 2025</div>
               <div class="pub-links">
-                <span class="venue-pill">ROBIO 2025</span>
-                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/robio-2025-biocrest.pdf">PDF</button>
-                <a href="https://doi.org/10.1109/ROBIO66223.2025.11376343" target="_blank" rel="noopener noreferrer">DOI</a>
+                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/robio-2025-biocrest.pdf">pdf</button>
+                <a href="https://doi.org/10.1109/ROBIO66223.2025.11376343" target="_blank" rel="noopener noreferrer">doi</a>
               </div>
             </div>
           </li>
           <li class="publication-item">
             <div class="pub-body">
               <div class="pub-title">An Underactuated Gripper with Grasshopper-Inspired Linkages and Delay Triggering for Pinching and Adaptive Grasping</div>
-              <div class="pub-meta"><span class="self-author">Haokai Ding</span><sup>†</sup>, Yizhe Chen<sup>†</sup>, Dongjun Jia, Wenzeng Zhang*</div>
-              <p class="pub-desc">A grasshopper-inspired linkage gripper with delay triggering for linear pinching and adaptive grasping.</p>
+              <div class="pub-meta"><strong>Haokai Ding</strong><sup>†</sup>, Yizhe Chen<sup>†</sup>, Dongjun Jia, Wenzeng Zhang*</div>
+              <div class="pub-meta">A grasshopper-inspired linkage gripper with delay triggering for linear pinching and adaptive grasping.</div>
+              <div class="pub-venue">ICIA 2025</div>
               <div class="pub-links">
-                <span class="venue-pill">ICIA 2025</span>
-                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/icia-2025-grasshopper-gripper.pdf">PDF</button>
-                <a href="https://doi.org/10.1109/ICIA64617.2025.11277434" target="_blank" rel="noopener noreferrer">DOI</a>
+                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/icia-2025-grasshopper-gripper.pdf">pdf</button>
+                <a href="https://doi.org/10.1109/ICIA64617.2025.11277434" target="_blank" rel="noopener noreferrer">doi</a>
               </div>
             </div>
           </li>
           <li class="publication-item">
             <div class="pub-body">
               <div class="pub-title">A Novel Gripper with Semi-Peaucellier Linkage and Idle-Stroke Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
-              <div class="pub-meta"><span class="self-author">Haokai Ding</span>, Wenzeng Zhang*</div>
-              <p class="pub-desc">A dual-finger gripper with Semi-Peaucellier linkages and idle-stroke transmission for linear pinching and self-adaptive grasping.</p>
+              <div class="pub-meta"><strong>Haokai Ding</strong>, Wenzeng Zhang*</div>
+              <div class="pub-meta">A dual-finger gripper with Semi-Peaucellier linkages and idle-stroke transmission for linear pinching and self-adaptive grasping.</div>
+              <div class="pub-venue">IROS 2025 Oral</div>
               <div class="pub-links">
-                <span class="venue-pill">IROS 2025 Oral</span>
-                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/iros-2025-semi-peaucellier-gripper.pdf">PDF</button>
-                <a href="https://doi.org/10.1109/IROS60139.2025.11246057" target="_blank" rel="noopener noreferrer">DOI</a>
-                <button type="button" class="inline-link video-link" data-video="assets/videos/semi-peaucellier-gripper-demo-compressed.mp4">Demo</button>
+                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/iros-2025-semi-peaucellier-gripper.pdf">pdf</button>
+                <a href="https://doi.org/10.1109/IROS60139.2025.11246057" target="_blank" rel="noopener noreferrer">doi</a>
+                <button type="button" class="inline-link video-link" data-video="assets/videos/semi-peaucellier-gripper-demo-compressed.mp4">demo</button>
               </div>
             </div>
           </li>
           <li class="publication-item">
             <div class="pub-body">
               <div class="pub-title">Semi-Peaucellier Linkage and Differential Mechanism for Linear Pinching and Self-Adaptive Grasping</div>
-              <div class="pub-meta"><span class="self-author">Haokai Ding</span>, Zhaohan Chen, Tao Yang*, Wenzeng Zhang*</div>
-              <p class="pub-desc">The SP-Diff gripper: a differential linkage with planetary transmission for linear-parallel grasping and independent finger poses.</p>
+              <div class="pub-meta"><strong>Haokai Ding</strong>, Zhaohan Chen, Tao Yang*, Wenzeng Zhang*</div>
+              <div class="pub-meta">The SP-Diff gripper: a differential linkage with planetary transmission for linear-parallel grasping and independent finger poses.</div>
+              <div class="pub-venue">CASE 2025 Oral</div>
               <div class="pub-links">
-                <span class="venue-pill">CASE 2025 Oral</span>
-                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/case-2025-semi-peaucellier-linkage.pdf">PDF</button>
-                <a href="https://doi.org/10.1109/CASE58245.2025.11163785" target="_blank" rel="noopener noreferrer">DOI</a>
+                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/case-2025-semi-peaucellier-linkage.pdf">pdf</button>
+                <a href="https://doi.org/10.1109/CASE58245.2025.11163785" target="_blank" rel="noopener noreferrer">doi</a>
               </div>
             </div>
           </li>
           <li class="publication-item">
             <div class="pub-body">
               <div class="pub-title">Peaucellier Gripper: A Novel Underactuated Gripper for Linear Pinching and Self-Adaptive Grasp with the Peaucellier Linkage</div>
-              <div class="pub-meta"><span class="self-author">Haokai Ding</span>, Jiaqi Fan, Zixuan Zhu, Yongzhu Zhao, Kai Chen*, Wenzeng Zhang*</div>
-              <p class="pub-desc">An optimized five-bar Peaucellier (OPL) gripper that eliminates link interference for linear parallel pinching.</p>
+              <div class="pub-meta"><strong>Haokai Ding</strong>, Jiaqi Fan, Zixuan Zhu, Yongzhu Zhao, Kai Chen*, Wenzeng Zhang*</div>
+              <div class="pub-meta">An optimized five-bar Peaucellier (OPL) gripper that eliminates link interference for linear parallel pinching.</div>
+              <div class="pub-venue">ICARM 2025</div>
               <div class="pub-links">
-                <span class="venue-pill">ICARM 2025</span>
-                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/icarm-2025-peaucellier-gripper.pdf">PDF</button>
-                <a href="https://doi.org/10.1109/ICARM65671.2025.11293470" target="_blank" rel="noopener noreferrer">DOI</a>
+                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/icarm-2025-peaucellier-gripper.pdf">pdf</button>
+                <a href="https://doi.org/10.1109/ICARM65671.2025.11293470" target="_blank" rel="noopener noreferrer">doi</a>
               </div>
             </div>
           </li>
           <li class="publication-item">
             <div class="pub-body">
               <div class="pub-title">Rapid Analysis of Heavy Metal Element Adsorption by SCG Based on LIBS Technology</div>
-              <div class="pub-meta">Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, <span class="self-author">Haokai Ding</span>, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang</div>
-              <p class="pub-desc">Rapid LIBS-based analysis of heavy-metal adsorption by spent coffee grounds.</p>
+              <div class="pub-meta">Hairui Xie, Libing You, Xiaodong Fang, Leyi Li, <strong>Haokai Ding</strong>, Zhengqi Zhou, Guanyang Zhang, Dongjian Zhang</div>
+              <div class="pub-meta">Rapid LIBS-based analysis of heavy-metal adsorption by spent coffee grounds.</div>
+              <div class="pub-venue">E3S Web Conf. 2025</div>
               <div class="pub-links">
-                <span class="venue-pill">E3S Web Conf. 2025</span>
-                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/e3s-2025-heavy-metal-libs.pdf">PDF</button>
-                <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank" rel="noopener noreferrer">DOI</a>
+                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/e3s-2025-heavy-metal-libs.pdf">pdf</button>
+                <a href="https://doi.org/10.1051/e3sconf/202561502010" target="_blank" rel="noopener noreferrer">doi</a>
               </div>
             </div>
           </li>
@@ -176,12 +175,12 @@
           <li class="publication-item">
             <div class="pub-body">
               <div class="pub-title">Recent Progress on the Research of 3D Printing in Aqueous Zinc-Ion Batteries</div>
-              <div class="pub-meta">Yating Liu<sup>†</sup>, <span class="self-author">Haokai Ding</span><sup>†</sup>, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang*</div>
-              <p class="pub-desc">A review of 3D printing approaches for aqueous zinc-ion batteries.</p>
+              <div class="pub-meta">Yating Liu<sup>†</sup>, <strong>Haokai Ding</strong><sup>†</sup>, Honglin Chen, Haoxuan Gao, Jixin Yu, Funian Mo, Ning Wang*</div>
+              <div class="pub-meta">A review of 3D printing approaches for aqueous zinc-ion batteries.</div>
+              <div class="pub-venue"><em>Polymers</em> 17, no. 15: 2136 <span class="meta-badge">SCI</span> <span class="meta-badge">JCR Q1</span></div>
               <div class="pub-links">
-                <span class="venue-pill">Polymers 2025</span><span class="meta-badge">SCI</span> <span class="meta-badge">JCR Q1</span>
-                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/polymers-2025-zinc-ion-batteries-review.pdf">PDF</button>
-                <a href="https://doi.org/10.3390/polym17152136" target="_blank" rel="noopener noreferrer">DOI</a>
+                <button type="button" class="inline-link pdf-link" data-pdf="assets/pdfs/polymers-2025-zinc-ion-batteries-review.pdf">pdf</button>
+                <a href="https://doi.org/10.3390/polym17152136" target="_blank" rel="noopener noreferrer">doi</a>
               </div>
             </div>
           </li>
@@ -190,7 +189,7 @@
     </main>
 
     <footer class="site-footer compact-footer">
-      <p class="footer-meta">← <a href="index.html">back to home</a> · Last updated <time id="lastUpdated" datetime="2026-07-18">2026-07-18</time></p>
+      <p class="footer-meta">← <a href="index.html">back to home</a> · Last updated <time id="lastUpdated" datetime="2026-08-23">2026-08-23</time></p>
     </footer>
   </div>
 

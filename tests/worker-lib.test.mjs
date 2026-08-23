@@ -57,6 +57,7 @@ import { corsHeaders, checkBasicAuth } from '../worker/src/lib.js';
 
 test('corsHeaders echoes allowed origins, falls back otherwise', () => {
   assert.equal(corsHeaders('https://haokaiding.qzz.io')['Access-Control-Allow-Origin'], 'https://haokaiding.qzz.io');
+  assert.equal(corsHeaders('https://haokaiding.github.io')['Access-Control-Allow-Origin'], 'https://haokaiding.github.io');
   assert.equal(corsHeaders('http://localhost:4567')['Access-Control-Allow-Origin'], 'http://localhost:4567');
   assert.equal(corsHeaders('https://evil.example')['Access-Control-Allow-Origin'], 'https://haokaiding.qzz.io');
   assert.equal(corsHeaders(null)['Access-Control-Allow-Origin'], 'https://haokaiding.qzz.io');
@@ -220,6 +221,7 @@ test('statsHtml renders an em dash (not 1970) for an empty database', () => {
 
 test('isAllowedOrigin accepts allowlisted + localhost, rejects others', () => {
   assert.equal(isAllowedOrigin('https://haokaiding.qzz.io'), true);
+  assert.equal(isAllowedOrigin('https://haokaiding.github.io'), true);
   assert.equal(isAllowedOrigin('http://localhost:4567'), true);
   assert.equal(isAllowedOrigin('https://evil.example'), false);
   assert.equal(isAllowedOrigin(null), false);
