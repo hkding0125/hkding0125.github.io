@@ -26,6 +26,8 @@ const expectedPaths = [
   'assets/images/mbzuai-logo-mark.svg',
   'assets/images/ditang-wechat-qr.jpg',
   'assets/images/ditang-rednote-qr.jpg',
+  'assets/images/pubs/fig-iros-grasps.webp',
+  'assets/images/pubs/fig-case-grasps.webp',
   'assets/pdfs/haokai-ding-cv.pdf',
   'assets/pdfs/iros-2025-semi-peaucellier-gripper.pdf',
   'assets/pdfs/case-2025-semi-peaucellier-linkage.pdf',
