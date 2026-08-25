@@ -48,7 +48,7 @@ assert.doesNotMatch(consoleHero[0].match(/<p class="hero-status">[\s\S]*?<\/p>/)
 assert.match(consoleHero[0], /My research interests lie in underactuated manipulation, aerial robotics, and deployment-focused robot learning/);
 assert.match(
   consoleHero[0],
-  /<p class="hero-acknowledgment">\s*I am deeply grateful to my peer advisor — <a href="https:\/\/yinsumirage\.github\.io\/" target="_blank" rel="noopener noreferrer">Wentao Guo<\/a> — for his generous guidance, support, and mentorship throughout my research journey and growth\. Thank you!\s*<\/p>/,
+  /<p class="hero-acknowledgment">\s*I am deeply grateful to my peer advisor <a href="https:\/\/yinsumirage\.github\.io\/" target="_blank" rel="noopener noreferrer">Wentao Guo<\/a> for his generous guidance and mentorship in my research and during the graduate application season\. Thank you!\s*<\/p>/,
   'expected the homepage hero to thank peer advisor Wentao Guo and link his homepage',
 );
 assert.match(consoleHero[0], /I am also an X Scholar[\s\S]*Tsien Excellence in Engineering Program[\s\S]*Tsinghua University[\s\S]*Shenzhen X-Institute[\s\S]*through September 2026/);
