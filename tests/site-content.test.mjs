@@ -78,8 +78,8 @@ assert.match(
 );
 assert.match(
   indexHtml,
-  /<link rel="icon" type="image\/png" sizes="64x64" href="https:\/\/avatars\.githubusercontent\.com\/u\/226810271\?v=4&amp;size=64" \/>/,
-  'expected the homepage favicon to use the GitHub raccoon avatar',
+  /<link rel="icon" type="image\/png" href="assets\/images\/favicon-raccoon-upright-v2\.png" \/>/,
+  'expected the homepage favicon to use the upright local raccoon asset',
 );
 assert.doesNotMatch(indexHtml, /data:image\/svg\+xml[\s\S]*%3EHD%3C/);
 assert.match(
