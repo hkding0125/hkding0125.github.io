@@ -46,6 +46,11 @@ assert.match(
 );
 assert.doesNotMatch(consoleHero[0].match(/<p class="hero-status">[\s\S]*?<\/p>/)?.[0] ?? '', /B\.Eng\.|Shenzhen Technology University/);
 assert.match(consoleHero[0], /My research interests lie in underactuated manipulation, aerial robotics, and deployment-focused robot learning/);
+assert.match(
+  consoleHero[0],
+  /<p class="hero-acknowledgment">\s*I would like to express my sincere gratitude to <strong>Wentao Guo<\/strong>\. Thank you!\s*<\/p>/,
+  'expected the homepage hero to thank Wentao Guo without asserting an undocumented role',
+);
 assert.match(consoleHero[0], /I am also an X Scholar[\s\S]*Tsien Excellence in Engineering Program[\s\S]*Tsinghua University[\s\S]*Shenzhen X-Institute[\s\S]*through September 2026/);
 assert.match(consoleHero[0], /Previously, I was a visiting student[\s\S]*State Key Laboratory of Mechanical System and Vibration[\s\S]*Shanghai Jiao Tong University[\s\S]*Prof\. Wei Dong/);
 assert.doesNotMatch(consoleHero[0], /class="intro-kicker"|# Robotics|I am an M\.Sc\. student in Robotics at/);
