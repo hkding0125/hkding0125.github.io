@@ -9,6 +9,18 @@ const indexHtml = read('index.html');
 const publicationsHtml = read('publications.html');
 const contactHtml = read('contact.html');
 
+for (const [pageName, html] of [
+  ['publications', publicationsHtml],
+  ['contact', contactHtml],
+]) {
+  assert.match(
+    html,
+    /<link rel="icon" type="image\/png" sizes="64x64" href="https:\/\/avatars\.githubusercontent\.com\/u\/226810271\?v=4&amp;size=64" \/>/,
+    `expected ${pageName} to use the GitHub raccoon avatar as its favicon`,
+  );
+  assert.doesNotMatch(html, /data:image\/svg\+xml[\s\S]*%3EHD%3C/);
+}
+
 assert.match(
   publicationsHtml,
   /<link rel="canonical" href="https:\/\/haokaiding\.github\.io\/publications\.html" \/>/,

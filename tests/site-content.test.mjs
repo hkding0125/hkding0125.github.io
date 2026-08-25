@@ -78,6 +78,12 @@ assert.match(
 );
 assert.match(
   indexHtml,
+  /<link rel="icon" type="image\/png" sizes="64x64" href="https:\/\/avatars\.githubusercontent\.com\/u\/226810271\?v=4&amp;size=64" \/>/,
+  'expected the homepage favicon to use the GitHub raccoon avatar',
+);
+assert.doesNotMatch(indexHtml, /data:image\/svg\+xml[\s\S]*%3EHD%3C/);
+assert.match(
+  indexHtml,
   /<meta property="og:url" content="https:\/\/haokaiding\.github\.io\/" \/>/,
   'expected Open Graph metadata to retain the GitHub Pages host',
 );
