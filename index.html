@@ -18,6 +18,7 @@
   <link rel="canonical" href="https://haokaiding.github.io/" />
   <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="availability.css" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -306,6 +307,37 @@
           </ul>
         </div>
       </section>
+
+      <section class="content-section availability-section" id="availability" data-availability-url="/automation/availability.json">
+        <div class="availability-summary">
+          <div>
+            <h2>availability</h2>
+            <p>Busy-only calendar for planning a meeting.</p>
+          </div>
+          <button class="availability-button" id="availability-toggle" type="button" aria-expanded="false" aria-controls="availability-panel">View calendar</button>
+        </div>
+        <div class="availability-panel" id="availability-panel" hidden>
+          <div class="availability-panel-heading">
+            <h3>My Free/Busy Hours <span class="availability-time-zone-label" id="availability-time-zone-label">(Asia/Dubai time)</span></h3>
+          </div>
+          <div class="availability-controls" role="group" aria-label="Calendar controls">
+            <button class="availability-button" id="availability-previous" type="button" aria-label="Previous week">← Prev</button>
+            <button class="availability-button" id="availability-next" type="button" aria-label="Next week">Next →</button>
+            <label class="availability-time-zone-control" for="availability-local-time-zone">
+              <input id="availability-local-time-zone" type="checkbox">
+              <span>Use my time zone</span>
+            </label>
+            <button class="availability-button availability-expand" id="availability-expand" type="button">Expand calendar</button>
+          </div>
+          <div class="availability-feedback">
+            <p class="availability-status" id="availability-status" role="status" aria-live="polite" tabindex="-1">Calendar data loads when opened.</p>
+            <button class="availability-button availability-retry" id="availability-retry" type="button" hidden>Retry</button>
+          </div>
+          <div class="availability-scroller" role="region" tabindex="0" aria-label="Scrollable weekly Busy calendar" hidden>
+            <div class="availability-grid" id="availability-grid" aria-label="Weekly Busy hours" hidden></div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
@@ -343,5 +375,6 @@
 
   <script src="scripts.js" defer></script>
   <script type="module" src="assets/js/visitor-map.js"></script>
+  <script type="module" src="assets/js/availability-calendar.mjs"></script>
 </body>
 </html>
