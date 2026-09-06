@@ -147,6 +147,7 @@
 
 .availability-status[data-state="error"],
 .availability-status[data-state="stale"],
+.availability-status[data-state="delayed"],
 .availability-status[data-state="setup-required"],
 .availability-status[data-state="out-of-range"] {
   border-left: 3px solid var(--accent);

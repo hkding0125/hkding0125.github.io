@@ -1,6 +1,8 @@
 export const OWNER_TIME_ZONE = 'Asia/Dubai';
 export const WORK_HOURS = Object.freeze({ start: 9, end: 18 });
 export const FETCH_TIMEOUT_MS = 10_000;
+export const DELAY_THRESHOLD_MS = 2 * 60 * 60 * 1000;
+export const PAYLOAD_LIFETIME_MS = 6 * 60 * 60 * 1000;
 
 const UTC_ISO_PATTERN = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,3}))?Z$/;
 const ROOT_KEYS = [
@@ -229,6 +231,9 @@ export function validateAvailability(payload) {
   if (parsedTimes.expiresAt <= parsedTimes.generatedAt) {
     fail('expiresAt must be after generatedAt');
   }
+  if (parsedTimes.expiresAt - parsedTimes.generatedAt !== PAYLOAD_LIFETIME_MS) {
+    fail('expiresAt must be exactly 6 hours after generatedAt');
+  }
   if (parsedTimes.windowEnd <= parsedTimes.windowStart) {
     fail('windowEnd must be after windowStart');
   }
@@ -277,6 +282,9 @@ export function availabilityState(payload, now = new Date()) {
   if (nowMs >= Date.parse(data.expiresAt)) {
     return { kind: 'stale', reason: 'expired', data };
   }
+  if (nowMs - Date.parse(data.generatedAt) >= DELAY_THRESHOLD_MS) {
+    return { kind: 'delayed', data };
+  }
   return { kind: 'ready', data };
 }
 
@@ -284,13 +292,24 @@ export function getAvailabilitySnapshot(payload, now = new Date()) {
   const capturedAtMs = now instanceof Date ? now.getTime() : new Date(now).getTime();
   if (!Number.isFinite(capturedAtMs)) throw new RangeError('Expected a valid current time');
   const state = availabilityState(payload, capturedAtMs);
+  const expiryDelayMs = ['ready', 'delayed'].includes(state.kind)
+    ? Date.parse(state.data.expiresAt) - capturedAtMs
+    : null;
+  const nextTransitionDelayMs = state.kind === 'ready'
+    ? Date.parse(state.data.generatedAt) + DELAY_THRESHOLD_MS - capturedAtMs
+    : (state.kind === 'delayed' ? expiryDelayMs : null);
   return {
     ...state,
     capturedAtMs,
-    expiryDelayMs: state.kind === 'ready'
-      ? Date.parse(state.data.expiresAt) - capturedAtMs
-      : null,
+    expiryDelayMs,
+    nextTransitionDelayMs,
   };
+}
+
+export function scheduleFreshnessTransition(snapshot, onTransition, setTimer = setTimeout) {
+  const delay = snapshot?.nextTransitionDelayMs;
+  if (!Number.isFinite(delay) || delay <= 0) return null;
+  return setTimer(onTransition, Math.min(delay, MAX_TIMER_DELAY_MS));
 }
 
 export function createRequestGenerationGuard() {
@@ -584,15 +603,11 @@ const initializeAvailabilityCalendar = () => {
 
   const scheduleExpiry = snapshot => {
     clearExpiryTimer();
-    const millisecondsRemaining = snapshot.expiryDelayMs;
-    if (millisecondsRemaining <= 0) {
-      return false;
-    }
-    expiryTimer = setTimeout(() => {
+    expiryTimer = scheduleFreshnessTransition(snapshot, () => {
       expiryTimer = null;
       renderCalendar();
-    }, Math.min(millisecondsRemaining, MAX_TIMER_DELAY_MS));
-    return true;
+    });
+    return expiryTimer !== null;
   };
 
   const syncReadyControls = (data, weekRange) => {
@@ -669,15 +684,17 @@ const initializeAvailabilityCalendar = () => {
     const rangeLabel = formatWeekRange(weekRange, activeTimeZone);
     const statusPrefix = `${rangeLabel} (${activeTimeZone})`;
     syncReadyControls(availability, weekRange);
-    setRetryHidden(true);
+    setRetryHidden(snapshot.kind !== 'delayed');
 
     if (!isWeekCovered(availability, weekRange)) {
       grid.hidden = true;
       grid.replaceChildren();
       setScrollerAvailable(false);
       setStatus(
-        `${statusPrefix}: No verified availability data is published for this week.`,
-        'out-of-range',
+        snapshot.kind === 'delayed'
+          ? `${statusPrefix}: Update delayed — no verified availability data covers this week; no free-time inference is shown.`
+          : `${statusPrefix}: No verified availability data is published for this week.`,
+        snapshot.kind === 'delayed' ? 'delayed' : 'out-of-range',
       );
       return;
     }
@@ -755,8 +772,10 @@ const initializeAvailabilityCalendar = () => {
 
     grid.append(calendarHeader, calendarBody);
     setStatus(
-      calendarStatusMessage(statusPrefix, allDay, segments.length),
-      'ready',
+      snapshot.kind === 'delayed'
+        ? `${statusPrefix}: Update delayed — showing last verified Busy blocks. Unmarked times may have changed.`
+        : calendarStatusMessage(statusPrefix, allDay, segments.length),
+      snapshot.kind,
     );
   };
 
@@ -816,7 +835,7 @@ const initializeAvailabilityCalendar = () => {
     toggle.textContent = opening ? 'Hide calendar' : 'View calendar';
     if (opening) {
       const currentState = availability ? getAvailabilitySnapshot(availability, Date.now()) : null;
-      if (currentState?.kind === 'ready') renderCalendar();
+      if (['ready', 'delayed'].includes(currentState?.kind)) renderCalendar();
       else loadAvailability();
     }
   });

@@ -4,8 +4,10 @@ import { join } from 'node:path';
 import test from 'node:test';
 
 import {
+  DELAY_THRESHOLD_MS,
   FETCH_TIMEOUT_MS,
   OWNER_TIME_ZONE,
+  PAYLOAD_LIFETIME_MS,
   availabilityState,
   calendarStatusMessage,
   canNavigateWeek,
@@ -16,6 +18,7 @@ import {
   getLocalDayBoundary,
   getWeekRange,
   isWeekCovered,
+  scheduleFreshnessTransition,
   shiftWeek,
   splitBusyIntervals,
   validateAvailability,
@@ -71,6 +74,11 @@ test('validates the single Busy-only availability contract', () => {
     () => validateAvailability({ ...fixture, expiresAt: fixture.generatedAt }),
     /expiresAt must be after generatedAt/,
   );
+  assert.equal(Date.parse(fixture.expiresAt) - Date.parse(fixture.generatedAt), 6 * 60 * 60 * 1000);
+  assert.throws(
+    () => validateAvailability({ ...fixture, expiresAt: '2026-09-05T15:00:00Z' }),
+    /exactly 6 hours after generatedAt/,
+  );
 });
 
 test('requires Busy intervals to be covered, sorted, separated, and non-adjacent', () => {
@@ -112,9 +120,23 @@ test('requires Busy intervals to be covered, sorted, separated, and non-adjacent
 
 test('distinguishes ready, stale, and setup-required data', () => {
   assert.equal(FETCH_TIMEOUT_MS, 10_000);
+  assert.equal(DELAY_THRESHOLD_MS, 2 * 60 * 60 * 1000);
+  assert.equal(PAYLOAD_LIFETIME_MS, 6 * 60 * 60 * 1000);
   assert.equal(
     availabilityState(fixture, new Date(fixture.generatedAt)).kind,
     'ready',
+  );
+  assert.equal(
+    availabilityState(fixture, new Date('2026-09-05T11:59:59.999Z')).kind,
+    'ready',
+  );
+  assert.equal(
+    availabilityState(fixture, new Date('2026-09-05T12:00:00.000Z')).kind,
+    'delayed',
+  );
+  assert.equal(
+    availabilityState(fixture, new Date('2026-09-05T15:59:59.999Z')).kind,
+    'delayed',
   );
   assert.deepEqual(
     availabilityState(fixture, new Date('2026-09-05T09:59:59Z')),
@@ -143,15 +165,62 @@ test('distinguishes ready, stale, and setup-required data', () => {
 });
 
 test('derives freshness and expiry delay from one fake-clock snapshot', () => {
+  const oneMillisecondBeforeDelayed = getAvailabilitySnapshot(
+    fixture,
+    new Date('2026-09-05T11:59:59.999Z'),
+  );
+  assert.equal(oneMillisecondBeforeDelayed.kind, 'ready');
+  assert.equal(oneMillisecondBeforeDelayed.nextTransitionDelayMs, 1);
+  assert.equal(oneMillisecondBeforeDelayed.expiryDelayMs, 4 * 60 * 60 * 1000 + 1);
+
+  const delayedBoundary = getAvailabilitySnapshot(
+    fixture,
+    new Date('2026-09-05T12:00:00.000Z'),
+  );
+  assert.equal(delayedBoundary.kind, 'delayed');
+  assert.equal(delayedBoundary.nextTransitionDelayMs, 4 * 60 * 60 * 1000);
+  assert.equal(delayedBoundary.expiryDelayMs, 4 * 60 * 60 * 1000);
+
   const oneMillisecondBeforeExpiry = new Date(Date.parse(fixture.expiresAt) - 1);
   const fresh = getAvailabilitySnapshot(fixture, oneMillisecondBeforeExpiry);
-  assert.equal(fresh.kind, 'ready');
+  assert.equal(fresh.kind, 'delayed');
   assert.equal(fresh.expiryDelayMs, 1);
+  assert.equal(fresh.nextTransitionDelayMs, 1);
 
   const expired = getAvailabilitySnapshot(fixture, new Date(fixture.expiresAt));
   assert.equal(expired.kind, 'stale');
   assert.equal(expired.reason, 'expired');
   assert.equal(expired.expiryDelayMs, null);
+  assert.equal(expired.nextTransitionDelayMs, null);
+});
+
+test('runtime scheduler transitions ready to delayed to stale at exact fake-clock boundaries', () => {
+  let nowMs = Date.parse(fixture.generatedAt) + DELAY_THRESHOLD_MS - 1;
+  const observedKinds = [];
+  const pendingTimers = [];
+  const scheduledDelays = [];
+  const fakeSetTimer = (callback, delay) => {
+    scheduledDelays.push(delay);
+    pendingTimers.push(callback);
+    return pendingTimers.length;
+  };
+
+  const render = () => {
+    const snapshot = getAvailabilitySnapshot(fixture, nowMs);
+    observedKinds.push(snapshot.kind);
+    scheduleFreshnessTransition(snapshot, () => {
+      nowMs += snapshot.nextTransitionDelayMs;
+      render();
+    }, fakeSetTimer);
+  };
+
+  render();
+  pendingTimers.shift()();
+  pendingTimers.shift()();
+
+  assert.deepEqual(observedKinds, ['ready', 'delayed', 'stale']);
+  assert.deepEqual(scheduledDelays, [1, 4 * 60 * 60 * 1000]);
+  assert.equal(pendingTimers.length, 0);
 });
 
 test('marks only the latest request generation as current', () => {
@@ -384,6 +453,7 @@ test('homepage wires a collapsed, lazy-loaded, accessible calendar', () => {
     css,
     /@media\s*\(forced-colors:\s*active\)[\s\S]*?appearance:\s*auto/,
   );
+  assert.match(css, /\.availability-status\[data-state="delayed"\]/);
   assert.match(css, /var\(--(?:bg|surface|text|line|accent)/);
   assert.match(css, /availability-busy-block--compact/);
   assert.match(css, /availability-busy-block--micro/);
@@ -400,6 +470,16 @@ test('homepage wires a collapsed, lazy-loaded, accessible calendar', () => {
   assert.match(js, /fetch\(availabilityUrl/);
   assert.match(js, /AbortController/);
   assert.match(js, /scheduleExpiry/);
+  assert.match(js, /snapshot\.kind === 'delayed'/);
+  assert.match(
+    js,
+    /Update delayed — showing last verified Busy blocks\. Unmarked times may have changed\./,
+  );
+  assert.match(
+    js,
+    /Update delayed — no verified availability data covers this week; no free-time inference is shown\./,
+  );
+  assert.match(js, /setRetryHidden\(snapshot\.kind !== 'delayed'\)/);
   assert.match(js, /formatWeekRange\(weekRange/);
   assert.match(js, /busyTitle\.textContent\s*=\s*'Busy'/);
   assert.match(js, /dayColumn\.setAttribute\('role',\s*'group'\)/);
