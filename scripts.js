@@ -69,37 +69,6 @@ themeSwitcher?.addEventListener('click', () => {
   applyTheme(next);
 });
 
-const siteNav = $('.site-nav');
-if (siteNav && 'IntersectionObserver' in window) {
-  const sentinel = document.createElement('span');
-  sentinel.className = 'site-nav-sentinel';
-  sentinel.setAttribute('aria-hidden', 'true');
-  siteNav.before(sentinel);
-
-  const stickyTop = Number.parseFloat(window.getComputedStyle(siteNav).top) || 0;
-  const stickyObserver = new IntersectionObserver(([entry]) => {
-    siteNav.classList.toggle('is-stuck', !entry.isIntersecting);
-  }, {
-    rootMargin: `-${stickyTop}px 0px 0px`,
-    threshold: 0,
-  });
-  stickyObserver.observe(sentinel);
-}
-
-const navLinks = $('.nav-links');
-navLinks?.addEventListener('focusin', event => {
-  const link = event.target.closest?.('a');
-  if (!link) return;
-
-  const scrollerRect = navLinks.getBoundingClientRect();
-  const linkRect = link.getBoundingClientRect();
-  if (linkRect.left - 4 < scrollerRect.left) {
-    navLinks.scrollLeft -= scrollerRect.left - linkRect.left + 4;
-  } else if (linkRect.right + 4 > scrollerRect.right) {
-    navLinks.scrollLeft += linkRect.right - scrollerRect.right + 4;
-  }
-});
-
 const updateLastUpdated = () => {
   const target = $('#lastUpdated');
   if (!target) return;
