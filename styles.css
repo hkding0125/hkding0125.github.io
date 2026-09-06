@@ -97,6 +97,15 @@ a:hover {
   border-bottom: 1px dashed var(--line);
 }
 
+.site-nav::before {
+  content: "";
+  position: absolute;
+  inset: 0 -28px;
+  z-index: -1;
+  background: var(--bg);
+  pointer-events: none;
+}
+
 .site-brand {
   color: var(--text);
   font-weight: 500;
@@ -1230,6 +1239,10 @@ body.dark-mode .entry-logo-sjtu {
     row-gap: 10px;
     column-gap: 10px;
     margin-bottom: 28px;
+  }
+
+  .site-nav::before {
+    inset-inline: -16px;
   }
 
   .site-brand {
