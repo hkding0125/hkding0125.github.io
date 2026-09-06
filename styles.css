@@ -19,6 +19,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 64px;
 }
 
 body {
@@ -83,12 +84,16 @@ a:hover {
 }
 
 .site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   padding: 0 0 16px;
   margin-bottom: 48px;
+  background: var(--bg);
   border-bottom: 1px dashed var(--line);
 }
 
@@ -1117,6 +1122,10 @@ body.dark-mode .entry-logo-sjtu {
 }
 
 @media (max-width: 800px) {
+  html {
+    scroll-padding-top: 88px;
+  }
+
   .site-nav {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
@@ -1203,6 +1212,10 @@ body.dark-mode .entry-logo-sjtu {
 }
 
 @media (max-width: 480px) {
+  html {
+    scroll-padding-top: 112px;
+  }
+
   .container {
     padding: 14px 16px 28px;
   }
